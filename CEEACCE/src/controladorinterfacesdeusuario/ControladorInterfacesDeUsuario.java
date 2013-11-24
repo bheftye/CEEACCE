@@ -89,4 +89,9 @@ public class ControladorInterfacesDeUsuario {
         }
         return agrego;
     }
+    
+    public boolean verificarUsario(String usuario, String contrasenia){
+        
+        return false;
+    }
 }

@@ -4,6 +4,8 @@
  */
 package interfazdeusuario;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +19,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
      */
     public VistaInicioSesion() {
         initComponents();
+        centrarJFrame();
     }
 
     /**
@@ -32,9 +35,9 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nombreUsuario = new javax.swing.JTextField();
-        contraseniaUsuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        contraseniaUsuario = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +120,11 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     private void centrarJFrame(){
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -159,7 +167,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField contraseniaUsuario;
+    private javax.swing.JPasswordField contraseniaUsuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

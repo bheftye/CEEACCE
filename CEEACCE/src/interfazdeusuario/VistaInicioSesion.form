@@ -95,8 +95,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nombreUsuario">
     </Component>
-    <Component class="javax.swing.JTextField" name="contraseniaUsuario">
-    </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
@@ -109,6 +107,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="contraseniaUsuario">
     </Component>
   </SubComponents>
 </Form>

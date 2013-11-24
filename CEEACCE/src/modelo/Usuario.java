@@ -1,11 +1,13 @@
 package modelo;
 
 public class Usuario {
- 
-	private String nombreDeUsuario;
-	 
-	private String contrasenia;
-
+    
+    public Usuario(String nombreUsuario, String contrasenia, int claveUsuario){
+        this.nombreDeUsuario = nombreUsuario;
+        this.contrasenia = contrasenia;
+        this.claveUsuario = claveUsuario;
+    }
+    
     /**
      * @return the nombreDeUsuario
      */
@@ -33,6 +35,18 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    public int getClaveUsuario() {
+        return claveUsuario;
+    }
+
+    public void setClaveUsuario(int claveUsuario) {
+        this.claveUsuario = claveUsuario;
+    }
+   
+	private String nombreDeUsuario;
+	private String contrasenia;
+        private int claveUsuario;
 	 
 }
  

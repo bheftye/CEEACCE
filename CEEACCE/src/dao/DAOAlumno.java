@@ -17,7 +17,33 @@ public class DAOAlumno extends DAO<Alumno> {
     
     @Override
     public int insertar(Alumno alumno) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String nombreAlumno = alumno.getNombre();
+        String apellidos = alumno.getApellidos();
+        //FALTA COLOCAR MÉTODO DE EDAD
+        int edad = 0;
+        String sexo = alumno.getSexo();
+        String email = alumno.getEmail();
+        String curp = alumno.getCURP();
+        String lugarNacimiento = alumno.getLugarDeNacimiento();
+        String fechaNacimiento = alumno.getFechaDeNacimiento();
+        String fechaInscripcion = alumno.getFechaDeInscripcion();
+        String turno = alumno.getTurno();
+        int clvplan = alumno.getPlanDeEstudio().getClave();
+        String queryInsercion = "INSERT INTO alumno (nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
+                + " VALUES ("+nombreAlumno+","+apellidos+","+edad+","+sexo+","+email+","+curp+","+lugarNacimiento+","+fechaNacimiento+","+fechaInscripcion+","+turno+","+clvplan+")";
+        int numFilasAfectadas = 0;
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        numFilasAfectadas = sentencia.executeUpdate(queryInsercion);
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return numFilasAfectadas;
     }
 
     @Override

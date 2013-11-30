@@ -1,5 +1,8 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import modelo.Curso;
 import java.util.ArrayList;
 
@@ -14,7 +17,22 @@ public class DAOCurso extends DAO<Curso> {
 
     @Override
     public int insertar(Curso curso) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String nombreCurso = curso.getNombre();
+        int clvplan = curso.getPlanDeEstudio().getClave();
+        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan) VALUES ("+nombreCurso+","+clvplan+")";
+        int numFilasAfectadas = 0; 
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        numFilasAfectadas = sentencia.executeUpdate(queryInsercion);
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return numFilasAfectadas;
     }
 
     @Override

@@ -30,7 +30,8 @@ public class DAOAlumno extends DAO<Alumno> {
         String turno = alumno.getTurno();
         int clvplan = alumno.getPlanDeEstudio().getClave();
         String queryInsercion = "INSERT INTO alumno (nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
-                + " VALUES ("+nombreAlumno+","+apellidos+","+edad+","+sexo+","+email+","+curp+","+lugarNacimiento+","+fechaNacimiento+","+fechaInscripcion+","+turno+","+clvplan+")";
+                + " VALUES ("+nombreAlumno+","+apellidos+","+edad+","+sexo+","+email+","+curp+""
+                + ","+lugarNacimiento+","+fechaNacimiento+","+fechaInscripcion+","+turno+","+clvplan+")";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{
@@ -48,7 +49,34 @@ public class DAOAlumno extends DAO<Alumno> {
 
     @Override
     public int actualizar(Alumno alumno) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String matricula = alumno.getMatricula();
+        String nombreAlumno = alumno.getNombre();
+        String apellidos = alumno.getApellidos();
+        //¿Edad debería actualizarse sola?
+        String sexo = alumno.getSexo();
+        String email = alumno.getEmail();
+        String curp = alumno.getCURP();
+        String lugarNacimiento = alumno.getLugarDeNacimiento();
+        String fechaNacimiento = alumno.getFechaDeNacimiento();
+        //No puede moficar fecha de inscripcion ni plan de estudio
+        String turno = alumno.getTurno();
+        String queryActualizacion = "UPDATE alumno SET nombre = "+nombreAlumno+""
+                + ", apellidos = "+apellidos+", sexo = "+sexo+", email = "+email+", curp = "+curp+""
+                + ", lugarnacimiento = "+lugarNacimiento+", fechanacimiento = "+fechaNacimiento+""
+                + ", turno = "+turno+" WHERE matricula = "+matricula;
+        int numFilasAfectadas = 0; 
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        numFilasAfectadas = sentencia.executeUpdate(queryActualizacion);
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return numFilasAfectadas;
     }
 
     @Override

@@ -1,10 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import modelo.Modulo;
 import modelo.PlanDeEstudio;
+import modelo.Usuario;
 
 public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     private static DAOPlanDeEstudio daoPlanDeEstudio = new DAOPlanDeEstudio();
@@ -54,8 +57,28 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     }
 
     @Override
-    public ArrayList consultar(String peticion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ArrayList consultar(String querySeleccion) {
+        //throw new UnsupportedOperationException("Not supported yet.");
+            ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
+        try{
+        Connection conexion = getConexion(); 
+        Statement sentencia =  conexion.createStatement();
+        ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
+            while(resultadoDeDatos.next()){
+                String nombre = resultadoDeDatos.getString("nombre");
+                ArrayList<Modulo> modulos = (ArrayList) resultadoDeDatos.getArray("modulos");
+                int clave = Integer.parseInt(resultadoDeDatos.getString("clave"));
+                PlanDeEstudio planEstudio = new PlanDeEstudio(nombre, modulos, clave);
+                resultadoPlanEstudio.add(planEstudio);
+            }
+        sentencia.close();
+        cerrarConexion(conexion);
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return resultadoPlanEstudio;
     }
  
 	 

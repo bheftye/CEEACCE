@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import modelo.Alumno;
 import modelo.ListaDePlanesDeEstudio;
 import modelo.PlanDeEstudio;
@@ -19,13 +20,12 @@ public class DAOAlumno extends DAO<Alumno> {
     public int insertar(Alumno alumno) {
         String nombreAlumno = alumno.getNombre();
         String apellidos = alumno.getApellidos();
-        //FALTA COLOCAR MÉTODO DE EDAD
-        int edad = 0;
         String sexo = alumno.getSexo();
         String email = alumno.getEmail();
         String curp = alumno.getCURP();
         String lugarNacimiento = alumno.getLugarDeNacimiento();
         String fechaNacimiento = alumno.getFechaDeNacimiento();
+        int edad = generarEdad(fechaNacimiento);
         String fechaInscripcion = alumno.getFechaDeInscripcion();
         String turno = alumno.getTurno();
         int clvplan = alumno.getPlanDeEstudio().getClave();
@@ -52,18 +52,18 @@ public class DAOAlumno extends DAO<Alumno> {
         String matricula = alumno.getMatricula();
         String nombreAlumno = alumno.getNombre();
         String apellidos = alumno.getApellidos();
-        //¿Edad debería actualizarse sola?
         String sexo = alumno.getSexo();
         String email = alumno.getEmail();
         String curp = alumno.getCURP();
         String lugarNacimiento = alumno.getLugarDeNacimiento();
         String fechaNacimiento = alumno.getFechaDeNacimiento();
+        int edad = generarEdad(fechaNacimiento);
         //No puede moficar fecha de inscripcion ni plan de estudio
         String turno = alumno.getTurno();
         String queryActualizacion = "UPDATE alumno SET nombre = "+nombreAlumno+""
-                + ", apellidos = "+apellidos+", sexo = "+sexo+", email = "+email+", curp = "+curp+""
-                + ", lugarnacimiento = "+lugarNacimiento+", fechanacimiento = "+fechaNacimiento+""
-                + ", turno = "+turno+" WHERE matricula = "+matricula;
+                + ", apellidos = "+apellidos+", edad = "+edad+", sexo = "+sexo+""
+                + ", email = "+email+", curp = "+curp+", lugarnacimiento = "+lugarNacimiento+""
+                + ", fechanacimiento = "+fechaNacimiento+", turno = "+turno+" WHERE matricula = "+matricula;
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -134,6 +134,19 @@ public class DAOAlumno extends DAO<Alumno> {
             }
         }
         return null;
+    }
+    
+    private int generarEdad(String fechaNacimiento){
+        Calendar cal = Calendar.getInstance();
+        int anioHoy = cal.get(Calendar.YEAR);
+        int mesHoy = cal.get(Calendar.MONTH);
+        int diaHoy = cal.get(Calendar.DAY_OF_MONTH);
+        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[0]);
+        int mesNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[1]);
+        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[2]);
+        double hoy = anioHoy + mesHoy*.01 + diaHoy*.0001;
+        double nacimiento = anioNacimiento + mesNacimiento*.01 + diaNacimiento*.0001;
+        return (int)(hoy-nacimiento);
     }
     
     private static DAOAlumno daoAlumno = new DAOAlumno();

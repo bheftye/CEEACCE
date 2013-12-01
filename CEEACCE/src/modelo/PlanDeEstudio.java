@@ -10,7 +10,7 @@ public class PlanDeEstudio {
     public PlanDeEstudio(String nombre, ArrayList<Modulo> modulos, int clave) {
         this.nombre = nombre;
         this.modulos = modulos;
-        this.clave = clave;
+       
     }
 
         

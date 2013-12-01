@@ -4,7 +4,10 @@
  */
 package interfazdeusuario;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
+import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
@@ -126,21 +129,31 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
 
     private void botonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        validarDatosUsuario();
-        
+        if(validarDatosUsuario() == true){
+            String nombreDeUsuario = nombreUsuario.getText();
+            String contraseniaDeUsuario = contraseniaUsuario.getText();
+            Usuario usuarioNuevo = new Usuario(nombreDeUsuario,contraseniaDeUsuario,4);
+            boolean agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
+            if(agregoUsuario){
+                JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No fue posible crear este Usuario");
+            }
+        }
     }//GEN-LAST:event_botonCrearUsuarioActionPerformed
 
-    private void validarDatosUsuario(){
+    private boolean validarDatosUsuario(){
         if("Admin".equals(nombreUsuario.getText())){
-            JOptionPane.showMessageDialog(this,"Nombre de Usuario inválido");
+            JOptionPane.showMessageDialog(this,"Nombre de Usuario inválido","Error",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         else{
             if(!contraseniaUsuario.getText().equals(contraseniaRepetida.getText())){
-                JOptionPane.showMessageDialog(this,"Las contraseñas ingresadas no son iguales");
+                JOptionPane.showMessageDialog(this,"Las contraseñas ingresadas no son iguales","Error",JOptionPane.ERROR_MESSAGE);
+                return false;
             }
-            else{
-                JOptionPane.showMessageDialog(this,"Usuario creado exitosamente");
-            }
+            return true;
         }
     }
     /**

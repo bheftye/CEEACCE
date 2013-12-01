@@ -108,7 +108,7 @@ public class DAOAlumno extends DAO<Alumno> {
                 String turno = rs.getString("turno");
                 String clavePlanDeEstudio = rs.getString("planDeEstudio");
                 PlanDeEstudio planDeEstudio = getPlanDeEstudioDeListaDePlanesDeEstudio(clavePlanDeEstudio);
-                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(),planDeEstudio.getModulos());
+                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(),planDeEstudio.getModulos(),planDeEstudio.getClave());
                 
                 if(planDeEstudio!=null){
                     listaAlumnos.add(new Alumno(nombre,apellidos,sexo,email,curp,matricula,lugarDeNacimiento,fechaDeNacimiento,fechaDeInscripcion,turno,copiaPlanDeEstudio));

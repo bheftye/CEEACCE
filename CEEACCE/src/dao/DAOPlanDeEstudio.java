@@ -20,7 +20,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     @Override
     public int insertar(PlanDeEstudio planDeEstudio) {
         String nombrePlanEstudio = planDeEstudio.getNombre();
-        String queryInsercion = "INSERT INTO plandeestudio (nomplan) VALUES ("+nombrePlanEstudio+")";
+        String queryInsercion = "INSERT INTO plandeestudio (nomplan) VALUES ('"+nombrePlanEstudio+"')";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -40,7 +40,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     public int actualizar(PlanDeEstudio planDeEstudio) {
         String nombrePlanEstudio = planDeEstudio.getNombre();
         int clavePlanEstudio = planDeEstudio.getClave();
-        String queryActualizacion = "UPDATE plandeestudio SET nomplan = "+nombrePlanEstudio+" WHERE clvplan = "+clavePlanEstudio;
+        String queryActualizacion = "UPDATE plandeestudio SET nomplan = '"+nombrePlanEstudio+"' WHERE clvplan = '"+clavePlanEstudio+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

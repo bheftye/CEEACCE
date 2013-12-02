@@ -25,7 +25,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
         int creditosAsignatura = asignatura.getCreditos();
         int duracionAsignatura = asignatura.getDuracion();
         String queryInsercion = "INSERT INTO asignatura (nomasig,calificacion, serializacion, maestro, fechaimparticion, creditos, duracion)"
-                + " VALUES ("+nombreAsignatura+","+calificacion+","+esSerializada+","+maestroImparteAsignatura+","+fechaImparticion+","+creditosAsignatura+","+duracionAsignatura+")";
+                + " VALUES ('"+nombreAsignatura+"','"+calificacion+"','"+esSerializada+"','"+maestroImparteAsignatura+"','"+fechaImparticion+"','"+creditosAsignatura+"','"+duracionAsignatura+"')";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{

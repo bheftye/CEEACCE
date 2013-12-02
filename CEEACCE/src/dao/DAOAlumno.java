@@ -30,8 +30,8 @@ public class DAOAlumno extends DAO<Alumno> {
         String turno = alumno.getTurno();
         int clvplan = alumno.getPlanDeEstudio().getClave();
         String queryInsercion = "INSERT INTO alumno (nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
-                + " VALUES ("+nombreAlumno+","+apellidos+","+edad+","+sexo+","+email+","+curp+""
-                + ","+lugarNacimiento+","+fechaNacimiento+","+fechaInscripcion+","+turno+","+clvplan+")";
+                + " VALUES ('"+nombreAlumno+"','"+apellidos+"','"+edad+"','"+sexo+"','"+email+"','"+curp+"'"
+                + ",'"+lugarNacimiento+"','"+fechaNacimiento+"','"+fechaInscripcion+"','"+turno+"','"+clvplan+"')";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{
@@ -60,10 +60,10 @@ public class DAOAlumno extends DAO<Alumno> {
         int edad = generarEdad(fechaNacimiento);
         //No puede moficar fecha de inscripcion ni plan de estudio
         String turno = alumno.getTurno();
-        String queryActualizacion = "UPDATE alumno SET nombre = "+nombreAlumno+""
-                + ", apellidos = "+apellidos+", edad = "+edad+", sexo = "+sexo+""
-                + ", email = "+email+", curp = "+curp+", lugarnacimiento = "+lugarNacimiento+""
-                + ", fechanacimiento = "+fechaNacimiento+", turno = "+turno+" WHERE matricula = "+matricula;
+        String queryActualizacion = "UPDATE alumno SET nombre = '"+nombreAlumno+"'"
+                + ", apellidos = '"+apellidos+"', edad = '"+edad+"', sexo = '"+sexo+"'"
+                + ", email = '"+email+"', curp = '"+curp+"', lugarnacimiento = '"+lugarNacimiento+"'"
+                + ", fechanacimiento = '"+fechaNacimiento+"', turno = '"+turno+"' WHERE matricula = '"+matricula+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

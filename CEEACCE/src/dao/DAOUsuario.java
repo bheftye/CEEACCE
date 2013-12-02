@@ -41,7 +41,7 @@ public class DAOUsuario extends DAO<Usuario>{
         String nombreUsuario = usuario.getNombreDeUsuario();
         String contrasenia = usuario.getContrasenia();
         int claveUsuario = usuario.getClaveUsuario();
-        String queryActualizacion = "UPDATE usuario SET nomusuario = "+nombreUsuario+", contrasenia = "+contrasenia+" WHERE clvusuario = "+claveUsuario;
+        String queryActualizacion = "UPDATE usuario SET nomusuario = '"+nombreUsuario+"', contrasenia = '"+contrasenia+"' WHERE clvusuario = '"+claveUsuario+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

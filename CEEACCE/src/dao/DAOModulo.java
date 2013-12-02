@@ -18,7 +18,7 @@ public class DAOModulo extends DAO<Modulo> {
     @Override
     public int insertar(Modulo modulo) {
         String nombreModulo = modulo.getNombre();
-        String queryInsercion = "INSERT INTO plandeestudio (nomplan) VALUES ("+nombreModulo+")";
+        String queryInsercion = "INSERT INTO plandeestudio (nomplan) VALUES ('"+nombreModulo+"')";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -38,7 +38,7 @@ public class DAOModulo extends DAO<Modulo> {
     public int actualizar(Modulo modulo) {
         String nombreModulo = modulo.getNombre();
         int claveModulo = generarClaveModulo(nombreModulo);
-        String queryActualizacion = "UPDATE plandeestudio SET nommod = "+nombreModulo+" WHERE clvmodulo = "+claveModulo;
+        String queryActualizacion = "UPDATE plandeestudio SET nommod = '"+nombreModulo+"' WHERE clvmodulo = '"+claveModulo+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

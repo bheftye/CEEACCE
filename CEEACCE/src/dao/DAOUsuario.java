@@ -20,7 +20,7 @@ public class DAOUsuario extends DAO<Usuario>{
     public int insertar(Usuario usuario) {
         String nombreUsuario = usuario.getNombreDeUsuario();
         String contrasenia = usuario.getContrasenia();
-        String queryInsercion = "INSERT INTO usuario (nomusuario,contrasenia) VALUES (\'"+nombreUsuario+"\',\'"+contrasenia+"\')";
+        String queryInsercion = "INSERT INTO usuario (nomusuario,contrasenia) VALUES ('"+nombreUsuario+"','"+contrasenia+"')";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -67,6 +67,7 @@ public class DAOUsuario extends DAO<Usuario>{
             while(resultadoDeDatos.next()){
                 String nombreUsuario = resultadoDeDatos.getString("nombreusuario");
                 String contrasenia = resultadoDeDatos.getString("contrasenia");
+                
                 int claveUsuario = Integer.parseInt(resultadoDeDatos.getString("clvusuario"));
                 Usuario usuario = new Usuario(nombreUsuario, contrasenia, claveUsuario);
                 resultadoUsuarios.add(usuario);

@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import modelo.Usuario;
 import java.util.ArrayList;
+import modelo.Usuario;
 
 public class DAOUsuario extends DAO<Usuario>{
     private static DAOUsuario daoUsuario = new DAOUsuario();

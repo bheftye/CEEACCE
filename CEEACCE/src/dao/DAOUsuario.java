@@ -58,7 +58,7 @@ public class DAOUsuario extends DAO<Usuario>{
     }
 
     @Override
-    public ArrayList consultar(String querySeleccion) {
+    public ArrayList<Usuario> consultar(String querySeleccion) {
         ArrayList<Usuario> resultadoUsuarios = new ArrayList();
         try{
         Connection conexion = getConexion(); 

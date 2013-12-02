@@ -4,6 +4,11 @@
  */
 package controladorcaches;
 
+import controladordepeticiones.ControladorDePeticiones;
+import java.util.ArrayList;
+import modelo.ListaDeUsuarios;
+import modelo.Usuario;
+
 /**
  *
  * @author brentheftye
@@ -31,7 +36,8 @@ public class ControladorCache {
     }
     
     public void llenarListaDeUsuarios(){
-    
+        ArrayList<Usuario> usuarios = ControladorDePeticiones.getControladorDePeticiones().obtenerUsuarios();
+        ListaDeUsuarios.getListaDeUsuarios().setUsuarios(usuarios);
     }
     
 }

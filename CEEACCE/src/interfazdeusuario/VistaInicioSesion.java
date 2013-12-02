@@ -114,19 +114,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
             boolean nombreUsuarioVacio = "".equals(nombreDeUsuario);
             boolean contraseniaUsuarioVacio = "".equals(contraseniaDeUsuario);
             if(!nombreUsuarioVacio && !contraseniaUsuarioVacio){
-                 if(this.contadorDeErroresDeAutenticacion < this.MAX_NUM_ERRORES_AUTENTICACION){
-                    boolean coincide = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().verificarUsario(nombreDeUsuario, contraseniaDeUsuario);
-                    if(coincide){
-                        new VistaPrincipal().setVisible(true);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
-                        contadorDeErroresDeAutenticacion++;
-                    }
-                }
-                else{
-                     JOptionPane.showMessageDialog(rootPane, "Este usuario se encuentra bloqueado. Por favor comunícale a tu administrador para su desbloqueo.");
-                }
+                
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 

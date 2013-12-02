@@ -8,6 +8,7 @@ import dao.DAOAlumno;
 import dao.DAOCurso;
 import dao.DAOPlanDeEstudio;
 import dao.DAOUsuario;
+import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Curso;
 import modelo.PlanDeEstudio;
@@ -65,6 +66,9 @@ public class ControladorDePeticiones {
         }
         return false;
     }
-
+    
+    public ArrayList<Usuario> obtenerUsuarios(){
+        return DAOUsuario.getDAOUsuario().consultar("select * from usuario order by clvusuario asc");
+    }
     
 }

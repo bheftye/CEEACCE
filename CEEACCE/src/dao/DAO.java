@@ -115,8 +115,8 @@ public abstract class DAO<T> {
     }
     
     private String host ="localhost";
-    private String nombreDeBD = "ceeacce";
-    private String usuario = "root";
+    private String nombreDeBD = "CEEACCE";
+    private String usuario = "postgres";
     private String contrasenia = "heftye92";
     private boolean PosgreSQLDriverCargado = false;
 }

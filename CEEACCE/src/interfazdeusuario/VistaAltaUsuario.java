@@ -4,7 +4,6 @@
  */
 package interfazdeusuario;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
@@ -37,9 +36,9 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nombreUsuario = new javax.swing.JTextField();
-        contraseniaUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        contraseniaRepetida = new javax.swing.JTextField();
+        contraseniaUsuario = new javax.swing.JPasswordField();
+        contraseniaRepetida = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,9 +89,9 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(nombreUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                     .addComponent(contraseniaUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(contraseniaRepetida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(contraseniaRepetida))))))
                 .addGap(0, 143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -200,8 +199,8 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JTextField contraseniaRepetida;
-    private javax.swing.JTextField contraseniaUsuario;
+    private javax.swing.JPasswordField contraseniaRepetida;
+    private javax.swing.JPasswordField contraseniaUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

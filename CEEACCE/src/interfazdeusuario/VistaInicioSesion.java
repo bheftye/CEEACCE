@@ -5,8 +5,6 @@
 package interfazdeusuario;
 
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -21,7 +19,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
      */
     public VistaInicioSesion() {
         initComponents();
-        centrarJFrame();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**
@@ -137,10 +135,6 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-     private void centrarJFrame(){
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-    }
     
     /**
      * @param args the command line arguments

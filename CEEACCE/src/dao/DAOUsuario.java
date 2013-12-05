@@ -65,11 +65,10 @@ public class DAOUsuario extends DAO<Usuario>{
         Statement sentencia =  conexion.createStatement();
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
-                String nombreUsuario = resultadoDeDatos.getString("nombreusuario");
-                String contrasenia = resultadoDeDatos.getString("contrasenia");
-                
-                int claveUsuario = Integer.parseInt(resultadoDeDatos.getString("clvusuario"));
-                Usuario usuario = new Usuario(nombreUsuario, contrasenia, claveUsuario);
+                String nombreUsuario = resultadoDeDatos.getString("nomusuario").trim().toString();
+                String contrasenia = resultadoDeDatos.getString("contrasenia").trim().toString();                
+                String claveUsuario = resultadoDeDatos.getString("clvusuario").trim().toString();
+                Usuario usuario = new Usuario(nombreUsuario, contrasenia, Integer.valueOf(claveUsuario));
                 resultadoUsuarios.add(usuario);
             }
         sentencia.close();

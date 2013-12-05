@@ -7,6 +7,7 @@ package interfazdeusuario;
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -108,13 +109,21 @@ public class VistaInicioSesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
             String nombreDeUsuario = nombreUsuario.getText();
             String contraseniaDeUsuario = contraseniaUsuario.getText();
             boolean nombreUsuarioVacio = "".equals(nombreDeUsuario);
             boolean contraseniaUsuarioVacio = "".equals(contraseniaDeUsuario);
             if(!nombreUsuarioVacio && !contraseniaUsuarioVacio){
-                
+              boolean usuarioValido =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().verificarUsario(nombreDeUsuario, contraseniaDeUsuario);
+              if(usuarioValido){
+                  new VistaPrincipal().setVisible(true);
+                  this.dispose();
+              }
+              else{
+                  
+                  JOptionPane.showMessageDialog(null,  "Usuario o contraseña incorrecto(s)", "Inicio de sesión fallido", JOptionPane.INFORMATION_MESSAGE, icon);
+                  contraseniaUsuario.setText("");
+              }
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -175,4 +184,5 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private int MAX_NUM_ERRORES_AUTENTICACION = 5;
     private int contadorDeErroresDeAutenticacion = 0;
+    private final ImageIcon icon = new ImageIcon("images/redx.png");
         }

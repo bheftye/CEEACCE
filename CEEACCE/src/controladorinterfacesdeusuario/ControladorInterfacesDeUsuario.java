@@ -91,7 +91,23 @@ public class ControladorInterfacesDeUsuario {
     }
     
     public boolean verificarUsario(String usuario, String contrasenia){
-        
+        int indiceUsuarioAVerificar = encuentraIndiceDeUsuario(usuario);
+        if(indiceUsuarioAVerificar != -1){
+            boolean contraseniaValida = ListaDeUsuarios.getListaDeUsuarios().getUsuarios().get(indiceUsuarioAVerificar).getContrasenia().equals(contrasenia);
+            if(contraseniaValida){
+                return true;
+            }
+        }
         return false;
     }
-}
+    
+    private int encuentraIndiceDeUsuario(String usuario){
+        ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
+        for (int i = 0; i < ListaDeUsuarios.getListaDeUsuarios().getUsuarios().size(); i++) {
+            if(usuarios.get(i).getNombreDeUsuario().equalsIgnoreCase(usuario)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}    

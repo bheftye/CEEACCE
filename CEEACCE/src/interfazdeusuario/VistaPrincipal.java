@@ -4,9 +4,6 @@
  */
 package interfazdeusuario;
 
-import interfazdeusuario.VistaAdministradorAlumnos;
-import interfazdeusuario.VistaAdministradorPlanesDeEstudios;
-
 /**
  *
  * @author Jorge
@@ -18,6 +15,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**

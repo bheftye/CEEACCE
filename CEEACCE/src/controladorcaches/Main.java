@@ -4,6 +4,8 @@
  */
 package controladorcaches;
 
+import interfazdeusuario.VistaInicioSesion;
+
 /**
  *
  * @author brentheftye
@@ -11,7 +13,8 @@ package controladorcaches;
 public class Main {
     
     public static void main(String[] args) {
-        
+        ControladorCache.getControladorCache().llenarListaDeUsuarios();
+        new VistaInicioSesion().setVisible(true);
     }
     
 }

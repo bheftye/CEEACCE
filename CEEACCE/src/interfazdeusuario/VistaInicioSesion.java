@@ -119,7 +119,12 @@ public class VistaInicioSesion extends javax.swing.JFrame {
             if(!nombreUsuarioVacio && !contraseniaUsuarioVacio){
               boolean usuarioValido =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().verificarUsario(nombreDeUsuario, contraseniaDeUsuario);
               if(usuarioValido){
-                  new VistaPrincipal().setVisible(true);
+                  if(nombreDeUsuario.equalsIgnoreCase("admin")){
+                      new VistaPrincipalAdministrador().setVisible(true);
+                  }
+                  else{
+                    new VistaPrincipal().setVisible(true);
+                  }
                   this.dispose();
               }
               else{

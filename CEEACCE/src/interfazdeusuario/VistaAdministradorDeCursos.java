@@ -4,6 +4,11 @@
  */
 package interfazdeusuario;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import modelo.Curso;
+import modelo.ListaDeCursos;
+
 /**
  *
  * @author brentheftye
@@ -16,6 +21,7 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
     public VistaAdministradorDeCursos() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        llenarJListConCursos();
     }
 
     /**
@@ -114,6 +120,16 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
         new VistaAltaCurso().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void llenarJListConCursos(){
+        ArrayList<Curso> cursos = ListaDeCursos.getListaDeCursos().getCursos();
+        DefaultListModel listModel = new DefaultListModel();
+        int numCursos = cursos.size();
+        for (int i = 0; i < numCursos; i++) {
+            Curso cursoIndexado = cursos.get(i);
+            listModel.addElement(cursoIndexado.getNombre());
+        }
+        jList1.setModel(listModel);
+    }
     /**
      * @param args the command line arguments
      */

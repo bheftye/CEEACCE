@@ -21,14 +21,11 @@ public class DAOAsignatura extends DAO<Asignatura> {
     public int insertar(Asignatura asignatura) {
         String claveAsignatura = asignatura.getClave();
         String nombreAsignatura = asignatura.getNombreAsignatura();
-        int calificacion = 0;
         boolean esSerializada = asignatura.isSerializacion();
-        String maestroImparteAsignatura = "";
-        String fechaImparticion = "";
         double creditosAsignatura = asignatura.getCreditos();
         int duracionAsignatura = asignatura.getDuracion();
-        String queryInsercion = "INSERT INTO asignatura (clvasig,nomasig, serializacion, maestro, fechaimparticion, creditos, duracion)"
-                + " VALUES ('"+claveAsignatura+"','"+nombreAsignatura+"',"+esSerializada+",'"+maestroImparteAsignatura+"','"+fechaImparticion+"',"+creditosAsignatura+","+duracionAsignatura+")";
+        String queryInsercion = "INSERT INTO asignatura (clvasig,nomasig, serializacion, creditos, duracion)"
+                + " VALUES ('"+claveAsignatura+"','"+nombreAsignatura+"',"+esSerializada+","+creditosAsignatura+","+duracionAsignatura+")";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{
@@ -73,10 +70,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
                 String nombreAsignatura = resultadoDeDatos.getString("nomasig");
-                int calificacion = Integer.parseInt(resultadoDeDatos.getString("calificacion"));
                 boolean esSerializada = Boolean.parseBoolean(resultadoDeDatos.getString("serializacion"));
-                String maestroImparteAsignatura = resultadoDeDatos.getString("maestro");
-                String fechaImparticion = resultadoDeDatos.getString("fechaimparticion");
                 int creditosAsignatura = Integer.parseInt(resultadoDeDatos.getString("creditos"));
                 int duracionAsignatura = Integer.parseInt(resultadoDeDatos.getString("duracion"));
                 Asignatura asignatura = new Asignatura();

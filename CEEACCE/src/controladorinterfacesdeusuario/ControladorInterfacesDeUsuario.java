@@ -77,7 +77,7 @@ public class ControladorInterfacesDeUsuario {
                         Asignatura asignaturaIndexada = asigunaturasDeModuloIndexado.get(j);
                         ControladorDePeticiones.getControladorDePeticiones().agregarAsignatura(asignaturaIndexada);
                         int numModulo = i+1;
-                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio,i, asignaturaIndexada.getClave());
+                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio,numModulo, asignaturaIndexada.getClave());
                     }
                 }
             }

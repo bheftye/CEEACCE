@@ -62,7 +62,7 @@ public class InsercionPlanDeEstudio {
         
         asignaturas5.add(new Asignatura("Probabilidad y Estadística","M-PRO01", 0, false, "", "", 2.6, 2));
         asignaturas5.add(new Asignatura("Administración","CS-ADM01", 0, false, "", "", 2.6, 2));
-        asignaturas5.add(new Asignatura("Historia de Nuestro Tiempo","CS-HIS01", 0, false, "", "", 2.3, 2));
+        asignaturas5.add(new Asignatura("Historia de Nuestro Tiempo","CS-HIS03", 0, false, "", "", 2.3, 2));
         asignaturas5.add(new Asignatura("Economía","CS-ECO01", 0, false, "", "", 2.3, 2));
         asignaturas5.add(new Asignatura("Ética y Valores","CS-ETI01", 0, false, "", "", 2.6, 2));
         asignaturas5.add(new Asignatura("Historia de Yucatán","CS-HIS04", 0, false, "", "", 2.3, 2));
@@ -88,7 +88,7 @@ public class InsercionPlanDeEstudio {
         modulos.add(m5);
         modulos.add(m6);
         PlanDeEstudio planDeEstudio = new PlanDeEstudio("Plan 2011", modulos);
-        
+        controladorinterfacesdeusuario.ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarPlanDeEstudio(planDeEstudio);
         
         
         

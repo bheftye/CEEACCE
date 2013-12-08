@@ -4,8 +4,10 @@
  */
 package interfazdeusuario;
 
+import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import modelo.Alumno;
 import modelo.ListaDePlanesDeEstudio;
 import modelo.PlanDeEstudio;
@@ -257,7 +259,35 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        boolean camposLlenos = validarLlenadoDeCampos();
+        if(camposLlenos){
+            String matricula = this.matriculaAlumno.getText();
+            String nombre = this.nombreAlumno.getText();
+            String apellidos = this.apellidosAlumno.getText();
+            String dia = this.diaNacimiento.getSelectedItem().toString();
+            String mes = Integer.toString(this.mesNacimiento.getSelectedIndex());
+            String anio = this.anioNacimiento.getSelectedItem().toString();
+            String fechaInscripcion = this.fechaDeInscripcion.getText();
+            String sexo = this.sexoAlumno.getSelectedItem().toString();
+            String email = this.emailAlumno.getText();
+            String curp = this.curpAlumno.getText();
+            String lugar = this.lugarDeNacimiento.getText();
+            String turno = this.turno.getSelectedItem().toString();
+            PlanDeEstudio planDeEstudio = (PlanDeEstudio)planesDeEstudio.getSelectedItem();
+            
+            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, dia+"/"+mes+"/"+anio, fechaInscripcion, turno, planDeEstudio);
+            boolean agregoAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarAlumno(alumno);
+            if (agregoAlumno) {
+                JOptionPane.showMessageDialog(this, "Alumno agregado exitosamente");
+                new VistaPrincipalAdministrador().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No fue posible crear este alumno.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Verifica que todos los campos estén llenos.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
@@ -327,6 +357,42 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
             nombresPlanesEstudio.add(planesDeEstudio.get(i).getNombre());
         }
         return nombresPlanesEstudio;
+    }
+    
+    private boolean validarLlenadoDeCampos(){
+        String matricula = this.matriculaAlumno.getText();
+        String nombre = this.nombreAlumno.getText();
+        String apellidos = this.apellidosAlumno.getText();
+        int indiceDia = this.diaNacimiento.getSelectedIndex();
+        int indiceMes = this.mesNacimiento.getSelectedIndex();
+        int indiceAnio = this.anioNacimiento.getSelectedIndex();
+        int indiceSexo = this.sexoAlumno.getSelectedIndex();
+        String email = this.emailAlumno.getText();
+        String curp = this.curpAlumno.getText();
+        String lugar = this.lugarDeNacimiento.getText();
+        int indiceTurno = this.turno.getSelectedIndex();
+        int indicePlan = this.planesDeEstudio.getSelectedIndex();
+        
+        boolean campoMatriculaVacio = "".equals(matricula);
+        boolean campoNombreVacio = "".equals(nombre);
+        boolean campoApellidosVacio = "".equals(apellidos);
+        boolean campoDiaVacio = indiceDia == 0? true : false;
+        boolean campoMesVacio = indiceMes == 0? true : false;
+        boolean campoAnioVacio = indiceAnio == 0? true : false;
+        boolean campoSexoVacio = indiceSexo == 0? true : false;
+        boolean campoEmailVacio = "".equals(email);
+        boolean campoCurpVacio = "".equals(curp);
+        boolean campoLugarVacio = "".equals(lugar);
+        boolean campoTurnoVacio = indiceTurno == 0? true : false;
+        boolean campoPlanVacio = indicePlan == 0? true : false;
+        
+        
+        if(!campoMatriculaVacio && !campoNombreVacio && !campoApellidosVacio && !campoDiaVacio && !campoMesVacio
+                && !campoAnioVacio && !campoSexoVacio && !campoEmailVacio && !campoCurpVacio && !campoLugarVacio
+                && !campoTurnoVacio && !campoPlanVacio){
+            return true;
+        }
+        return false;
     }
     
     /**

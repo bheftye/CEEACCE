@@ -5,11 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import modelo.Asignatura;
-=======
 import modelo.Alumno;
->>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
 
 public class DAOAsignatura extends DAO<Asignatura> {
     private static DAOAsignatura daoAsignatura = new DAOAsignatura();
@@ -24,10 +21,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
     public int insertar(Asignatura asignatura) {
         String claveAsignatura = asignatura.getClave();
         String nombreAsignatura = asignatura.getNombreAsignatura();
-<<<<<<< HEAD
         int calificacion = 0;
-=======
->>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
         boolean esSerializada = asignatura.isSerializacion();
         String maestroImparteAsignatura = "";
         String fechaImparticion = "";
@@ -102,9 +96,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
     @Override
     public int actualizar(Asignatura entidad) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-<<<<<<< HEAD
-    
+    }    
     public int ejecutaQuery(String query){
 	int numFilasAfectadas = 0;
         Connection conexion = getConexion();
@@ -119,12 +111,6 @@ public class DAOAsignatura extends DAO<Asignatura> {
         }
         cerrarConexion(conexion);
         return numFilasAfectadas;
-}
-
-=======
-
- 
-	 
->>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
+    }
 }
  

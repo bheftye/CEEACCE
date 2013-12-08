@@ -1,7 +1,6 @@
 package modelo;
 
 public class Asignatura {
-<<<<<<< HEAD
  
 	private String nombreAsignatura;
         
@@ -18,8 +17,6 @@ public class Asignatura {
 	private double creditos;
 	 
 	private int duracion;
-=======
->>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
 
     /**
      * @return the nombreAsignatura
@@ -126,15 +123,6 @@ public class Asignatura {
     public String getClave() {
         return clave;
     }
-    
-    private String nombreAsignatura;
-    private String clave;
-    private int calificacion;
-    private boolean serializacion;
-    private String maestroQueImparte;
-    private String fechaImparticion;
-    private int creditos;
-    private int duracion;
 	 
 }
  

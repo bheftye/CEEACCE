@@ -32,4 +32,10 @@ public class EncriptadorDeContrasenia {
 
         return "";
     }
+    
+    public static void main(String[] args) {
+        String clave = "admin";
+        String claveEncriptada = EncriptadorDeContrasenia.encriptaContrasenia(clave);
+        System.out.println(claveEncriptada);
+    }
 }

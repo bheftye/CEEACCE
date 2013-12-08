@@ -57,11 +57,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
 
     @Override
     public ArrayList consultar(String querySeleccion) {
-<<<<<<< HEAD
         ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
-=======
-            ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
->>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
         try{
         Connection conexion = getConexion(); 
         Statement sentencia =  conexion.createStatement();

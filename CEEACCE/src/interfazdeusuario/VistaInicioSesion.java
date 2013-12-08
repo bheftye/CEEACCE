@@ -4,6 +4,7 @@
  */
 package interfazdeusuario;
 
+import controladorcaches.ControladorCache;
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import encriptador.EncriptadorDeContrasenia;
 import javax.swing.ImageIcon;
@@ -125,7 +126,13 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                       new VistaPrincipalAdministrador().setVisible(true);
                   }
                   else{
+                    if(!this.cacheCargada){
+                        ControladorCache.getControladorCache().llenarListaDePlanesDeEstudio();
+                        setCacheCargada(true);
+                        System.out.println("Se cargo la cache...");
+                    }
                     new VistaPrincipal().setVisible(true);
+                    
                   }
                   this.dispose();
               }
@@ -143,7 +150,9 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+    public void setCacheCargada(boolean cacheCargada){
+        this.cacheCargada = cacheCargada;
+    }
     /**
      * @param args the command line arguments
      */
@@ -197,4 +206,5 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     private int MAX_NUM_ERRORES_AUTENTICACION = 5;
     private int contadorDeErroresDeAutenticacion = 0;
     private final ImageIcon icon = new ImageIcon("images/redx.png");
+    private boolean cacheCargada = false; 
         }

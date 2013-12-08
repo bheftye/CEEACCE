@@ -4,6 +4,14 @@
  */
 package interfazdeusuario;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import modelo.ListaDePlanesDeEstudio;
+import modelo.PlanDeEstudio;
+
 /**
  *
  * @author brentheftye
@@ -16,6 +24,8 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
     public VistaAdministradorPlanesDeEstudios() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        llenarJListConPlanesDeEstudio();
+        setListListener();
     }
 
     /**
@@ -31,9 +41,10 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton2.setText("Crear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +61,13 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
         });
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(jList1);
 
         jLabel1.setText("Planes de Estudio");
 
@@ -61,7 +79,7 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(39, 39, 39)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 456, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 548, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -70,7 +88,7 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(210, 210, 210)
                         .add(jLabel1)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -80,7 +98,7 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(0, 181, Short.MAX_VALUE)
+                        .add(0, 242, Short.MAX_VALUE)
                         .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -100,9 +118,38 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+        int indexEnJList = jList1.getSelectedIndex();
+        new VistaVerPlanDeEstudio(ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(indexEnJList)).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void llenarJListConPlanesDeEstudio(){
+        ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
+        DefaultListModel listModel = new DefaultListModel();
+        int numPlanes = planesDeEstudio.size();
+        for (int i = 0; i < numPlanes; i++) {
+            PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
+            listModel.addElement(planDeEstudioIndexado.getNombre());
+        }
+        jList1.setModel(listModel);
+    }
+    
+    private void setListListener() {
+        jList1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int indexEnJList = list.locationToIndex(evt.getPoint());
+                    new VistaVerPlanDeEstudio(ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(indexEnJList)).setVisible(true);
+
+                }
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -142,6 +189,7 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

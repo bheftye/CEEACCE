@@ -58,14 +58,17 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     @Override
     public ArrayList consultar(String querySeleccion) {
         ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
+        ArrayList<Modulo> modulos = new ArrayList();
+        for (int i = 0; i < 6; i++) {
+           modulos.add(new Modulo("Modulo "+(i+1))); 
+        }
         try{
         Connection conexion = getConexion(); 
         Statement sentencia =  conexion.createStatement();
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
-                String nombre = resultadoDeDatos.getString("nombre");
-                ArrayList<Modulo> modulos = (ArrayList) resultadoDeDatos.getArray("modulos");
-                int clave = Integer.parseInt(resultadoDeDatos.getString("clave"));
+                String nombre = resultadoDeDatos.getString("nomplan");
+                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan"));
                 PlanDeEstudio planEstudio = new PlanDeEstudio(nombre, modulos, clave);
                 resultadoPlanEstudio.add(planEstudio);
             }

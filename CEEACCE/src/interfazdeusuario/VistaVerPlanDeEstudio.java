@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import modelo.Asignatura;
 import modelo.Modulo;
+import modelo.PlanDeEstudio;
 
 /**
  *
@@ -21,11 +22,11 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
      * Creates new form VistaVerPlanDeEstudio.
      * @param modulos Módulos del plan de estudio. 
      */
-    public VistaVerPlanDeEstudio(ArrayList<Modulo> modulos) {
+    public VistaVerPlanDeEstudio(PlanDeEstudio planDeEstudio) {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
-        this.modulos = modulos;
-        llenarListaDeAsignaturasCreadas();
+        this.modulos = planDeEstudio.getModulos();
+        llenarListaDeAsignaturas();
     }
     
     /**
@@ -84,18 +85,17 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(19, 19, 19)
-                        .add(nombrePlanDeEstudio))
-                    .add(layout.createSequentialGroup()
                         .add(270, 270, 270)
-                        .add(jLabel2)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(0, 106, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jButton1)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 463, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(84, 84, 84))
+                        .add(jLabel2))
+                    .add(layout.createSequentialGroup()
+                        .add(19, 19, 19)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(jButton1)
+                            .add(layout.createSequentialGroup()
+                                .add(nombrePlanDeEstudio)
+                                .add(583, 583, 583))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 686, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -103,11 +103,11 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
                 .add(jLabel2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(nombrePlanDeEstudio)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 364, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 430, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
-                .add(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,7 +152,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
     /**
      * Método que llena la Tabla con las filas de las asignaturas.
      */
-    private void llenarListaDeAsignaturasCreadas() {
+    private void llenarListaDeAsignaturas() {
         Vector titulosTabla = llenarTitulosDeTabla();
         Vector datosAsignaturas = new Vector<Vector<String>>();
         int numeroDeModulos = this.modulos.size();

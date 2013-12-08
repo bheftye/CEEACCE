@@ -6,14 +6,12 @@ package controladorinterfacesdeusuario;
 
 import controladorcaches.ControladorCache;
 import controladordepeticiones.ControladorDePeticiones;
-import dao.DAOAsignatura;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Curso;
 import modelo.ListaDeAlumnos;
 import modelo.ListaDeCursos;
-import modelo.ListaDePlanesDeEstudio;
 import modelo.ListaDeUsuarios;
 import modelo.Modulo;
 import modelo.PlanDeEstudio;

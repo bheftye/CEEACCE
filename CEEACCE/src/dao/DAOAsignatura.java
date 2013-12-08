@@ -69,12 +69,12 @@ public class DAOAsignatura extends DAO<Asignatura> {
         Statement sentencia =  conexion.createStatement();
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
-                String nombreAsignatura = resultadoDeDatos.getString("nomasig");
-                boolean esSerializada = Boolean.parseBoolean(resultadoDeDatos.getString("serializacion"));
-                int creditosAsignatura = Integer.parseInt(resultadoDeDatos.getString("creditos"));
-                int duracionAsignatura = Integer.parseInt(resultadoDeDatos.getString("duracion"));
-                Asignatura asignatura = new Asignatura();
-                //Asignatura asignatura = new Asignatura(nombreAsignatura,calificacion,esSerializada,maestroImparteAsignatura,fechaImparticion,creditosAsignatura,duracionAsignatura);
+                String claveAsignatura = resultadoDeDatos.getString("clvasig").trim().toString();
+                String nombreAsignatura = resultadoDeDatos.getString("nomasig").trim().toString();
+                boolean esSerializada = Boolean.parseBoolean(resultadoDeDatos.getString("serializacion").trim().toString());
+                double creditosAsignatura = Double.parseDouble(resultadoDeDatos.getString("creditos").trim().toString());
+                int duracionAsignatura = Integer.parseInt(resultadoDeDatos.getString("duracion").trim().toString());
+                Asignatura asignatura = new Asignatura(claveAsignatura,nombreAsignatura,0,esSerializada,"","",creditosAsignatura,duracionAsignatura);
                 resultadoAsignatura.add(asignatura);
             }
         sentencia.close();
@@ -90,7 +90,8 @@ public class DAOAsignatura extends DAO<Asignatura> {
     @Override
     public int actualizar(Asignatura entidad) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }    
+    }
+    
     public int ejecutaQuery(String query){
 	int numFilasAfectadas = 0;
         Connection conexion = getConexion();

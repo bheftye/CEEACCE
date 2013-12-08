@@ -6,10 +6,6 @@ package interfazdeusuario;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
 import modelo.ListaDeUsuarios;
 import modelo.Usuario;
 
@@ -25,7 +21,7 @@ public class VistaAdministradorUsuarios extends javax.swing.JFrame {
     public VistaAdministradorUsuarios() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
-        llenaJListConUsuarios();
+        llenarJListConUsuarios();
     }
 
     /**
@@ -121,7 +117,7 @@ public class VistaAdministradorUsuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void llenaJListConUsuarios(){
+    private void llenarJListConUsuarios(){
         ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
         DefaultListModel listModel = new DefaultListModel();
         int numUsuarios = usuarios.size();

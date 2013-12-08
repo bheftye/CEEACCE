@@ -8,6 +8,7 @@ import controladordepeticiones.ControladorDePeticiones;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Curso;
+import modelo.ListaDeAlumnos;
 import modelo.ListaDeCursos;
 import modelo.ListaDePlanesDeEstudio;
 import modelo.ListaDeUsuarios;
@@ -31,6 +32,7 @@ public class ControladorCache {
 
     public void llenarListaDeAlumnos() {
         ArrayList<Alumno> alumnos = ControladorDePeticiones.getControladorDePeticiones().obtenerAlumnos();
+        ListaDeAlumnos.getListaDeAlumnos().setAlumnos(alumnos);
 
     }
 

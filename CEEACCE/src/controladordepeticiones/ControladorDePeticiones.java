@@ -127,6 +127,7 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<Alumno> obtenerAlumnos() {
+        
         return null;
     }
 
@@ -143,5 +144,25 @@ public class ControladorDePeticiones {
             return planDeEstudio;
         }
         return null;
+    }
+    
+    public void registrarBoletaVaciaDeAlumno(Alumno alumno){
+        PlanDeEstudio planDeEstudio = alumno.getPlanDeEstudio();
+        int clavePlanDeEstudio = planDeEstudio.getClave();
+        int claveModulo = 0;
+        String claveAsignatura = "";
+        int NUM_DE_MODULOS = 6;
+        for (int i = 0; i < NUM_DE_MODULOS; i++) {
+            claveModulo = i+1;
+            Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
+            int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
+            for (int j = 0; j < NUM_ASIGNATURAS_DEL_MODULO; j++) {
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                claveAsignatura = asignaturaIndexada.getClave();
+                System.out.println(claveAsignatura);
+                String query = "insert into calificaciones (clvalumno,clvplan,clvmodulo,clvasign) values ('"+alumno.getMatricula()+"','"+clavePlanDeEstudio+"','"+claveModulo+"','"+claveAsignatura+"')";
+                DAOAsignatura.getDAOAsignatura().ejecutaQuery(query);
+            }
+        }
     }
 }

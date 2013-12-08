@@ -38,9 +38,8 @@ public class ControladorInterfacesDeUsuario {
     public boolean agregarAlumno(Alumno alumno){
         boolean agrego = controladorDePeticiones.agregarAlumno(alumno);
         if(agrego){
-            ArrayList<Alumno> listaDeAlumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();  
-            listaDeAlumnos.add(alumno);
-            ListaDeAlumnos.getListaDeAlumnos().setAlumnos(listaDeAlumnos);
+            ControladorDePeticiones.getControladorDePeticiones().registrarBoletaVaciaDeAlumno(alumno);
+            ControladorCache.getControladorCache().llenarListaDeAlumnos();
         }
         return agrego;
     }

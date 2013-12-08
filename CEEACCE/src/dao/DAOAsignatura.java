@@ -78,7 +78,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
                 boolean esSerializada = Boolean.parseBoolean(resultadoDeDatos.getString("serializacion").trim().toString());
                 double creditosAsignatura = Double.parseDouble(resultadoDeDatos.getString("creditos").trim().toString());
                 int duracionAsignatura = Integer.parseInt(resultadoDeDatos.getString("duracion").trim().toString());
-                Asignatura asignatura = new Asignatura(claveAsignatura,nombreAsignatura,0,esSerializada,"","",creditosAsignatura,duracionAsignatura);
+                Asignatura asignatura = new Asignatura(nombreAsignatura,claveAsignatura,0,esSerializada,"","",creditosAsignatura,duracionAsignatura);
                 resultadoAsignatura.add(asignatura);
             }
         sentencia.close();

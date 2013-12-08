@@ -136,7 +136,7 @@ public class DAOAlumno extends DAO<Alumno> {
         }
         return null;
     }
-    
+
     private int generarEdad(String fechaNacimiento){
         Calendar cal = Calendar.getInstance();
         int anioHoy = cal.get(Calendar.YEAR);
@@ -149,7 +149,7 @@ public class DAOAlumno extends DAO<Alumno> {
         double nacimiento = anioNacimiento + mesNacimiento*.01 + diaNacimiento*.0001;
         return (int)(hoy-nacimiento);
     }
-    
+  
     private static DAOAlumno daoAlumno = new DAOAlumno();
 
 }

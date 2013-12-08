@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Curso {
         
 
+    public Curso(String nombre){
+        this.nombre = nombre;
+    }
     /**
      * @return the planDeEstudio
      */

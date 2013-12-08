@@ -100,7 +100,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
  
 	public int eliminar(PlanDeEstudio planDeEstudio) {
         String nombrePlanEstudio = planDeEstudio.getNombre();
-        String queryInsercion = "DELETE FROM plandeestudio WHERE nomplan = "+nombrePlanEstudio;
+        String queryInsercion = "DELETE FROM plandeestudio WHERE nomplan = '"+nombrePlanEstudio+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

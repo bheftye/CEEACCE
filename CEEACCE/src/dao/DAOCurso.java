@@ -19,7 +19,7 @@ public class DAOCurso extends DAO<Curso> {
     public int insertar(Curso curso) {
         String nombreCurso = curso.getNombre();
         int clvplan = curso.getPlanDeEstudio().getClave();
-        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan) VALUES ('"+nombreCurso+"','"+clvplan+"')";
+        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan) VALUES ('"+nombreCurso+"',"+clvplan+")";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{

@@ -30,8 +30,8 @@ public class DAOAlumno extends DAO<Alumno> {
         String turno = alumno.getTurno();
         int clvplan = alumno.getPlanDeEstudio().getClave();
         String queryInsercion = "INSERT INTO alumno (nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
-                + " VALUES ('"+nombreAlumno+"','"+apellidos+"','"+edad+"','"+sexo+"','"+email+"','"+curp+"'"
-                + ",'"+lugarNacimiento+"','"+fechaNacimiento+"','"+fechaInscripcion+"','"+turno+"','"+clvplan+"')";
+                + " VALUES ('"+nombreAlumno+"','"+apellidos+"',"+edad+",'"+sexo+"','"+email+"','"+curp+"'"
+                + ",'"+lugarNacimiento+"','"+fechaNacimiento+"','"+fechaInscripcion+"','"+turno+"',"+clvplan+")";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{

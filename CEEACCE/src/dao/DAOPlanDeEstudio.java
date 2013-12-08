@@ -40,7 +40,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     public int actualizar(PlanDeEstudio planDeEstudio) {
         String nombrePlanEstudio = planDeEstudio.getNombre();
         int clavePlanEstudio = planDeEstudio.getClave();
-        String queryActualizacion = "UPDATE plandeestudio SET nomplan = '"+nombrePlanEstudio+"' WHERE clvplan = '"+clavePlanEstudio+"'";
+        String queryActualizacion = "UPDATE plandeestudio SET nomplan = '"+nombrePlanEstudio+"' WHERE clvplan = "+clavePlanEstudio;
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -58,7 +58,6 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
 
     @Override
     public ArrayList consultar(String querySeleccion) {
-        //throw new UnsupportedOperationException("Not supported yet.");
             ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
         try{
         Connection conexion = getConexion(); 

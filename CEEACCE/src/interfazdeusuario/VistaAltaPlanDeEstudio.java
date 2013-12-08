@@ -154,7 +154,7 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
         boolean campoNombrePlanDeEstudioVacio = "".equals(nombreDePlanDeEstudio);
         if(numAsignaturas == numeroDeAsignaturasNecesarias && !campoNombrePlanDeEstudioVacio ){
             //En el numeor de clave se puso para retener el error
-            PlanDeEstudio planDeEstudioNuevo = new PlanDeEstudio(nombreDePlanDeEstudio, modulos ,4);
+            PlanDeEstudio planDeEstudioNuevo = new PlanDeEstudio(nombreDePlanDeEstudio, modulos);
             boolean agregoPlanDeEstudio = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarPlanDeEstudio(planDeEstudioNuevo);
             if(agregoPlanDeEstudio){
                 JOptionPane.showMessageDialog(this, "Se agregó el plan de estudio exitosamente.");

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Asignatura;
 import java.util.ArrayList;
+import modelo.Alumno;
 
 public class DAOAsignatura extends DAO<Asignatura> {
     private static DAOAsignatura daoAsignatura = new DAOAsignatura();
@@ -18,15 +19,15 @@ public class DAOAsignatura extends DAO<Asignatura> {
 
     @Override
     public int insertar(Asignatura asignatura) {
+        String claveAsignatura = asignatura.getClave();
         String nombreAsignatura = asignatura.getNombreAsignatura();
-        int calificacion = asignatura.getCalificacion();
         boolean esSerializada = asignatura.isSerializacion();
         String maestroImparteAsignatura = asignatura.getMaestroQueImparte();
         String fechaImparticion = asignatura.getFechaImparticion();
         int creditosAsignatura = asignatura.getCreditos();
         int duracionAsignatura = asignatura.getDuracion();
-        String queryInsercion = "INSERT INTO asignatura (nomasig,calificacion, serializacion, maestro, fechaimparticion, creditos, duracion)"
-                + " VALUES ('"+nombreAsignatura+"','"+calificacion+"','"+esSerializada+"','"+maestroImparteAsignatura+"','"+fechaImparticion+"','"+creditosAsignatura+"','"+duracionAsignatura+"')";
+        String queryInsercion = "INSERT INTO asignatura (clvasig,nomasig, serializacion, maestro, fechaimparticion, creditos, duracion)"
+                + " VALUES ('"+claveAsignatura+"','"+nombreAsignatura+"',"+esSerializada+",'"+maestroImparteAsignatura+"','"+fechaImparticion+"',"+creditosAsignatura+","+duracionAsignatura+")";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{
@@ -42,18 +43,11 @@ public class DAOAsignatura extends DAO<Asignatura> {
         return numFilasAfectadas;
     }
 
-    @Override
-    public int actualizar(Asignatura asignatura) {
-        String nombreAsignatura = asignatura.getNombreAsignatura();
+    public int actualizar(Alumno alumno, Asignatura asignatura) {
+        String claveAlumno = alumno.getMatricula();
+        String claveAsignatura = asignatura.getClave();
         int calificacion = asignatura.getCalificacion();
-        boolean esSerializada = asignatura.isSerializacion();
-        String maestroImparteAsignatura = asignatura.getMaestroQueImparte();
-        String fechaImparticion = asignatura.getFechaImparticion();
-        int creditosAsignatura = asignatura.getCreditos();
-        int duracionAsignatura = asignatura.getDuracion();
-        String queryActualizacion = "UPDATE asignatura SET nomasig = '"+nombreAsignatura+"'"
-                + ", calificacion = '"+calificacion+"', serializacion = '"+esSerializada+"', maestro = '"+maestroImparteAsignatura+"'"
-                + ", fechaimparticion = '"+fechaImparticion+"', creditos = '"+creditosAsignatura+"', duracion = '"+duracionAsignatura+"'";
+        String queryActualizacion = "UPDATE calificaciones SET calificacion = "+calificacion+" WHERE clvasig = '"+claveAsignatura+"' AND clvalumno = '"+claveAlumno+"'";
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -96,6 +90,11 @@ public class DAOAsignatura extends DAO<Asignatura> {
             exception.printStackTrace();
         }
         return resultadoAsignatura;
+    }
+
+    @Override
+    public int actualizar(Asignatura entidad) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
  

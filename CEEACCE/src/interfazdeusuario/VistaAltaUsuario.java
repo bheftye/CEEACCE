@@ -131,7 +131,7 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
         if(validarDatosUsuario() == true){
             String nombreDeUsuario = nombreUsuario.getText();
             String contraseniaDeUsuario = contraseniaUsuario.getText();
-            Usuario usuarioNuevo = new Usuario(nombreDeUsuario,contraseniaDeUsuario,4);
+            Usuario usuarioNuevo = new Usuario(nombreDeUsuario,contraseniaDeUsuario);
             boolean agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
             if(agregoUsuario){
                 JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");

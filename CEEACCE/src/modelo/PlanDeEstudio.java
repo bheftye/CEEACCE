@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class PlanDeEstudio {
     
 
+    public PlanDeEstudio(String nombre, ArrayList<Modulo> modulos) {
+        this.nombre = nombre;
+        this.modulos = modulos;
+    }
+    
     public PlanDeEstudio(String nombre, ArrayList<Modulo> modulos,int clave) {
         this.nombre = nombre;
         this.modulos = modulos;

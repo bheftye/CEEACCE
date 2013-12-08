@@ -4,6 +4,10 @@
  */
 package interfazdeusuario;
 
+import java.util.ArrayList;
+import modelo.ListaDePlanesDeEstudio;
+import modelo.PlanDeEstudio;
+
 /**
  *
  * @author brentheftye
@@ -32,7 +36,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        planesDeEstudioCombo = new javax.swing.JComboBox();
         botonAsignarFecha = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -56,7 +60,8 @@ public class VistaAltaCurso extends javax.swing.JFrame {
 
         jLabel2.setText("Plan de Estudio:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        planesDeEstudioCombo = new javax.swing.JComboBox(llenaPlanesDeEstudio().toArray());
+        planesDeEstudioCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         botonAsignarFecha.setText("Asignar Fecha");
         botonAsignarFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +84,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(jLabel2)
                         .add(18, 18, 18)
-                        .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 171, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 171, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(jLabel1)
                         .add(18, 18, 18)
@@ -104,7 +109,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(284, 284, 284)
@@ -128,6 +133,15 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         new VistaAsignacionFechaAsignatura().setVisible(true);
     }//GEN-LAST:event_botonAsignarFechaActionPerformed
 
+    private ArrayList llenaPlanesDeEstudio(){
+        ArrayList<String> nombresPlanesEstudio = new ArrayList();
+        nombresPlanesEstudio.add("Selecciona un plan de estudio");
+        ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
+        for (int i = 0; i < planesDeEstudio.size(); i++) {
+            nombresPlanesEstudio.add(planesDeEstudio.get(i).getNombre());
+        }
+        return nombresPlanesEstudio;
+    }
     /**
      * @param args the command line arguments
      */
@@ -166,11 +180,11 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private javax.swing.JButton botonAsignarFecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox planesDeEstudioCombo;
     // End of variables declaration//GEN-END:variables
 }

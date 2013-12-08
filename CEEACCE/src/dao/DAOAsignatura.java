@@ -41,16 +41,19 @@ public class DAOAsignatura extends DAO<Asignatura> {
         return numFilasAfectadas;
     }
 
-    public int actualizar(Alumno alumno, Asignatura asignatura) {
-        String claveAlumno = alumno.getMatricula();
+    public int actualizar(Asignatura asignatura) {
         String claveAsignatura = asignatura.getClave();
-        int calificacion = asignatura.getCalificacion();
-        String queryActualizacion = "UPDATE calificaciones SET calificacion = "+calificacion+" WHERE clvasig = '"+claveAsignatura+"' AND clvalumno = '"+claveAlumno+"'";
-        int numFilasAfectadas = 0; 
+        String nombreAsignatura = asignatura.getNombreAsignatura();
+        boolean esSerializada = asignatura.isSerializacion();
+        double creditosAsignatura = asignatura.getCreditos();
+        int duracionAsignatura = asignatura.getDuracion();
+        String queryInsercion = "INSERT INTO asignatura (clvasig,nomasig, serializacion, creditos, duracion)"
+                + " VALUES ('"+claveAsignatura+"','"+nombreAsignatura+"',"+esSerializada+","+creditosAsignatura+","+duracionAsignatura+")";
+        int numFilasAfectadas = 0;
         Connection conexion = getConexion();
         try{
         Statement sentencia = conexion.createStatement();
-        numFilasAfectadas = sentencia.executeUpdate(queryActualizacion);
+        numFilasAfectadas = sentencia.executeUpdate(queryInsercion);
         sentencia.close();
         }catch(SQLException sqlException){
             sqlException.printStackTrace();
@@ -59,6 +62,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
         }
         cerrarConexion(conexion);
         return numFilasAfectadas;
+
     }
 
     @Override
@@ -85,11 +89,6 @@ public class DAOAsignatura extends DAO<Asignatura> {
             exception.printStackTrace();
         }
         return resultadoAsignatura;
-    }
-
-    @Override
-    public int actualizar(Asignatura entidad) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     public int ejecutaQuery(String query){

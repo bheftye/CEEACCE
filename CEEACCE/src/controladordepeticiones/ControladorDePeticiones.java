@@ -118,4 +118,8 @@ public class ControladorDePeticiones {
         }
         return planesDeEstudio;
     }
+    
+    public ArrayList<Alumno> obtenerAlumnos(){
+        return null;
+    }
 }   

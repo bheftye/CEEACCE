@@ -6,6 +6,7 @@ package controladorcaches;
 
 import controladordepeticiones.ControladorDePeticiones;
 import java.util.ArrayList;
+import modelo.Alumno;
 import modelo.ListaDePlanesDeEstudio;
 import modelo.ListaDeUsuarios;
 import modelo.PlanDeEstudio;
@@ -26,6 +27,7 @@ public class ControladorCache {
     }
     
     public void llenarListaDeAlumnos(){
+        ArrayList<Alumno> alumnos = ControladorDePeticiones.getControladorDePeticiones().obtenerAlumnos();
         
     }
     

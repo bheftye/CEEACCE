@@ -17,7 +17,19 @@ public class Asignatura {
 	private double creditos;
 	 
 	private int duracion;
+    
+    public Asignatura(){}    
 
+    public Asignatura(String nombreAsignatura, String clave, int calificacion, boolean serializacion, String maestroQueImparte, String fechaImparticion, double creditos, int duracion){
+        this.calificacion = calificacion;
+        this.clave = clave;
+        this.creditos = creditos;
+        this.duracion = duracion;
+        this.fechaImparticion = fechaImparticion;
+        this.maestroQueImparte = maestroQueImparte;
+        this.nombreAsignatura = nombreAsignatura;
+        this.serializacion = serializacion;
+    }    
     /**
      * @return the nombreAsignatura
      */

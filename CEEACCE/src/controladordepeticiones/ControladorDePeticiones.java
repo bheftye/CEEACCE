@@ -82,7 +82,7 @@ public class ControladorDePeticiones {
     }
     
     public boolean registraAsignaturaEnPlanDeEstudio(int clavePlanDeEstudio, int modulo, String claveAsignatura ){
-        String queryDeRegistro = "INSERT INTO plan-modulo-asignatura (clvplan, clvmodulo,clvasign) VALUES ('"+clavePlanDeEstudio+"','"+modulo+"','"+claveAsignatura+"')";
+        String queryDeRegistro = "INSERT INTO plan-modulo-asignatura (clvplan, clvmodulo,clvasign) VALUES ("+clavePlanDeEstudio+","+modulo+",'"+claveAsignatura+"')";
         int numeroFilasAfectadas = DAOAsignatura.getDAOAsignatura().ejecutaQuery(queryDeRegistro);
         if(numeroFilasAfectadas > 0){
             return true;
@@ -91,7 +91,7 @@ public class ControladorDePeticiones {
     }
     
     public int obtenClaveDePlanDeEstudioPorNombre(String nombrePlanDeEstudio){
-        String queryDeConsulta = "SELECT * FROM plandeestudio WHERE nomplan = "+nombrePlanDeEstudio;
+        String queryDeConsulta = "SELECT * FROM plandeestudio WHERE nomplan = '"+nombrePlanDeEstudio+"'";
         return DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerClaveDePlanDeEstudioPorNombre(queryDeConsulta);
     }
     

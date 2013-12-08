@@ -61,7 +61,7 @@ public class DAOAlumno extends DAO<Alumno> {
         //No puede moficar fecha de inscripcion ni plan de estudio
         String turno = alumno.getTurno();
         String queryActualizacion = "UPDATE alumno SET nombre = '"+nombreAlumno+"'"
-                + ", apellidos = '"+apellidos+"', edad = '"+edad+"', sexo = '"+sexo+"'"
+                + ", apellidos = '"+apellidos+"', edad = "+edad+", sexo = '"+sexo+"'"
                 + ", email = '"+email+"', curp = '"+curp+"', lugarnacimiento = '"+lugarNacimiento+"'"
                 + ", fechanacimiento = '"+fechaNacimiento+"', turno = '"+turno+"' WHERE matricula = '"+matricula+"'";
         int numFilasAfectadas = 0; 

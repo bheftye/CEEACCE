@@ -166,7 +166,7 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
  
             Asignatura asignatura = new Asignatura();
             asignatura.setClave(clave);
-            asignatura.setCreditos(Integer.parseInt(creditos));
+            asignatura.setCreditos(Double.parseDouble(creditos));
             asignatura.setNombreAsignatura(nombre);
             asignatura.setDuracion(Integer.parseInt(duracion));
             vistaAltaPlanDeEstudio.getModulos().get(modulo).getAsignaturas().add(asignatura);

@@ -25,11 +25,6 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         generaFechaInscripcion();
-    }
-    
-    public VistaAgregarAlumno(Alumno alumno){
-        initComponents();
-        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenaPlanesDeEstudio();
     }
 
@@ -68,10 +63,11 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         fechaDeInscripcion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        turno = new javax.swing.JComboBox();
+        turnoCombo = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        planesDeEstudio = new javax.swing.JComboBox();
+        planesDeEstudioCombo = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -119,7 +115,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
 
         jLabel14.setText("Turno:");
 
-        turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un turno", "Matutino", "Vespertino", "Diurno", "Nocturno" }));
+        turnoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un turno", "Matutino", "Vespertino", "Diurno", "Nocturno" }));
 
         jButton2.setText("Dar de alta");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +125,15 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         });
 
         jLabel15.setText("Plan de Estudio:");
+
+        planesDeEstudioCombo = new javax.swing.JComboBox(llenaPlanesDeEstudio().toArray());
+
+        jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +172,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
                                 .add(jLabel8)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(anioNacimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(81, Short.MAX_VALUE))))
+                                .addContainerGap(84, Short.MAX_VALUE))))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel9)
@@ -184,13 +189,15 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
                             .add(emailAlumno)
                             .add(matriculaAlumno)
                             .add(fechaDeInscripcion)
-                            .add(turno, 0, 207, Short.MAX_VALUE)
-                            .add(planesDeEstudio, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(turnoCombo, 0, 207, Short.MAX_VALUE)
+                            .add(planesDeEstudioCombo, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jButton2)
-                .add(112, 112, 112))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButton3)
+                .add(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -240,13 +247,15 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel14)
-                    .add(turno, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(turnoCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(planesDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 11, Short.MAX_VALUE)
-                .add(jButton2)
+                    .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButton2)
+                    .add(jButton3))
                 .add(16, 16, 16))
         );
 
@@ -272,8 +281,8 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
             String email = this.emailAlumno.getText();
             String curp = this.curpAlumno.getText();
             String lugar = this.lugarDeNacimiento.getText();
-            String turno = this.turno.getSelectedItem().toString();
-            PlanDeEstudio planDeEstudio = (PlanDeEstudio)planesDeEstudio.getSelectedItem();
+            String turno = this.turnoCombo.getSelectedItem().toString();
+            PlanDeEstudio planDeEstudio = (PlanDeEstudio)planesDeEstudioCombo.getSelectedItem();
             
             Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, dia+"/"+mes+"/"+anio, fechaInscripcion, turno, planDeEstudio);
             boolean agregoAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarAlumno(alumno);
@@ -289,6 +298,11 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Verifica que todos los campos estén llenos.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     /**
@@ -334,8 +348,8 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         String email = this.emailAlumno.getText();
         String curp = this.curpAlumno.getText();
         String lugar = this.lugarDeNacimiento.getText();
-        int indiceTurno = this.turno.getSelectedIndex();
-        int indicePlan = this.planesDeEstudio.getSelectedIndex();
+        int indiceTurno = this.turnoCombo.getSelectedIndex();
+        int indicePlan = this.planesDeEstudioCombo.getSelectedIndex();
         
         boolean campoMatriculaVacio = "".equals(matricula);
         boolean campoNombreVacio = "".equals(nombre);
@@ -404,6 +418,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField fechaDeInscripcion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -423,8 +438,8 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField matriculaAlumno;
     private javax.swing.JComboBox mesNacimiento;
     private javax.swing.JTextField nombreAlumno;
-    private javax.swing.JComboBox planesDeEstudio;
+    private javax.swing.JComboBox planesDeEstudioCombo;
     private javax.swing.JComboBox sexoAlumno;
-    private javax.swing.JComboBox turno;
+    private javax.swing.JComboBox turnoCombo;
     // End of variables declaration//GEN-END:variables
 }

@@ -66,7 +66,7 @@
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="anioNacimiento" min="-2" pref="70" max="-2" attributes="0"/>
-                              <EmptySpace pref="81" max="32767" attributes="0"/>
+                              <EmptySpace pref="84" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -87,8 +87,8 @@
                           <Component id="emailAlumno" max="32767" attributes="0"/>
                           <Component id="matriculaAlumno" max="32767" attributes="0"/>
                           <Component id="fechaDeInscripcion" max="32767" attributes="0"/>
-                          <Component id="turno" pref="207" max="32767" attributes="0"/>
-                          <Component id="planesDeEstudio" max="32767" attributes="0"/>
+                          <Component id="turnoCombo" pref="207" max="32767" attributes="0"/>
+                          <Component id="planesDeEstudioCombo" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -97,7 +97,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -158,15 +160,18 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="turno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="turnoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel15" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="planesDeEstudio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="planesDeEstudioCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -345,7 +350,7 @@
         <Property name="text" type="java.lang.String" value="Turno:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="turno">
+    <Component class="javax.swing.JComboBox" name="turnoCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -371,12 +376,23 @@
         <Property name="text" type="java.lang.String" value="Plan de Estudio:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="planesDeEstudio">
+    <Component class="javax.swing.JComboBox" name="planesDeEstudioCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="planesDeEstudioCombo = new javax.swing.JComboBox(llenaPlanesDeEstudio().toArray());"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

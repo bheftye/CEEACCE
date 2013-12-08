@@ -5,6 +5,7 @@
 package interfazdeusuario;
 
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
+import encriptador.EncriptadorDeContrasenia;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 
@@ -128,29 +129,43 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
 
     private void botonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        if(validarDatosUsuario() == true){
+        if (validarDatosUsuario() == true) {
             String nombreDeUsuario = nombreUsuario.getText();
             String contraseniaDeUsuario = contraseniaUsuario.getText();
-            Usuario usuarioNuevo = new Usuario(nombreDeUsuario,contraseniaDeUsuario,4);
-            boolean agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
-            if(agregoUsuario){
-                JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");
+            contraseniaDeUsuario = EncriptadorDeContrasenia.encriptaContrasenia(contraseniaDeUsuario);
+            boolean agregoUsuario = false;
+            if (!contraseniaDeUsuario.equalsIgnoreCase("")) {
+                Usuario usuarioNuevo = new Usuario(nombreDeUsuario, contraseniaDeUsuario, -1);
+                agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
             }
-            else{
-                JOptionPane.showMessageDialog(this, "No fue posible crear este Usuario");
+            if (agregoUsuario) {
+                JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");
+                new VistaPrincipalAdministrador().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No fue posible crear este Usuario.");
+                this.contraseniaUsuario.setText("");
+                this.contraseniaRepetida.setText("");
             }
         }
     }//GEN-LAST:event_botonCrearUsuarioActionPerformed
 
     private boolean validarDatosUsuario(){
-        if("Admin".equals(nombreUsuario.getText())){
-            JOptionPane.showMessageDialog(this,"Nombre de Usuario inválido","Error",JOptionPane.ERROR_MESSAGE);
+        if("Admin".equalsIgnoreCase(nombreUsuario.getText()) || nombreUsuario.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(this,"Nombre de Usuario inválido o vacío","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         else{
-            if(!contraseniaUsuario.getText().equals(contraseniaRepetida.getText())){
+            if(!contraseniaUsuario.getText().equals(contraseniaRepetida.getText()) || contraseniaUsuario.getText().equalsIgnoreCase("") || contraseniaRepetida.getText().equalsIgnoreCase("")){
                 JOptionPane.showMessageDialog(this,"Las contraseñas ingresadas no son iguales","Error",JOptionPane.ERROR_MESSAGE);
                 return false;
+            }
+            else{
+             boolean existeUsuario =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().existeUsuario(nombreUsuario.getText());
+             if(existeUsuario){
+                 JOptionPane.showMessageDialog(this,"Este usuario ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                 return false;
+             }
             }
             return true;
         }

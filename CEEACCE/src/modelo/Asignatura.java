@@ -14,7 +14,7 @@ public class Asignatura {
 	 
 	private String fechaImparticion;
 	 
-	private int creditos;
+	private double creditos;
 	 
 	private int duracion;
 
@@ -91,14 +91,14 @@ public class Asignatura {
     /**
      * @return the creditos
      */
-    public int getCreditos() {
+    public double getCreditos() {
         return creditos;
     }
 
     /**
      * @param creditos the creditos to set
      */
-    public void setCreditos(int creditos) {
+    public void setCreditos(double creditos) {
         this.creditos = creditos;
     }
 

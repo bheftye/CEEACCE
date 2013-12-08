@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Modulo;
 import modelo.PlanDeEstudio;
-import modelo.Usuario;
 
 public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     private static DAOPlanDeEstudio daoPlanDeEstudio = new DAOPlanDeEstudio();
@@ -58,8 +57,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
 
     @Override
     public ArrayList consultar(String querySeleccion) {
-        //throw new UnsupportedOperationException("Not supported yet.");
-            ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
+        ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
         try{
         Connection conexion = getConexion(); 
         Statement sentencia =  conexion.createStatement();
@@ -80,7 +78,42 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         }
         return resultadoPlanEstudio;
     }
+    
+    public int obtenerClaveDePlanDeEstudioPorNombre(String queryDeConsulta){
+        Connection conexion = getConexion();
+        int clavePlanDeEstudio = -1;
+        try{
+        Statement sentencia = conexion.createStatement();
+        ResultSet resultadoDeDatos = sentencia.executeQuery(queryDeConsulta);
+         while(resultadoDeDatos.next()){
+                clavePlanDeEstudio = Integer.parseInt(resultadoDeDatos.getString("clvplan").trim().toString());
+            }
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return clavePlanDeEstudio ;   
+    }
  
-	 
+	public int eliminar(PlanDeEstudio planDeEstudio) {
+        String nombrePlanEstudio = planDeEstudio.getNombre();
+        String queryInsercion = "DELETE FROM plandeestudio WHERE nomplan = "+nombrePlanEstudio;
+        int numFilasAfectadas = 0; 
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        numFilasAfectadas = sentencia.executeUpdate(queryInsercion);
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return numFilasAfectadas;
+    } 
 }
  

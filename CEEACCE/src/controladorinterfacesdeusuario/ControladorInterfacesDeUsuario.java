@@ -4,14 +4,18 @@
  */
 package controladorinterfacesdeusuario;
 
+import controladorcaches.ControladorCache;
 import controladordepeticiones.ControladorDePeticiones;
+import dao.DAOAsignatura;
 import java.util.ArrayList;
 import modelo.Alumno;
+import modelo.Asignatura;
 import modelo.Curso;
 import modelo.ListaDeAlumnos;
 import modelo.ListaDeCursos;
 import modelo.ListaDePlanesDeEstudio;
 import modelo.ListaDeUsuarios;
+import modelo.Modulo;
 import modelo.PlanDeEstudio;
 import modelo.Usuario;
 
@@ -63,9 +67,24 @@ public class ControladorInterfacesDeUsuario {
     public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio){
         boolean agrego = controladorDePeticiones.agregarPlanDeEstudio(planDeEstudio);
         if(agrego){
-            ArrayList<PlanDeEstudio> listaDePlanesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();  
-            listaDePlanesDeEstudio.add(planDeEstudio);
-            ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().setPlanesDeEstudio(listaDePlanesDeEstudio);
+            int clavePlanDeEstudio = ControladorDePeticiones.getControladorDePeticiones().obtenClaveDePlanDeEstudioPorNombre(planDeEstudio.getNombre());
+            if(clavePlanDeEstudio != -1){
+                for (int i = 0; i < 6; i++) {
+                    Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
+                    int numAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+                    ArrayList<Asignatura> asigunaturasDeModuloIndexado = moduloIndexado.getAsignaturas();
+                    for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
+                        Asignatura asignaturaIndexada = asigunaturasDeModuloIndexado.get(j);
+                        ControladorDePeticiones.getControladorDePeticiones().agregarAsignatura(asignaturaIndexada);
+                        int numModulo = i+1;
+                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio,i, asignaturaIndexada.getClave());
+                    }
+                }
+            }
+            else{
+                return false;
+            }
+           ControladorCache.getControladorCache().llenarListaDePlanesDeEstudio();
         }
         return agrego;
     }
@@ -83,9 +102,7 @@ public class ControladorInterfacesDeUsuario {
     public boolean darAltaUsuario(Usuario usuario){
         boolean agrego = controladorDePeticiones.darAltaUsuario(usuario);
         if(agrego){
-            ArrayList<Usuario> listaDeUsuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
-            listaDeUsuarios.add(usuario);
-            ListaDeUsuarios.getListaDeUsuarios().setUsuarios(listaDeUsuarios);
+            actualizarListaDeUsuarios();
         }
         return agrego;
     }
@@ -109,5 +126,21 @@ public class ControladorInterfacesDeUsuario {
             }
         }
         return -1;
+    }
+    
+    public boolean existeUsuario(String nuevoUsuario){
+        ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
+        int numUsuarios = usuarios.size();
+        for (int i = 0; i < numUsuarios; i++) {
+            Usuario usuarioIndexado = usuarios.get(i);
+            if(usuarioIndexado.getNombreDeUsuario().equalsIgnoreCase(nuevoUsuario)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void actualizarListaDeUsuarios(){
+        ControladorCache.getControladorCache().llenarListaDeUsuarios();
     }
 }    

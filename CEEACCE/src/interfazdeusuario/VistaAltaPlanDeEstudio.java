@@ -27,6 +27,7 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
         initComponents();
         modulos = new ArrayList();
         creaModulos();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**
@@ -158,7 +159,11 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
             boolean agregoPlanDeEstudio = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarPlanDeEstudio(planDeEstudioNuevo);
             if(agregoPlanDeEstudio){
                 JOptionPane.showMessageDialog(this, "Se agregó el plan de estudio exitosamente.");
+                new VistaPrincipal().setVisible(true);
                 this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Hubo un problema; no se agregó el plan de estudio.");
             }
         }
         else{

@@ -5,6 +5,7 @@
 package interfazdeusuario;
 
 import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
+import encriptador.EncriptadorDeContrasenia;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -117,6 +118,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
             boolean nombreUsuarioVacio = "".equals(nombreDeUsuario);
             boolean contraseniaUsuarioVacio = "".equals(contraseniaDeUsuario);
             if(!nombreUsuarioVacio && !contraseniaUsuarioVacio){
+              contraseniaDeUsuario = EncriptadorDeContrasenia.encriptaContrasenia(contraseniaDeUsuario);  
               boolean usuarioValido =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().verificarUsario(nombreDeUsuario, contraseniaDeUsuario);
               if(usuarioValido){
                   if(nombreDeUsuario.equalsIgnoreCase("admin")){
@@ -138,6 +140,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

@@ -44,9 +44,9 @@ public class Usuario {
         this.claveUsuario = claveUsuario;
     }
    
-	private String nombreDeUsuario;
-	private String contrasenia;
-        private int claveUsuario;
+    private String nombreDeUsuario;
+    private String contrasenia;
+    private int claveUsuario;
 	 
 }
  

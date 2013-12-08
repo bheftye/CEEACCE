@@ -3,9 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class PlanDeEstudio {
-        private int clave;
-        private String nombre;
-	private ArrayList<Modulo> modulos;
+    
 
     public PlanDeEstudio(String nombre, ArrayList<Modulo> modulos,int clave) {
         this.nombre = nombre;
@@ -45,6 +43,8 @@ public class PlanDeEstudio {
         this.clave = clave;
     }
     
-    
+    private int clave;
+    private String nombre;
+    private ArrayList<Modulo> modulos;
 }
  

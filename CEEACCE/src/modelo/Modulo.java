@@ -3,8 +3,6 @@ package modelo;
 import java.util.ArrayList;
 
 public class Modulo {
-    private String nombre;
-    private ArrayList<Asignatura> asignaturas;
 
     
     public Modulo(String nombre){
@@ -32,6 +30,9 @@ public class Modulo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    private String nombre;
+    private ArrayList<Asignatura> asignaturas;
 	 
 }
  

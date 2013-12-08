@@ -3,9 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Curso {
-        private String nombre;
-	private PlanDeEstudio planDeEstudio;
-	private ArrayList<String> planeacion;
+        
 
     /**
      * @return the planDeEstudio
@@ -49,7 +47,9 @@ public class Curso {
         this.nombre = nombre;
     }
     
-    
+    private String nombre;
+    private PlanDeEstudio planDeEstudio;
+    private ArrayList<String> planeacion;
 	 
 }
  

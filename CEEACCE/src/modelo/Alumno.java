@@ -3,30 +3,6 @@ package modelo;
 import java.util.ArrayList;
 
 public class Alumno {
- 
-	private String nombre;
-	 
-	private String apellidos;
-	 	 
-	private String sexo;
-	 
-	private String email;
-	 
-	private String matricula;
-	 
-	private String CURP;
-	 
-	private String lugarDeNacimiento;
-	 
-	private String fechaDeNacimiento;
-	 
-	private String fechaDeInscripcion;
-	 
-	private String turno;
-	 
-	private PlanDeEstudio planDeEstudio;
-	 
-	private ArrayList<CargaAcademica> cargasAcademicas;
         
 
     public Alumno(String nombre, String apellidos, String sexo, String email, String matricula, String CURP, String lugarDeNacimiento, String fechaDeNacimiento, String fechaDeInscripcion, String turno, PlanDeEstudio planDeEstudio) {
@@ -212,5 +188,18 @@ public class Alumno {
     public void setCargasAcademicas(ArrayList<CargaAcademica> cargasAcademicas) {
         this.cargasAcademicas = cargasAcademicas;
     }
+    
+    private String nombre;
+    private String apellidos;
+    private String sexo;
+    private String email;
+    private String matricula;
+    private String CURP;
+    private String lugarDeNacimiento;
+    private String fechaDeNacimiento;
+    private String fechaDeInscripcion;
+    private String turno;
+    private PlanDeEstudio planDeEstudio;
+    private ArrayList<CargaAcademica> cargasAcademicas;
 }
  

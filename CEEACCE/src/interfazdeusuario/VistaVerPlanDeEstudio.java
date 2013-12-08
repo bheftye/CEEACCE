@@ -23,6 +23,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
      */
     public VistaVerPlanDeEstudio(ArrayList<Modulo> modulos) {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.modulos = modulos;
         llenarListaDeAsignaturasCreadas();
     }
@@ -32,6 +33,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
      */
     public VistaVerPlanDeEstudio() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**

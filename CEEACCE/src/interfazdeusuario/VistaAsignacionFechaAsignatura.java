@@ -21,6 +21,7 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
      */
     public VistaAsignacionFechaAsignatura() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         setListenerToTextField();
     }
 

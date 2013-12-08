@@ -21,10 +21,12 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
      */
     public VistaModificarAlumno() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
     
     public VistaModificarAlumno(Alumno alumno){
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenaInformacionAlumno(alumno);
     }
 

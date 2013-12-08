@@ -15,6 +15,7 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
      */
     public VistaAdministradorDeCursos() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**

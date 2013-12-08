@@ -15,6 +15,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
      */
     public VistaAltaCurso() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**

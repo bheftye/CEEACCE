@@ -20,6 +20,7 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
      */
     public VistaAdministradorDeCalificaciones() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
 
     /**

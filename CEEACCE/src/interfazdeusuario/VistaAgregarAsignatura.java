@@ -20,6 +20,7 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
      */
     public VistaAgregarAsignatura() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
     
     
@@ -28,6 +29,7 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
      */
     public VistaAgregarAsignatura(VistaAltaPlanDeEstudio vistaAltaPlanDeEstudio) {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.vistaAltaPlanDeEstudio = vistaAltaPlanDeEstudio;
     }
 

@@ -25,10 +25,12 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
      */
     public VistaModificarCalificaciones() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
     
     public VistaModificarCalificaciones(VistaAdministradorDeCalificaciones vistaAdministradorDeCalificaciones){
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.vistaAdministradorDeCalificaciones = vistaAdministradorDeCalificaciones;
         this.nombreAlumno.setText("Calificaciones de Roberto");
         modulos = vistaAdministradorDeCalificaciones.getAlumnoSeleccionado().getPlanDeEstudio().getModulos();

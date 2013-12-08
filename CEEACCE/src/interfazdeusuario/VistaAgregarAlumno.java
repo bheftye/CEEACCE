@@ -21,11 +21,13 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
      */
     public VistaAgregarAlumno() {
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         generaFechaInscripcion();
     }
     
     public VistaAgregarAlumno(Alumno alumno){
         initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenaInformacionAlumno(alumno);
     }
 

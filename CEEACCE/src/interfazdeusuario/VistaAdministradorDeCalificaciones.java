@@ -4,14 +4,19 @@
  */
 package interfazdeusuario;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import modelo.Alumno;
+import modelo.ListaDeAlumnos;
 
 /**
  *
  * @author Jorge
  */
 public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
-    private VistaModificarCalificaciones vistaModificarCalificaciones;
     private Alumno alumno;
     
 
@@ -21,6 +26,8 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
     public VistaAdministradorDeCalificaciones() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        llenarJListConAlumnos();
+        setListListener();
     }
 
     /**
@@ -120,10 +127,8 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        VistaAdministradorDeCalificaciones vistaActual = this;
-        vistaModificarCalificaciones = new VistaModificarCalificaciones(vistaActual);
-        vistaModificarCalificaciones.llenarListaAsignaturas();
-        vistaModificarCalificaciones.setVisible(true);
+        int indexEnJList = this.jList1.getSelectedIndex();
+        new VistaModificarCalificaciones(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().get(indexEnJList)).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -133,6 +138,29 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
 
     protected Alumno getAlumnoSeleccionado(){
         return alumno;
+    }
+    
+    private void llenarJListConAlumnos(){
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<Alumno> listaAlumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
+        for (int i = 0; i < listaAlumnos.size(); i++) {
+            Alumno alumnoIndexado = listaAlumnos.get(i);
+            listModel.addElement(alumnoIndexado.getNombre());
+        }
+        jList1.setModel(listModel);
+    }
+    
+    private void setListListener() {
+        jList1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int indexEnJList = list.locationToIndex(evt.getPoint());
+                    new VistaModificarCalificaciones(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().get(indexEnJList)).setVisible(true);
+
+                }
+            }
+        });
     }
     /**
      * @param args the command line arguments

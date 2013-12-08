@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Modulo;
 
@@ -17,7 +18,6 @@ import modelo.Modulo;
  * @author Jorge
  */
 public class VistaModificarCalificaciones extends javax.swing.JFrame {
-    private VistaAdministradorDeCalificaciones vistaAdministradorDeCalificaciones;
     private ArrayList<Modulo> modulos;
 
     /**
@@ -28,12 +28,12 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
     
-    public VistaModificarCalificaciones(VistaAdministradorDeCalificaciones vistaAdministradorDeCalificaciones){
+    public VistaModificarCalificaciones(Alumno alumno){
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
-        this.vistaAdministradorDeCalificaciones = vistaAdministradorDeCalificaciones;
-        this.nombreAlumno.setText("Calificaciones de " + vistaAdministradorDeCalificaciones.getAlumnoSeleccionado().getNombre());
-        modulos = vistaAdministradorDeCalificaciones.getAlumnoSeleccionado().getPlanDeEstudio().getModulos();
+        this.nombreAlumno.setText("Calificaciones de " + alumno.getNombre());
+        modulos = alumno.getPlanDeEstudio().getModulos();
+        llenarListaAsignaturas();
     }
 
     /**
@@ -140,7 +140,7 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
    /**
     * Método que llena la Tabla con las filas de las asignaturas.
     */
-   protected void llenarListaAsignaturas(){
+   private void llenarListaAsignaturas(){
        Vector titulosTabla = llenarTitulosDeTabla();
        Vector datosAsignaturas = new Vector<Vector<String>>();
        int numeroDeModulos = this.modulos.size();

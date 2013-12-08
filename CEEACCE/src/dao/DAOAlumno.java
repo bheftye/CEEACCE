@@ -18,6 +18,7 @@ public class DAOAlumno extends DAO<Alumno> {
     
     @Override
     public int insertar(Alumno alumno) {
+        String matricula = alumno.getMatricula();
         String nombreAlumno = alumno.getNombre();
         String apellidos = alumno.getApellidos();
         String sexo = alumno.getSexo();
@@ -29,8 +30,8 @@ public class DAOAlumno extends DAO<Alumno> {
         String fechaInscripcion = alumno.getFechaDeInscripcion();
         String turno = alumno.getTurno();
         int clvplan = alumno.getPlanDeEstudio().getClave();
-        String queryInsercion = "INSERT INTO alumno (nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
-                + " VALUES ('"+nombreAlumno+"','"+apellidos+"',"+edad+",'"+sexo+"','"+email+"','"+curp+"'"
+        String queryInsercion = "INSERT INTO alumno (matricula,nombre,apellidos,edad,sexo,email,curp,lugarnacimiento,fechanacimiento,fechainscripcion,turno,clvplan)"
+                + " VALUES ('"+matricula+"','"+nombreAlumno+"','"+apellidos+"',"+edad+",'"+sexo+"','"+email+"','"+curp+"'"
                 + ",'"+lugarNacimiento+"','"+fechaNacimiento+"','"+fechaInscripcion+"','"+turno+"',"+clvplan+")";
         int numFilasAfectadas = 0;
         Connection conexion = getConexion();
@@ -141,9 +142,9 @@ public class DAOAlumno extends DAO<Alumno> {
         int anioHoy = cal.get(Calendar.YEAR);
         int mesHoy = cal.get(Calendar.MONTH);
         int diaHoy = cal.get(Calendar.DAY_OF_MONTH);
-        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[0]);
-        int mesNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[1]);
-        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("/"))[2]);
+        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[0]);
+        int mesNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[1]);
+        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[2]);
         double hoy = anioHoy + mesHoy*.01 + diaHoy*.0001;
         double nacimiento = anioNacimiento + mesNacimiento*.01 + diaNacimiento*.0001;
         return (int)(hoy-nacimiento);

@@ -118,5 +118,30 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         cerrarConexion(conexion);
         return numFilasAfectadas;
     } 
+        
+    public PlanDeEstudio obtenerPlanDeEstudio(String query){
+        ArrayList<Modulo> modulos = new ArrayList();
+         PlanDeEstudio planDeEstudio = null;
+        for (int i = 0; i < 6; i++) {
+           modulos.add(new Modulo("Modulo "+(i+1))); 
+        }
+        try{
+        Connection conexion = getConexion(); 
+        Statement sentencia =  conexion.createStatement();
+        ResultSet resultadoDeDatos = sentencia.executeQuery(query); 
+            while(resultadoDeDatos.next()){
+                String nombre = resultadoDeDatos.getString("nomplan");
+                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan"));
+                planDeEstudio = new PlanDeEstudio(nombre, modulos, clave);
+            }
+        sentencia.close();
+        cerrarConexion(conexion);
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return planDeEstudio;
+    }
 }
  

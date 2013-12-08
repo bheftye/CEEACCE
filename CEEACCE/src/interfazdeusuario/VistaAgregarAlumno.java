@@ -25,7 +25,6 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         generaFechaInscripcion();
-        llenaPlanesDeEstudio();
     }
 
     /**
@@ -270,21 +269,20 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean camposLlenos = validarLlenadoDeCampos();
         if(camposLlenos){
-            String matricula = this.matriculaAlumno.getText();
-            String nombre = this.nombreAlumno.getText();
-            String apellidos = this.apellidosAlumno.getText();
+            String matricula = this.matriculaAlumno.getText().trim();
+            String nombre = this.nombreAlumno.getText().trim();
+            String apellidos = this.apellidosAlumno.getText().trim();
             String dia = this.diaNacimiento.getSelectedItem().toString();
             String mes = Integer.toString(this.mesNacimiento.getSelectedIndex());
             String anio = this.anioNacimiento.getSelectedItem().toString();
-            String fechaInscripcion = this.fechaDeInscripcion.getText();
+            String fechaInscripcion = this.fechaDeInscripcionAlumno;
             String sexo = this.sexoAlumno.getSelectedItem().toString();
             String email = this.emailAlumno.getText();
             String curp = this.curpAlumno.getText();
             String lugar = this.lugarDeNacimiento.getText();
             String turno = this.turnoCombo.getSelectedItem().toString();
-            PlanDeEstudio planDeEstudio = (PlanDeEstudio)planesDeEstudioCombo.getSelectedItem();
-            
-            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, dia+"/"+mes+"/"+anio, fechaInscripcion, turno, planDeEstudio);
+            PlanDeEstudio planDeEstudio =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().obtenerPlanDeEstudioPorClave(ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(planesDeEstudioCombo.getSelectedIndex()-1).getClave());
+            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, dia+"-"+mes+"-"+anio, fechaInscripcion, turno, planDeEstudio);
             boolean agregoAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarAlumno(alumno);
             if (agregoAlumno) {
                 JOptionPane.showMessageDialog(this, "Alumno agregado exitosamente");
@@ -326,10 +324,12 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         int dia = cal.get(Calendar.DAY_OF_MONTH);
         String[] meses = {"Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"};
         fechaDeInscripcion.setText(dia+" de "+meses[mes]+" del "+anio);
+        fechaDeInscripcionAlumno = dia+"-"+mes+"-"+anio;
     }
     
     private ArrayList llenaPlanesDeEstudio(){
         ArrayList<String> nombresPlanesEstudio = new ArrayList();
+        nombresPlanesEstudio.add("Selecciona un plan de estudio");
         ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
         for (int i = 0; i < planesDeEstudio.size(); i++) {
             nombresPlanesEstudio.add(planesDeEstudio.get(i).getNombre());
@@ -408,7 +408,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         });
     }
     
-   
+   private String fechaDeInscripcionAlumno ="";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox anioNacimiento;
     private javax.swing.JTextField apellidosAlumno;

@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlanDeEstudio {
     
@@ -16,7 +18,6 @@ public class PlanDeEstudio {
         this.clave= clave;
        
     }
-
         
     /**
      * @return the modulos

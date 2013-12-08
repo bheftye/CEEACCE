@@ -138,7 +138,12 @@ public class ControladorInterfacesDeUsuario {
         return false;
     }
     
+    public PlanDeEstudio obtenerPlanDeEstudioPorClave(int clavePlanDeEstudio){
+        return ControladorDePeticiones.getControladorDePeticiones().obtenerNuevoPlanDeEstudioPorClave(clavePlanDeEstudio);
+    }
+    
     private void actualizarListaDeUsuarios(){
         ControladorCache.getControladorCache().llenarListaDeUsuarios();
     }
+    
 }    

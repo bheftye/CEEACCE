@@ -122,4 +122,19 @@ public class ControladorDePeticiones {
     public ArrayList<Alumno> obtenerAlumnos(){
         return null;
     }
+    
+    public PlanDeEstudio obtenerNuevoPlanDeEstudioPorClave(int clavePlanDeEstudio) {
+        int NUM_DE_MODULOS = 6;
+        String queryDeConsulta = "select * from plandeestudio where clvplan =" + clavePlanDeEstudio;
+        PlanDeEstudio planDeEstudio = DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerPlanDeEstudio(queryDeConsulta);
+        if (planDeEstudio != null) {
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+                Modulo moduloIndexado = planDeEstudio.getModulos().get(j);
+                String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + planDeEstudio.getClave() + " and clvmodulo = " + (j + 1) + " and clvasign = clvasig";
+                moduloIndexado.setAsignaturas(DAOAsignatura.getDAOAsignatura().consultar(queryDeAsignaturasDeModulo));
+            }
+            return planDeEstudio;
+        }
+        return null;
+    }
 }   

@@ -81,44 +81,34 @@ public class DAOAlumno extends DAO<Alumno> {
     }
 
     @Override
-    public ArrayList<Alumno> consultar(String peticion) throws SQLException {
-        ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        Connection con = getConexion(); 
-        String orden; 
-        Statement sentencia = null; 
-        ResultSet rs = null; 
-        
-        if(peticion.equalsIgnoreCase("")){
-            orden = "select * from Alumnos"; 
-        }
-        else{
-            orden = "select * from Alumnos where " + peticion;  
-        }
-            sentencia = con.createStatement();
-            rs = sentencia.executeQuery(orden); 
-            while(rs.next()){
+    public ArrayList<Alumno> consultar(String query) {
+        ArrayList<Alumno> listaAlumnos = new ArrayList();
+        Connection con = getConexion();
+        try {
+            Statement sentencia = con.createStatement();
+            ResultSet rs = sentencia.executeQuery(query);
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
-                String sexo =  rs.getString("sexo");
+                String sexo = rs.getString("sexo");
                 String email = rs.getString("email");
-                String curp = rs.getString("CURP");
+                String curp = rs.getString("curp");
                 String matricula = rs.getString("matricula");
-                String lugarDeNacimiento =  rs.getString("lugarNacimiento");
-                String fechaDeNacimiento = rs.getString("fechaNacimiento");
-                String fechaDeInscripcion = rs.getString("fechaInscripcion");
+                String lugarDeNacimiento = rs.getString("lugarnacimiento");
+                String fechaDeNacimiento = rs.getString("fechanacimiento");
+                String fechaDeInscripcion = rs.getString("fechainscripcion");
                 String turno = rs.getString("turno");
-                String clavePlanDeEstudio = rs.getString("planDeEstudio");
+                String clavePlanDeEstudio = rs.getString("clvplan");
                 PlanDeEstudio planDeEstudio = getPlanDeEstudioDeListaDePlanesDeEstudio(clavePlanDeEstudio);
-                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(),planDeEstudio.getModulos(),planDeEstudio.getClave());
-                
-                if(planDeEstudio!=null){
-                    listaAlumnos.add(new Alumno(nombre,apellidos,sexo,email,curp,matricula,lugarDeNacimiento,fechaDeNacimiento,fechaDeInscripcion,turno,copiaPlanDeEstudio));
+                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(), planDeEstudio.getModulos(), planDeEstudio.getClave());
+                if (planDeEstudio != null) {
+                    listaAlumnos.add(new Alumno(nombre, apellidos, sexo, email, curp, matricula, lugarDeNacimiento, fechaDeNacimiento, fechaDeInscripcion, turno, copiaPlanDeEstudio));
                 }
             }
-            
-            //String nombre, String apellidos, String sexo, String email, String matricula, String CURP, String lugarDeNacimiento, String fechaDeNacimiento, String fechaDeInscripcion, String turno, PlanDeEstudio planDeEstudio
-        
-        sentencia.close();
+            sentencia.close();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
         cerrarConexion(con);
         return listaAlumnos;
     }

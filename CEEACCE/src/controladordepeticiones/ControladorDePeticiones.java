@@ -127,8 +127,29 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<Alumno> obtenerAlumnos() {
-        
-        return null;
+        ArrayList<Alumno> alumnos = DAOAlumno.getDAOAlumno().consultar("select * from alumno");
+        int NUM_ALUMNOS = alumnos.size();
+        for (int i = 0; i < NUM_ALUMNOS ; i++) {
+            Alumno alumnoIndexado = alumnos.get(i);
+            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
+            alumnoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
+            int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
+            int NUM_DE_MODULOS = 6;
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+            int claveModulo = j+1;
+            Modulo moduloIndexado = copiaPlanDeEstudio.getModulos().get(i);
+            int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
+            for (int k = 0; k < NUM_ASIGNATURAS_DEL_MODULO; k++) {
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                String claveAsignatura = asignaturaIndexada.getClave();
+                String queryCalificacion = "select calificacion from calificaciones where clvalumno = "+alumnoIndexado.getMatricula()+" and clvplan = "+clavePlanDeEstudio+" and clvmodulo = "+claveModulo+" and clvasign = "+claveAsignatura+"";
+                int calificacion = DAOAsignatura.getDAOAsignatura().obtenerCalificacion(queryCalificacion);
+                asignaturaIndexada.setCalificacion(calificacion);
+            }
+        }
+            
+        }
+        return alumnos;
     }
 
     public PlanDeEstudio obtenerNuevoPlanDeEstudioPorClave(int clavePlanDeEstudio) {
@@ -159,7 +180,6 @@ public class ControladorDePeticiones {
             for (int j = 0; j < NUM_ASIGNATURAS_DEL_MODULO; j++) {
                 Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
                 claveAsignatura = asignaturaIndexada.getClave();
-                System.out.println(claveAsignatura);
                 String query = "insert into calificaciones (clvalumno,clvplan,clvmodulo,clvasign) values ('"+alumno.getMatricula()+"','"+clavePlanDeEstudio+"','"+claveModulo+"','"+claveAsignatura+"')";
                 DAOAsignatura.getDAOAsignatura().ejecutaQuery(query);
             }

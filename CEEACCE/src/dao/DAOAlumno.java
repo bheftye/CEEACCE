@@ -142,9 +142,9 @@ public class DAOAlumno extends DAO<Alumno> {
         int anioHoy = cal.get(Calendar.YEAR);
         int mesHoy = cal.get(Calendar.MONTH);
         int diaHoy = cal.get(Calendar.DAY_OF_MONTH);
-        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[0]);
+        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[0]);
         int mesNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[1]);
-        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[2]);
+        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[2]);
         double hoy = anioHoy + mesHoy*.01 + diaHoy*.0001;
         double nacimiento = anioNacimiento + mesNacimiento*.01 + diaNacimiento*.0001;
         return (int)(hoy-nacimiento);

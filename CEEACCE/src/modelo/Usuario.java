@@ -2,6 +2,11 @@ package modelo;
 
 public class Usuario {
     
+    public Usuario(String nombreUsuario, String contrasenia){
+        this.nombreDeUsuario = nombreUsuario;
+        this.contrasenia = contrasenia;
+    }
+    
     public Usuario(String nombreUsuario, String contrasenia, int claveUsuario){
         this.nombreDeUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
@@ -44,9 +49,9 @@ public class Usuario {
         this.claveUsuario = claveUsuario;
     }
    
-	private String nombreDeUsuario;
-	private String contrasenia;
-        private int claveUsuario;
+    private String nombreDeUsuario;
+    private String contrasenia;
+    private int claveUsuario;
 	 
 }
  

@@ -39,7 +39,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
     public int actualizar(PlanDeEstudio planDeEstudio) {
         String nombrePlanEstudio = planDeEstudio.getNombre();
         int clavePlanEstudio = planDeEstudio.getClave();
-        String queryActualizacion = "UPDATE plandeestudio SET nomplan = '"+nombrePlanEstudio+"' WHERE clvplan = '"+clavePlanEstudio+"'";
+        String queryActualizacion = "UPDATE plandeestudio SET nomplan = '"+nombrePlanEstudio+"' WHERE clvplan = "+clavePlanEstudio;
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -57,7 +57,11 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
 
     @Override
     public ArrayList consultar(String querySeleccion) {
+<<<<<<< HEAD
         ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
+=======
+            ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
+>>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
         try{
         Connection conexion = getConexion(); 
         Statement sentencia =  conexion.createStatement();

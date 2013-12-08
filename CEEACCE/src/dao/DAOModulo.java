@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Modulo;
@@ -38,7 +39,7 @@ public class DAOModulo extends DAO<Modulo> {
     public int actualizar(Modulo modulo) {
         String nombreModulo = modulo.getNombre();
         int claveModulo = generarClaveModulo(nombreModulo);
-        String queryActualizacion = "UPDATE plandeestudio SET nommod = '"+nombreModulo+"' WHERE clvmodulo = '"+claveModulo+"'";
+        String queryActualizacion = "UPDATE plandeestudio SET nommod = '"+nombreModulo+"' WHERE clvmodulo = "+claveModulo;
         int numFilasAfectadas = 0; 
         Connection conexion = getConexion();
         try{
@@ -55,8 +56,25 @@ public class DAOModulo extends DAO<Modulo> {
     }
 
     @Override
-    public ArrayList consultar(String peticion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ArrayList<Modulo> consultar(String querySeleccion) {
+        ArrayList<Modulo> resultadoModulos = new ArrayList<>();
+        try{
+        Connection conexion = getConexion(); 
+        Statement sentencia =  conexion.createStatement();
+        ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
+            while(resultadoDeDatos.next()){
+                String nombreModulo = resultadoDeDatos.getString("nommod");
+                Modulo modulo = new Modulo(nombreModulo);
+                resultadoModulos.add(modulo);
+            }
+        sentencia.close();
+        cerrarConexion(conexion);
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return resultadoModulos;
     }
     
     private int generarClaveModulo(String nombreModulo){

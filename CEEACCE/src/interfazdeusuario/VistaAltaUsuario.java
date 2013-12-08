@@ -132,11 +132,18 @@ public class VistaAltaUsuario extends javax.swing.JFrame {
         if (validarDatosUsuario() == true) {
             String nombreDeUsuario = nombreUsuario.getText();
             String contraseniaDeUsuario = contraseniaUsuario.getText();
+<<<<<<< HEAD
             contraseniaDeUsuario = EncriptadorDeContrasenia.encriptaContrasenia(contraseniaDeUsuario);
             boolean agregoUsuario = false;
             if (!contraseniaDeUsuario.equalsIgnoreCase("")) {
                 Usuario usuarioNuevo = new Usuario(nombreDeUsuario, contraseniaDeUsuario, -1);
                 agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
+=======
+            Usuario usuarioNuevo = new Usuario(nombreDeUsuario,contraseniaDeUsuario);
+            boolean agregoUsuario = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().darAltaUsuario(usuarioNuevo);
+            if(agregoUsuario){
+                JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");
+>>>>>>> 200086631ca5babc69fcf30e12e31015faefa89b
             }
             if (agregoUsuario) {
                 JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente");

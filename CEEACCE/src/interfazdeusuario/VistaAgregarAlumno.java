@@ -30,7 +30,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
     public VistaAgregarAlumno(Alumno alumno){
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
-        llenaInformacionAlumno(alumno);
+        llenaPlanesDeEstudio();
     }
 
     /**
@@ -312,42 +312,6 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         int dia = cal.get(Calendar.DAY_OF_MONTH);
         String[] meses = {"Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"};
         fechaDeInscripcion.setText(dia+" de "+meses[mes]+" del "+anio);
-    }
-    
-    private void llenaInformacionAlumno(Alumno alumno){
-        this.nombreAlumno.setText(alumno.getNombre());
-        this.apellidosAlumno.setText(alumno.getApellidos());
-        if(alumno.getSexo().equalsIgnoreCase("Hombre")){
-            this.sexoAlumno.setSelectedIndex(1);
-        }
-        else{
-            this.sexoAlumno.setSelectedIndex(2);
-        }
-        this.diaNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("/"))[0]));
-        this.mesNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("/"))[1]));
-        this.anioNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("/"))[2]));
-        this.lugarDeNacimiento.setText(alumno.getLugarDeNacimiento());
-        this.curpAlumno.setText(alumno.getCURP());
-        this.emailAlumno.setText(alumno.getEmail());
-        this.matriculaAlumno.setText(alumno.getMatricula());
-        this.fechaDeInscripcion.setText(alumno.getFechaDeInscripcion());
-        switch(alumno.getTurno()){
-            case "Matutino":
-                            this.turno.setSelectedIndex(1);
-                            break;
-            case "Vespertino:":
-                            this.turno.setSelectedIndex(2);
-                            break;
-            case "Diurno":
-                            this.turno.setSelectedIndex(3);
-                            break;
-            case "Nocturno":
-                            this.turno.setSelectedIndex(4);
-                            break;
-            default:
-                            break;
-        }
-        
     }
     
     private ArrayList llenaPlanesDeEstudio(){

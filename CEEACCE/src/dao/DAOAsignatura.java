@@ -41,6 +41,7 @@ public class DAOAsignatura extends DAO<Asignatura> {
         return numFilasAfectadas;
     }
 
+    @Override
     public int actualizar(Asignatura asignatura) {
         String claveAsignatura = asignatura.getClave();
         String nombreAsignatura = asignatura.getNombreAsignatura();
@@ -62,7 +63,6 @@ public class DAOAsignatura extends DAO<Asignatura> {
         }
         cerrarConexion(conexion);
         return numFilasAfectadas;
-
     }
 
     @Override

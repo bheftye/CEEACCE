@@ -102,7 +102,7 @@ public class DAOAlumno extends DAO<Alumno> {
                 PlanDeEstudio planDeEstudio = getPlanDeEstudioDeListaDePlanesDeEstudio(clavePlanDeEstudio);
                 PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(), planDeEstudio.getModulos(), planDeEstudio.getClave());
                 if (planDeEstudio != null) {
-                    listaAlumnos.add(new Alumno(nombre, apellidos, sexo, email, curp, matricula, lugarDeNacimiento, fechaDeNacimiento, fechaDeInscripcion, turno, copiaPlanDeEstudio));
+                    listaAlumnos.add(new Alumno(nombre, apellidos, sexo, email,matricula,curp, lugarDeNacimiento, fechaDeNacimiento, fechaDeInscripcion, turno, copiaPlanDeEstudio));
                 }
             }
             sentencia.close();

@@ -137,18 +137,19 @@ public class ControladorDePeticiones {
             int NUM_DE_MODULOS = 6;
             for (int j = 0; j < NUM_DE_MODULOS; j++) {
             int claveModulo = j+1;
-            Modulo moduloIndexado = copiaPlanDeEstudio.getModulos().get(i);
+            Modulo moduloIndexado = copiaPlanDeEstudio.getModulos().get(j);
             int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
             for (int k = 0; k < NUM_ASIGNATURAS_DEL_MODULO; k++) {
-                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(k);
                 String claveAsignatura = asignaturaIndexada.getClave();
-                String queryCalificacion = "select calificacion from calificaciones where clvalumno = "+alumnoIndexado.getMatricula()+" and clvplan = "+clavePlanDeEstudio+" and clvmodulo = "+claveModulo+" and clvasign = "+claveAsignatura+"";
+                String queryCalificacion = "select calificacion from calificaciones where clvalumno = '"+alumnoIndexado.getMatricula()+"' and clvplan = "+clavePlanDeEstudio+" and clvmodulo = "+claveModulo+" and clvasign = '"+claveAsignatura+"'";
                 int calificacion = DAOAsignatura.getDAOAsignatura().obtenerCalificacion(queryCalificacion);
                 asignaturaIndexada.setCalificacion(calificacion);
             }
         }
             
         }
+        System.out.println(alumnos.size());
         return alumnos;
     }
 

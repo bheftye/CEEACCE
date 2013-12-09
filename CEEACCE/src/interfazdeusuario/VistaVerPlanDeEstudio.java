@@ -26,6 +26,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.modulos = planDeEstudio.getModulos();
+        this.nombrePlanDeEstudio.setText(planDeEstudio.getNombre());
         llenarListaDeAsignaturas();
     }
     

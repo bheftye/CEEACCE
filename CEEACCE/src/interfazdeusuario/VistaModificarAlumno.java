@@ -4,11 +4,10 @@
  */
 package interfazdeusuario;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import modelo.Alumno;
-import modelo.ListaDePlanesDeEstudio;
-import modelo.PlanDeEstudio;
 
 /**
  *
@@ -28,6 +27,13 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenaInformacionAlumno(alumno);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+            new VistaAdministradorAlumnos().setVisible(true);
+            ((VistaModificarAlumno)we.getSource()).dispose();
+            }
+         });
     }
 
     /**
@@ -65,12 +71,12 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         fechaDeInscripcion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         turno = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         anioNacimiento = new javax.swing.JTextField();
         planDeEstudio = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -122,10 +128,10 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
         turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un turno", "Matutino", "Vespertino", "Diurno", "Nocturno" }));
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
@@ -133,7 +139,12 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
         jButton3.setText("Cambiar Plan de Estudio");
 
-        jButton4.setText("Cancelar");
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,9 +159,9 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                                 .add(0, 0, Short.MAX_VALUE)
                                 .add(jButton3)
                                 .add(18, 18, 18)
-                                .add(jButton2)
+                                .add(modificarButton)
                                 .add(18, 18, 18)
-                                .add(jButton4))
+                                .add(cancelarButton))
                             .add(layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(layout.createSequentialGroup()
@@ -258,9 +269,9 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                     .add(planDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 61, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton2)
+                    .add(modificarButton)
                     .add(jButton3)
-                    .add(jButton4))
+                    .add(cancelarButton))
                 .addContainerGap())
         );
 
@@ -271,10 +282,15 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_apellidosAlumnoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_modificarButtonActionPerformed
+
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     
     private void llenaInformacionAlumno(Alumno alumno){
@@ -353,14 +369,13 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioNacimiento;
     private javax.swing.JTextField apellidosAlumno;
+    private javax.swing.JButton cancelarButton;
     private javax.swing.JTextField curpAlumno;
     private javax.swing.JComboBox diaNacimiento;
     private javax.swing.JTextField emailAlumno;
     private javax.swing.JTextField fechaDeInscripcion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -379,6 +394,7 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField lugarDeNacimiento;
     private javax.swing.JTextField matriculaAlumno;
     private javax.swing.JComboBox mesNacimiento;
+    private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreAlumno;
     private javax.swing.JTextField planDeEstudio;
     private javax.swing.JComboBox sexoAlumno;

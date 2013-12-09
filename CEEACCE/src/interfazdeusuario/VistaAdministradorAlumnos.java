@@ -156,7 +156,6 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -226,7 +225,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
                 if (evt.getClickCount() == 2) {
                     int indexEnJList = list.locationToIndex(evt.getPoint());
                     new VistaModificarAlumno(alumnosCoincidentes.get(indexEnJList)).setVisible(true);
-
+                    
                 }
             }
         });

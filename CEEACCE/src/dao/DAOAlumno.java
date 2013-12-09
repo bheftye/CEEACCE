@@ -81,44 +81,34 @@ public class DAOAlumno extends DAO<Alumno> {
     }
 
     @Override
-    public ArrayList<Alumno> consultar(String peticion) throws SQLException {
-        ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
-        Connection con = getConexion(); 
-        String orden; 
-        Statement sentencia = null; 
-        ResultSet rs = null; 
-        
-        if(peticion.equalsIgnoreCase("")){
-            orden = "select * from Alumnos"; 
-        }
-        else{
-            orden = "select * from Alumnos where " + peticion;  
-        }
-            sentencia = con.createStatement();
-            rs = sentencia.executeQuery(orden); 
-            while(rs.next()){
-                String nombre = rs.getString("nombre");
-                String apellidos = rs.getString("apellidos");
-                String sexo =  rs.getString("sexo");
-                String email = rs.getString("email");
-                String curp = rs.getString("CURP");
-                String matricula = rs.getString("matricula");
-                String lugarDeNacimiento =  rs.getString("lugarNacimiento");
-                String fechaDeNacimiento = rs.getString("fechaNacimiento");
-                String fechaDeInscripcion = rs.getString("fechaInscripcion");
-                String turno = rs.getString("turno");
-                String clavePlanDeEstudio = rs.getString("planDeEstudio");
+    public ArrayList<Alumno> consultar(String query) {
+        ArrayList<Alumno> listaAlumnos = new ArrayList();
+        Connection con = getConexion();
+        try {
+            Statement sentencia = con.createStatement();
+            ResultSet rs = sentencia.executeQuery(query);
+            while (rs.next()) {
+                String nombre = rs.getString("nombre").trim().toString();
+                String apellidos = rs.getString("apellidos").trim().toString();
+                String sexo = rs.getString("sexo").trim().toString();
+                String email = rs.getString("email").trim().toString();
+                String curp = rs.getString("curp").trim().toString();
+                String matricula = rs.getString("matricula").trim().toString();
+                String lugarDeNacimiento = rs.getString("lugarnacimiento").trim().toString();
+                String fechaDeNacimiento = rs.getString("fechanacimiento").trim().toString();
+                String fechaDeInscripcion = rs.getString("fechainscripcion").trim().toString();
+                String turno = rs.getString("turno").trim().toString();
+                String clavePlanDeEstudio = rs.getString("clvplan").trim().toString();
                 PlanDeEstudio planDeEstudio = getPlanDeEstudioDeListaDePlanesDeEstudio(clavePlanDeEstudio);
-                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(),planDeEstudio.getModulos(),planDeEstudio.getClave());
-                
-                if(planDeEstudio!=null){
-                    listaAlumnos.add(new Alumno(nombre,apellidos,sexo,email,curp,matricula,lugarDeNacimiento,fechaDeNacimiento,fechaDeInscripcion,turno,copiaPlanDeEstudio));
+                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(), planDeEstudio.getModulos(), planDeEstudio.getClave());
+                if (planDeEstudio != null) {
+                    listaAlumnos.add(new Alumno(nombre, apellidos, sexo, email,matricula,curp, lugarDeNacimiento, fechaDeNacimiento, fechaDeInscripcion, turno, copiaPlanDeEstudio));
                 }
             }
-            
-            //String nombre, String apellidos, String sexo, String email, String matricula, String CURP, String lugarDeNacimiento, String fechaDeNacimiento, String fechaDeInscripcion, String turno, PlanDeEstudio planDeEstudio
-        
-        sentencia.close();
+            sentencia.close();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
         cerrarConexion(con);
         return listaAlumnos;
     }
@@ -142,9 +132,9 @@ public class DAOAlumno extends DAO<Alumno> {
         int anioHoy = cal.get(Calendar.YEAR);
         int mesHoy = cal.get(Calendar.MONTH);
         int diaHoy = cal.get(Calendar.DAY_OF_MONTH);
-        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[0]);
+        int diaNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[2]);
         int mesNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[1]);
-        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[2]);
+        int anioNacimiento = Integer.valueOf((fechaNacimiento.split("-"))[0]);
         double hoy = anioHoy + mesHoy*.01 + diaHoy*.0001;
         double nacimiento = anioNacimiento + mesNacimiento*.01 + diaNacimiento*.0001;
         return (int)(hoy-nacimiento);

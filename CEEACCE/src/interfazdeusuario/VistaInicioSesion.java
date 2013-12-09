@@ -9,6 +9,7 @@ import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import encriptador.EncriptadorDeContrasenia;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelo.ListaDeAlumnos;
 
 /**
  *
@@ -128,6 +129,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                   else{
                     if(!this.cacheCargada){
                         ControladorCache.getControladorCache().llenarListaDePlanesDeEstudio();
+                        ControladorCache.getControladorCache().llenarListaDeAlumnos();
                         setCacheCargada(true);
                         System.out.println("Se cargo la cache...");
                     }

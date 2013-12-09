@@ -106,5 +106,24 @@ public class DAOAsignatura extends DAO<Asignatura> {
         cerrarConexion(conexion);
         return numFilasAfectadas;
     }
+    
+    public int obtenerCalificacion(String query){
+        int calificacion = 0;
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        ResultSet resultadoDatos = sentencia.executeQuery(query);
+        while(resultadoDatos.next()){
+            calificacion = resultadoDatos.getInt("calificacion");
+        }
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return calificacion;
+    }
 }
  

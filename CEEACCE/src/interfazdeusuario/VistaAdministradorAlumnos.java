@@ -4,6 +4,14 @@
  */
 package interfazdeusuario;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import modelo.Alumno;
+import modelo.ListaDeAlumnos;
+
 /**
  *
  * @author brentheftye
@@ -16,6 +24,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     public VistaAdministradorAlumnos() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        llenarJListConAlumnos();
     }
 
     /**
@@ -134,11 +143,12 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         // TODO add your handling code here:
         VistaAgregarAlumno interfazAlumno = new VistaAgregarAlumno();
         interfazAlumno.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -182,6 +192,30 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VistaAdministradorAlumnos().setVisible(true);
+            }
+        });
+    }
+    
+    private void llenarJListConAlumnos(){
+        ArrayList<Alumno> alumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
+         DefaultListModel listModel = new DefaultListModel();
+        int NUM_DE_ALUMNOS = alumnos.size();
+        for (int i = 0; i < NUM_DE_ALUMNOS; i++) {
+            Alumno alumnoIndexado = alumnos.get(i);
+            listModel.addElement(alumnoIndexado.getNombre()+" "+alumnoIndexado.getApellidos());
+        }
+        jList1.setModel(listModel);
+    }
+    
+    private void setListListener() {
+        jList1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int indexEnJList = list.locationToIndex(evt.getPoint());
+                    new VistaModificarAlumno().setVisible(true);
+
+                }
             }
         });
     }

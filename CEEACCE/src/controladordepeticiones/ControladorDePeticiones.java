@@ -149,7 +149,6 @@ public class ControladorDePeticiones {
         }
             
         }
-        System.out.println(alumnos.size());
         return alumnos;
     }
 

@@ -286,6 +286,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
             boolean agregoAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarAlumno(alumno);
             if (agregoAlumno) {
                 JOptionPane.showMessageDialog(this, "Alumno agregado exitosamente");
+                new VistaAdministradorAlumnos().setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "No fue posible crear este alumno.");

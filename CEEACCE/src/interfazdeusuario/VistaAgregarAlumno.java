@@ -282,7 +282,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
             String lugar = this.lugarDeNacimiento.getText();
             String turno = this.turnoCombo.getSelectedItem().toString();
             PlanDeEstudio planDeEstudio =  ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().obtenerPlanDeEstudioPorClave(ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(planesDeEstudioCombo.getSelectedIndex()-1).getClave());
-            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, dia+"-"+mes+"-"+anio, fechaInscripcion, turno, planDeEstudio);
+            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, anio+"-"+mes+"-"+dia, fechaInscripcion, turno, planDeEstudio);
             boolean agregoAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarAlumno(alumno);
             if (agregoAlumno) {
                 JOptionPane.showMessageDialog(this, "Alumno agregado exitosamente");
@@ -323,7 +323,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         int dia = cal.get(Calendar.DAY_OF_MONTH);
         String[] meses = {"Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"};
         fechaDeInscripcion.setText(dia+" de "+meses[mes]+" del "+anio);
-        fechaDeInscripcionAlumno = dia+"-"+mes+"-"+anio;
+        fechaDeInscripcionAlumno = anio+"-"+(mes+1)+"-"+dia;
     }
     
     private ArrayList llenaPlanesDeEstudio(){

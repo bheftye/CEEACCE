@@ -4,10 +4,14 @@
  */
 package interfazdeusuario;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import modelo.Curso;
 import modelo.ListaDeCursos;
+import modelo.ListaDePlanesDeEstudio;
 
 /**
  *
@@ -22,6 +26,7 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenarJListConCursos();
+        setListListener();
     }
 
     /**
@@ -129,6 +134,19 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
             listModel.addElement(cursoIndexado.getNombre());
         }
         jList1.setModel(listModel);
+    }
+    
+    private void setListListener() {
+        jList1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int indexEnJList = list.locationToIndex(evt.getPoint());
+                    new VistaVerCurso(ListaDeCursos.getListaDeCursos().getCursos().get(indexEnJList)).setVisible(true);
+
+                }
+            }
+        });
     }
     /**
      * @param args the command line arguments

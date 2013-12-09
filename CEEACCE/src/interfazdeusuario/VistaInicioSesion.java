@@ -132,7 +132,6 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                         ControladorCache.getControladorCache().llenarListaDeAlumnos();
                         setCacheCargada(true);
                         System.out.println("Se cargo la cache...");
-                        System.out.println(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().size());
                     }
                     new VistaPrincipal().setVisible(true);
                     

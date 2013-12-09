@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Curso {
         
 
-    public Curso(String nombre){
+    public Curso(String nombre, PlanDeEstudio planDeEstudio){
         this.nombre = nombre;
+        this.planDeEstudio = planDeEstudio;
     }
     /**
      * @return the planDeEstudio

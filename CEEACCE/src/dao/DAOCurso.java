@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Curso;
 import java.util.ArrayList;
+import modelo.ListaDePlanesDeEstudio;
 import modelo.PlanDeEstudio;
 
 public class DAOCurso extends DAO<Curso> {
@@ -51,7 +52,10 @@ public class DAOCurso extends DAO<Curso> {
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
                 String nombreCurso = resultadoDeDatos.getString("nomcurso");
-                Curso curso = new Curso(nombreCurso);
+                String clavePlanDeEstudio = resultadoDeDatos.getString("clvplan").trim().toString();
+                PlanDeEstudio planDeEstudio = getPlanDeEstudioDeListaDePlanesDeEstudio(clavePlanDeEstudio);
+                PlanDeEstudio copiaPlanDeEstudio = new PlanDeEstudio(planDeEstudio.getNombre(), planDeEstudio.getModulos(), planDeEstudio.getClave());
+                Curso curso = new Curso(nombreCurso, copiaPlanDeEstudio);
                 resultadoCursos.add(curso);
             }
         sentencia.close();
@@ -62,6 +66,18 @@ public class DAOCurso extends DAO<Curso> {
             exception.printStackTrace();
         }
         return resultadoCursos;
+    }
+    
+    private PlanDeEstudio getPlanDeEstudioDeListaDePlanesDeEstudio(String clave){
+        ListaDePlanesDeEstudio listaPlanesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio();
+        int tamañoListaDePlanesDeEstudio = listaPlanesDeEstudio.getPlanesDeEstudio().size();
+        for (int i = 0; i < tamañoListaDePlanesDeEstudio; i++) {
+            PlanDeEstudio planDeEstudioIndexado = listaPlanesDeEstudio.getPlanesDeEstudio().get(i);
+            if(clave.equalsIgnoreCase(planDeEstudioIndexado.getClave()+"")){
+                return planDeEstudioIndexado;
+            }
+        }
+        return null;
     }
 
 	 

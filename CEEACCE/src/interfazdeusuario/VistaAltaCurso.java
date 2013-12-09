@@ -4,6 +4,7 @@
  */
 package interfazdeusuario;
 
+import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-import modelo.Asignatura;
-import modelo.ListaDePlanesDeEstudio;
-import modelo.Modulo;
-import modelo.PlanDeEstudio;
+import modelo.*;
 
 /**
  *
@@ -41,7 +39,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombreCurso = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -127,7 +125,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                             .add(layout.createSequentialGroup()
                                 .add(jLabel1)
                                 .add(18, 18, 18)
-                                .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 301, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(nombreCurso, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 301, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -137,7 +135,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                 .add(16, 16, 16)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
-                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(nombreCurso, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -174,6 +172,10 @@ public class VistaAltaCurso extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String nombreCurso = this.nombreCurso.getText();
+        PlanDeEstudio planDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(planesDeEstudioCombo.getSelectedIndex()-1);
+        Curso cursoNuevo = new Curso(nombreCurso, planDeEstudio);
+        ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarCurso(cursoNuevo);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -273,7 +275,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nombreCurso;
     private javax.swing.JComboBox planesDeEstudioCombo;
     // End of variables declaration//GEN-END:variables
 }

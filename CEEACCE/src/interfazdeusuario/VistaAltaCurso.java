@@ -4,8 +4,17 @@
  */
 package interfazdeusuario;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import modelo.Asignatura;
 import modelo.ListaDePlanesDeEstudio;
+import modelo.Modulo;
 import modelo.PlanDeEstudio;
 
 /**
@@ -40,6 +49,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         botonAsignarFecha = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        botonVaciarPlan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,8 +81,25 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         });
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Crear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        botonVaciarPlan.setText("Vaciar Plan en Tabla");
+        botonVaciarPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVaciarPlanActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,21 +109,26 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                 .add(17, 17, 17)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(jLabel2)
-                        .add(18, 18, 18)
-                        .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 171, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
-                        .add(jLabel1)
-                        .add(18, 18, 18)
-                        .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 301, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                 .add(botonAsignarFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel2)
+                                .add(18, 18, 18)
+                                .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 171, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(18, 18, 18)
+                                .add(botonVaciarPlan))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel1)
+                                .add(18, 18, 18)
+                                .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 301, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,9 +139,11 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                     .add(jLabel1)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel2)
-                    .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel2)
+                        .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, botonVaciarPlan))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(284, 284, 284)
@@ -133,6 +167,20 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         new VistaAsignacionFechaAsignatura().setVisible(true);
     }//GEN-LAST:event_botonAsignarFechaActionPerformed
 
+    private void botonVaciarPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVaciarPlanActionPerformed
+        // TODO add your handling code here:
+        llenarListaAsignaturas();
+    }//GEN-LAST:event_botonVaciarPlanActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private ArrayList llenaPlanesDeEstudio(){
         ArrayList<String> nombresPlanesEstudio = new ArrayList();
         nombresPlanesEstudio.add("Selecciona un plan de estudio");
@@ -142,6 +190,43 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         }
         return nombresPlanesEstudio;
     }
+    
+   private void llenarListaAsignaturas(){
+       planDeEstudioSeleccionado = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(planesDeEstudioCombo.getSelectedIndex()-1);
+       Vector titulosTabla = llenarTitulosDeTabla();
+       Vector datosAsignaturas = new Vector<Vector<String>>();
+       modulos = planDeEstudioSeleccionado.getModulos();
+       int numeroDeModulos = this.modulos.size();
+       for (int i = 0; i < numeroDeModulos; i++) {
+            Modulo moduloIndexado = modulos.get(i);
+            int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+            for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
+            Vector<String>  filaDatosDeAsignaturaIndexada = llenarFilaDatosDeAsignatura(moduloIndexado.getAsignaturas().get(j));
+            filaDatosDeAsignaturaIndexada.add(moduloIndexado.getNombre());
+            datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
+           }
+       }
+   DefaultTableModel modelo = new DefaultTableModel(datosAsignaturas,titulosTabla){
+    public boolean isCellEditable(int row, int column){return false;}};
+    this.jTable1.setModel(modelo);
+}
+   
+   private Vector llenarTitulosDeTabla(){
+       Vector titulos = new Vector();
+       titulos.add("Asignatura");
+       titulos.add("Fecha de Impartición");
+       titulos.add("Duración");
+       return titulos;
+   }
+   
+   private Vector<String> llenarFilaDatosDeAsignatura(Asignatura asignatura){
+       Asignatura asignaturaIndexada = asignatura;
+       Vector<String> filaDatosDeAsignaturaIndexada = new Vector<String>();
+       filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getNombreAsignatura());
+       filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getFechaImparticion());
+       filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getDuracion() + "");
+       return filaDatosDeAsignaturaIndexada;
+   }
     /**
      * @param args the command line arguments
      */
@@ -176,8 +261,12 @@ public class VistaAltaCurso extends javax.swing.JFrame {
             }
         });
     }
+    
+    private ArrayList<Modulo> modulos;
+    private PlanDeEstudio planDeEstudioSeleccionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAsignarFecha;
+    private javax.swing.JButton botonVaciarPlan;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

@@ -24,7 +24,10 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     public VistaAdministradorAlumnos() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        this.alumnosCoincidentes = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
+         this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
         llenarJListConAlumnos();
+        setListListener();
     }
 
     /**
@@ -38,13 +41,13 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        buscarTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        buscarButton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,7 +79,12 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Buscar");
+        buscarButton.setText("Buscar");
+        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarButtonActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Salir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +104,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
                         .add(jLabel2)
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jTextField1)
+                            .add(buscarTextField)
                             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
@@ -104,7 +112,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
                             .add(jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jButton2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jButton4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .add(buscarButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .add(layout.createSequentialGroup()
                         .add(341, 341, 341)
                         .add(jLabel1)
@@ -129,8 +137,8 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel2)
-                            .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButton4))
+                            .add(buscarTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(buscarButton))
                         .add(18, 18, 18)
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -160,6 +168,11 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        String textoABuscar = this.buscarTextField.getText();
+        encontrarAlumnoCoincidente(textoABuscar);
+    }//GEN-LAST:event_buscarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,11 +210,10 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     }
     
     private void llenarJListConAlumnos(){
-        ArrayList<Alumno> alumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
          DefaultListModel listModel = new DefaultListModel();
-        int NUM_DE_ALUMNOS = alumnos.size();
+        int NUM_DE_ALUMNOS = alumnosCoincidentes.size();
         for (int i = 0; i < NUM_DE_ALUMNOS; i++) {
-            Alumno alumnoIndexado = alumnos.get(i);
+            Alumno alumnoIndexado = alumnosCoincidentes.get(i);
             listModel.addElement(alumnoIndexado.getNombre()+" "+alumnoIndexado.getApellidos());
         }
         jList1.setModel(listModel);
@@ -213,22 +225,38 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
                 JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     int indexEnJList = list.locationToIndex(evt.getPoint());
-                    new VistaModificarAlumno().setVisible(true);
+                    new VistaModificarAlumno(alumnosCoincidentes.get(indexEnJList)).setVisible(true);
 
                 }
             }
         });
     }
+    
+    private void  encontrarAlumnoCoincidente(String textoABuscar){
+        alumnosCoincidentes = new ArrayList();
+        for (int i = 0; i < alumnosOriginales.size(); i++) {
+            Alumno alumnoIndexado = alumnosOriginales.get(i);
+           boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
+           boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
+           if(coincideApellidos || coincideNombre){
+               alumnosCoincidentes.add(alumnoIndexado);
+           }
+        }
+        llenarJListConAlumnos();
+    }
+    
+    private ArrayList<Alumno> alumnosCoincidentes;
+    private ArrayList<Alumno> alumnosOriginales;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarButton;
+    private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

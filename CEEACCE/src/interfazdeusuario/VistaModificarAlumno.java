@@ -131,8 +131,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
         jLabel15.setText("Plan de Estudio:");
 
-        planDeEstudio.setEditable(false);
-
         jButton3.setText("Cambiar Plan de Estudio");
 
         jButton4.setText("Cancelar");
@@ -163,12 +161,10 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                                             .add(jLabel5))
                                         .add(18, 18, 18)
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(layout.createSequentialGroup()
-                                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                                    .add(org.jdesktop.layout.GroupLayout.LEADING, nombreAlumno)
-                                                    .add(org.jdesktop.layout.GroupLayout.LEADING, sexoAlumno, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                                    .add(org.jdesktop.layout.GroupLayout.LEADING, apellidosAlumno, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                                .add(206, 206, 206))
+                                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                .add(org.jdesktop.layout.GroupLayout.LEADING, nombreAlumno)
+                                                .add(org.jdesktop.layout.GroupLayout.LEADING, sexoAlumno, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .add(org.jdesktop.layout.GroupLayout.LEADING, apellidosAlumno, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                             .add(layout.createSequentialGroup()
                                                 .add(jLabel6)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -198,8 +194,7 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                                             .add(matriculaAlumno)
                                             .add(fechaDeInscripcion)
                                             .add(turno, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .add(planDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 208, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                            .add(planDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                                 .add(0, 167, Short.MAX_VALUE))))
                     .add(layout.createSequentialGroup()
                         .add(296, 296, 296)
@@ -291,9 +286,9 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         else{
             this.sexoAlumno.setSelectedIndex(2);
         }
-        this.diaNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("/"))[0]));
-        this.mesNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("/"))[1]));
-        this.anioNacimiento.setText((alumno.getFechaDeNacimiento().split("/"))[2]);
+        this.diaNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("-"))[2]));
+        this.mesNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("-"))[1]));
+        this.anioNacimiento.setText((alumno.getFechaDeNacimiento().split("-"))[0]);
         this.lugarDeNacimiento.setText(alumno.getLugarDeNacimiento());
         this.curpAlumno.setText(alumno.getCURP());
         this.emailAlumno.setText(alumno.getEmail());
@@ -316,16 +311,7 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                             break;
         }
         this.planDeEstudio.setText(alumno.getPlanDeEstudio().getNombre());
-        
-    }
-    
-    private ArrayList llenaPlanesDeEstudio(){
-        ArrayList<String> nombresPlanesEstudio = new ArrayList();
-        ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
-        for (int i = 0; i < planesDeEstudio.size(); i++) {
-            nombresPlanesEstudio.add(planesDeEstudio.get(i).getNombre());
-        }
-        return nombresPlanesEstudio;
+        this.planDeEstudio.setEnabled(false);
     }
     
     /**

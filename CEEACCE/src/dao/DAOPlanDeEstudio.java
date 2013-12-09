@@ -67,8 +67,8 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         Statement sentencia =  conexion.createStatement();
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
-                String nombre = resultadoDeDatos.getString("nomplan");
-                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan"));
+                String nombre = resultadoDeDatos.getString("nomplan").trim().toString();
+                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan").trim().toString());
                 PlanDeEstudio planEstudio = new PlanDeEstudio(nombre, modulos, clave);
                 resultadoPlanEstudio.add(planEstudio);
             }
@@ -130,8 +130,8 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         Statement sentencia =  conexion.createStatement();
         ResultSet resultadoDeDatos = sentencia.executeQuery(query); 
             while(resultadoDeDatos.next()){
-                String nombre = resultadoDeDatos.getString("nomplan");
-                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan"));
+                String nombre = resultadoDeDatos.getString("nomplan").trim().toString();
+                int clave = Integer.parseInt(resultadoDeDatos.getString("clvplan").trim().toString());
                 planDeEstudio = new PlanDeEstudio(nombre, modulos, clave);
             }
         sentencia.close();

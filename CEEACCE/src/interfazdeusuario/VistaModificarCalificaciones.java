@@ -53,9 +53,9 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
         nombreAlumno = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonGuardarCalificaciones = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
+        botonGenerarCertificado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,24 +75,24 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
         jTable1.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardarCalificaciones.setText("Guardar");
+        botonGuardarCalificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonGuardarCalificacionesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Generar Certificado");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonGenerarCertificado.setText("Generar Certificado");
+        botonGenerarCertificado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonGenerarCertificadoActionPerformed(evt);
             }
         });
 
@@ -107,11 +107,11 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(botonGenerarCertificado)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(botonGuardarCalificaciones)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(botonCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(314, 314, 314)
                         .addComponent(nombreAlumno)
@@ -128,16 +128,16 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(botonGuardarCalificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(botonGenerarCertificado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonGuardarCalificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCalificacionesActionPerformed
         int numeroDeModulos = this.modulos.size();
         int contadorDeFilaDeAsignatura = 0;
         for (int i = 0; i < numeroDeModulos; i++) {
@@ -150,17 +150,17 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
         }
         alumno.getPlanDeEstudio().setModulos(modulos);
         ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarCalificacionAlumno(alumno);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonGuardarCalificacionesActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonGenerarCertificadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarCertificadoActionPerformed
         // TODO add your handling code here:
         InsertText.generarCertificado(alumno);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonGenerarCertificadoActionPerformed
 
     /**
      * Método que llena la Tabla con las filas de las asignaturas.
@@ -245,9 +245,9 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonGenerarCertificado;
+    private javax.swing.JButton botonGuardarCalificaciones;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel nombreAlumno;

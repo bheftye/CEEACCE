@@ -51,7 +51,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonVerPlanDeEstudio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,10 +72,10 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
 
         jLabel2.setText("Plan de Estudio");
 
-        jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonVerPlanDeEstudio.setText("Cerrar");
+        botonVerPlanDeEstudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonVerPlanDeEstudioActionPerformed(evt);
             }
         });
 
@@ -91,7 +91,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(19, 19, 19)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jButton1)
+                            .add(botonVerPlanDeEstudio)
                             .add(layout.createSequentialGroup()
                                 .add(nombrePlanDeEstudio)
                                 .add(583, 583, 583))
@@ -107,17 +107,17 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 364, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(botonVerPlanDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonVerPlanDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerPlanDeEstudioActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonVerPlanDeEstudioActionPerformed
 
     /**
      * Método que crea los titulos de la tabla a mostrar.
@@ -210,7 +210,7 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonVerPlanDeEstudio;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

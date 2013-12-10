@@ -42,11 +42,11 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonBuscarAlumno = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
+        botonVerCalificacionAlumno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,21 +54,21 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar Alumno");
 
-        jButton1.setText("Buscar");
+        botonBuscarAlumno.setText("Buscar");
 
         jScrollPane1.setViewportView(jList1);
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonSalirActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Calificaciones");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonVerCalificacionAlumno.setText("Calificaciones");
+        botonVerCalificacionAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonVerCalificacionAlumnoActionPerformed(evt);
             }
         });
 
@@ -86,14 +86,14 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
+                                .addComponent(botonBuscarAlumno)
                                 .addGap(0, 232, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3)))))
+                                    .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonVerCalificacionAlumno)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(293, 293, 293)
                         .addComponent(jLabel1)
@@ -107,16 +107,16 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(botonVerCalificacionAlumno)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(botonSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1))
+                            .addComponent(botonBuscarAlumno))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -125,16 +125,16 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonVerCalificacionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerCalificacionAlumnoActionPerformed
         // TODO add your handling code here:
         int indexEnJList = this.jList1.getSelectedIndex();
         new VistaModificarCalificaciones(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().get(indexEnJList)).setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonVerCalificacionAlumnoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     protected Alumno getAlumnoSeleccionado(){
         return alumno;
@@ -204,9 +204,9 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonBuscarAlumno;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonVerCalificacionAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;

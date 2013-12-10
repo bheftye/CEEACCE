@@ -37,33 +37,33 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonCrearPlanDeEstudio = new javax.swing.JButton();
+        botonVerPlanDeEstudio = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton2.setText("Crear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearPlanDeEstudio.setText("Crear");
+        botonCrearPlanDeEstudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCrearPlanDeEstudioActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Ver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonVerPlanDeEstudio.setText("Ver");
+        botonVerPlanDeEstudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonVerPlanDeEstudioActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonSalirActionPerformed(evt);
             }
         });
 
@@ -82,9 +82,9 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 548, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButton3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButton5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(botonCrearPlanDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(botonVerPlanDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(botonSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .add(210, 210, 210)
                         .add(jLabel1)))
@@ -99,11 +99,11 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(0, 242, Short.MAX_VALUE)
-                        .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(botonCrearPlanDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(botonVerPlanDeEstudio, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(79, 79, 79)
-                        .add(jButton5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(botonSalir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jScrollPane2))
                 .add(34, 34, 34))
         );
@@ -111,21 +111,21 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCrearPlanDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearPlanDeEstudioActionPerformed
         // TODO add your handling code here:
          new VistaAltaPlanDeEstudio().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCrearPlanDeEstudioActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonVerPlanDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerPlanDeEstudioActionPerformed
         // TODO add your handling code here:
         int indexEnJList = jList1.getSelectedIndex();
         new VistaVerPlanDeEstudio(ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(indexEnJList)).setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonVerPlanDeEstudioActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void llenarJListConPlanesDeEstudio(){
         ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
@@ -185,9 +185,9 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton botonCrearPlanDeEstudio;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonVerPlanDeEstudio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane2;

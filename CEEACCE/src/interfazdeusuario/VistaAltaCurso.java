@@ -46,7 +46,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         planesDeEstudioCombo = new javax.swing.JComboBox();
         botonAsignarFecha = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCrearCurso = new javax.swing.JButton();
         botonVaciarPlan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,10 +85,10 @@ public class VistaAltaCurso extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Crear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearCurso.setText("Crear");
+        botonCrearCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCrearCursoActionPerformed(evt);
             }
         });
 
@@ -113,7 +113,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                 .add(botonAsignarFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                .add(botonCrearCurso, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 123, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
@@ -147,7 +147,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                         .add(284, 284, 284)
                         .add(botonAsignarFecha)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton2)
+                        .add(botonCrearCurso)
                         .add(86, 86, 86)
                         .add(jButton1)
                         .add(0, 0, Short.MAX_VALUE))
@@ -170,7 +170,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         llenarListaAsignaturas();
     }//GEN-LAST:event_botonVaciarPlanActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCrearCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearCursoActionPerformed
         // TODO add your handling code here:
         String nombreCurso = this.nombreCurso.getText();
         PlanDeEstudio planDeEstudioDeCurso = planDeEstudioSeleccionado;
@@ -188,7 +188,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         planDeEstudioDeCurso.setModulos(modulosAModificar);
         Curso cursoNuevo = new Curso(nombreCurso,planDeEstudioDeCurso);
         ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarCurso(cursoNuevo);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCrearCursoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -281,9 +281,9 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private PlanDeEstudio planDeEstudioSeleccionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAsignarFecha;
+    private javax.swing.JButton botonCrearCurso;
     private javax.swing.JButton botonVaciarPlan;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

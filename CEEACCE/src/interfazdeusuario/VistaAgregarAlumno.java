@@ -63,10 +63,10 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         fechaDeInscripcion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         turnoCombo = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        botonAltaAlumno = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         planesDeEstudioCombo = new javax.swing.JComboBox();
-        jButton3 = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -116,10 +116,10 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
 
         turnoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un turno", "Matutino", "Vespertino", "Diurno", "Nocturno" }));
 
-        jButton2.setText("Dar de alta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonAltaAlumno.setText("Dar de alta");
+        botonAltaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonAltaAlumnoActionPerformed(evt);
             }
         });
 
@@ -127,10 +127,10 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
 
         planesDeEstudioCombo = new javax.swing.JComboBox(llenaPlanesDeEstudio().toArray());
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
@@ -193,9 +193,9 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
                         .addContainerGap())))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jButton2)
+                .add(botonAltaAlumno)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButton3)
+                .add(botonCancelar)
                 .add(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -253,8 +253,8 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
                     .add(planesDeEstudioCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton2)
-                    .add(jButton3))
+                    .add(botonAltaAlumno)
+                    .add(botonCancelar))
                 .add(16, 16, 16))
         );
 
@@ -265,7 +265,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_apellidosAlumnoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaAlumnoActionPerformed
         // TODO add your handling code here:
         boolean camposLlenos = validarLlenadoDeCampos();
         if(camposLlenos){
@@ -295,12 +295,12 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this, "Verifica que todos los campos estén llenos.");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonAltaAlumnoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     
     /**
@@ -412,13 +412,13 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox anioNacimiento;
     private javax.swing.JTextField apellidosAlumno;
+    private javax.swing.JButton botonAltaAlumno;
+    private javax.swing.JButton botonCancelar;
     private javax.swing.JTextField curpAlumno;
     private javax.swing.JComboBox diaNacimiento;
     private javax.swing.JTextField emailAlumno;
     private javax.swing.JTextField fechaDeInscripcion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

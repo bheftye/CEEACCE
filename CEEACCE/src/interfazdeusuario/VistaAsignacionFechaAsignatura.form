@@ -26,9 +26,9 @@
               <EmptySpace pref="155" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton2" min="-2" pref="117" max="-2" attributes="0"/>
+                      <Component id="botonGuardarCambioFecha" min="-2" pref="117" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -43,7 +43,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="fechaField" min="-2" pref="257" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="136" max="-2" attributes="0"/>
+                              <Component id="botonAsignarFecha" min="-2" pref="136" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
@@ -66,12 +66,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="fechaField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="botonAsignarFecha" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="90" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="botonGuardarCambioFecha" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="botonCancelar" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -104,12 +104,12 @@
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="observing = (ObservingTextField)fechaField;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="botonAsignarFecha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignar Fecha"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAsignarFechaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -117,12 +117,12 @@
         <Property name="text" type="java.lang.String" value="Asignatura"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="botonGuardarCambioFecha">
       <Properties>
         <Property name="text" type="java.lang.String" value="Asignar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="botonCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>

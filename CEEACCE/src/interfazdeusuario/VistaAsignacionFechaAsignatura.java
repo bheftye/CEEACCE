@@ -38,10 +38,10 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
         moduloLabel = new javax.swing.JLabel();
         duracionLabel = new javax.swing.JLabel();
         fechaField = new ObservingTextField();
-        jButton1 = new javax.swing.JButton();
+        botonAsignarFecha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonGuardarCambioFecha = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,18 +65,18 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Asignar Fecha");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAsignarFecha.setText("Asignar Fecha");
+        botonAsignarFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAsignarFechaActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Asignatura");
 
-        jButton2.setText("Asignar");
+        botonGuardarCambioFecha.setText("Asignar");
 
-        jButton3.setText("Cancelar");
+        botonCancelar.setText("Cancelar");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,9 +86,9 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
                 .addContainerGap(155, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(botonGuardarCambioFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jButton3)
+                        .add(botonCancelar)
                         .add(35, 35, 35))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(jLabel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 92, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -101,7 +101,7 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
                             .add(layout.createSequentialGroup()
                                 .add(fechaField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 257, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(30, 30, 30)
-                                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(botonAsignarFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .add(142, 142, 142))))
         );
         layout.setVerticalGroup(
@@ -118,18 +118,18 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(fechaField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(botonAsignarFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 90, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButton3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(botonGuardarCambioFecha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(botonCancelar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAsignarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAsignarFechaActionPerformed
         // TODO add your handling code here:
         String lang = "";
         final Locale locale = getLocale(lang);
@@ -139,7 +139,7 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
         datePicker.start(observing);
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonAsignarFechaActionPerformed
 
     private void fechaFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaFieldPropertyChange
         // TODO add your handling code here:
@@ -229,11 +229,11 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAsignarFecha;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonGuardarCambioFecha;
     private javax.swing.JLabel duracionLabel;
     private javax.swing.JTextField fechaField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel moduloLabel;
     private javax.swing.JLabel nombreLabel;

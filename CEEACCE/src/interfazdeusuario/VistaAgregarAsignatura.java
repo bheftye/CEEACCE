@@ -53,8 +53,8 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         duracionAsignatura = new javax.swing.JTextField();
         moduloAsignatura = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonAgregarAsignatura = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,17 +72,17 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
 
         jLabel6.setText("Módulo:");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAgregarAsignatura.setText("Agregar");
+        botonAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAgregarAsignaturaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
@@ -111,12 +111,12 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
                             .add(nombreAsignatura)
                             .add(creditosAsignatura)
                             .add(duracionAsignatura))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .add(layout.createSequentialGroup()
                         .add(0, 115, Short.MAX_VALUE)
-                        .add(jButton1)
+                        .add(botonAgregarAsignatura)
                         .add(18, 18, 18)
-                        .add(jButton2)
+                        .add(botonCancelar)
                         .add(19, 19, 19))))
         );
         layout.setVerticalGroup(
@@ -146,15 +146,15 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
                     .add(jLabel6))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
-                    .add(jButton2))
+                    .add(botonAgregarAsignatura)
+                    .add(botonCancelar))
                 .add(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAsignaturaActionPerformed
         // TODO add your handling code here:
         boolean camposLlenos = validaLlenadoDeCampos();
         if(camposLlenos){
@@ -180,11 +180,11 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonAgregarAsignaturaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     
     private boolean validaLlenadoDeCampos(){
@@ -239,11 +239,11 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAgregarAsignatura;
+    private javax.swing.JButton botonCancelar;
     private javax.swing.JTextField claveAsignatura;
     private javax.swing.JTextField creditosAsignatura;
     private javax.swing.JTextField duracionAsignatura;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

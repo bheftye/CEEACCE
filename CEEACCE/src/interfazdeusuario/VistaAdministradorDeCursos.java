@@ -42,10 +42,10 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
         textoABuscarField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonBuscarCurso = new javax.swing.JButton();
+        botonVerCurso = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
+        botonCrearCurso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,16 +58,16 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Buscar");
+        botonBuscarCurso.setText("Buscar");
 
-        jButton2.setText("Ver");
+        botonVerCurso.setText("Ver");
 
-        jButton3.setText("Salir");
+        botonSalir.setText("Salir");
 
-        jButton4.setText("Crear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearCurso.setText("Crear");
+        botonCrearCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonCrearCursoActionPerformed(evt);
             }
         });
 
@@ -83,15 +83,15 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(textoABuscarField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jButton1)
+                        .add(botonBuscarCurso)
                         .add(0, 231, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(jScrollPane1)
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(jButton2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jButton3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 93, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(botonVerCurso, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(botonSalir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(botonCrearCurso, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 93, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,27 +103,27 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel1)
                             .add(textoABuscarField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jButton1))
+                            .add(botonBuscarCurso))
                         .add(32, 32, 32)
                         .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jButton4)
+                        .add(botonCrearCurso)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton2)
+                        .add(botonVerCurso)
                         .add(64, 64, 64)
-                        .add(jButton3)))
+                        .add(botonSalir)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botonCrearCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearCursoActionPerformed
         // TODO add your handling code here:
         //Crear ventana de alta.
         new VistaAltaCurso().setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonCrearCursoActionPerformed
 
     private void llenarJListConCursos(){
         ArrayList<Curso> cursos = ListaDeCursos.getListaDeCursos().getCursos();
@@ -183,10 +183,10 @@ public class VistaAdministradorDeCursos extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton botonBuscarCurso;
+    private javax.swing.JButton botonCrearCurso;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonVerCurso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;

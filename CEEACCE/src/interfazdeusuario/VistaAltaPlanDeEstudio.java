@@ -44,9 +44,9 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
         nombrePlanDeEstudio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonAgregarAsignatura = new javax.swing.JButton();
+        botonCrearPlanDeEstudio = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,24 +67,24 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Agregar Asignatura");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAgregarAsignatura.setText("Agregar Asignatura");
+        botonAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAgregarAsignaturaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Crear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearPlanDeEstudio.setText("Crear");
+        botonCrearPlanDeEstudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCrearPlanDeEstudioActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
@@ -108,11 +108,11 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(0, 0, Short.MAX_VALUE)
-                        .add(jButton1)
+                        .add(botonAgregarAsignatura)
                         .add(18, 18, 18)
-                        .add(jButton2)
+                        .add(botonCrearPlanDeEstudio)
                         .add(53, 53, 53)
-                        .add(jButton3))
+                        .add(botonCancelar))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -129,27 +129,27 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
-                    .add(jButton2)
-                    .add(jButton3))
+                    .add(botonAgregarAsignatura)
+                    .add(botonCrearPlanDeEstudio)
+                    .add(botonCancelar))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAsignaturaActionPerformed
         // TODO add your handling code here
         VistaAltaPlanDeEstudio vistaActual = this;
         new VistaAgregarAsignatura(vistaActual).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonAgregarAsignaturaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCrearPlanDeEstudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearPlanDeEstudioActionPerformed
         // TODO add your handling code here:
         int numeroDeAsignaturasNecesarias = 40;
         String nombreDePlanDeEstudio = nombrePlanDeEstudio.getText(); 
@@ -171,7 +171,7 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
             int asignaturasFaltantes = numeroDeAsignaturasNecesarias - numAsignaturas;
             JOptionPane.showMessageDialog(this,"Faltan "+ asignaturasFaltantes + " asignatura(s).");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCrearPlanDeEstudioActionPerformed
 
     
    /**
@@ -298,9 +298,9 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonAgregarAsignatura;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonCrearPlanDeEstudio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

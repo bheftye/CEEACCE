@@ -125,18 +125,16 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        modulos.get(0).getAsignaturas().get(0).setCalificacion((Integer) jTable1.getValueAt(0, 2));
-
         int numeroDeModulos = this.modulos.size();
+        int contadorDeFilaDeAsignatura = 0;
         for (int i = 0; i < numeroDeModulos; i++) {
             Modulo moduloIndexado = modulos.get(i);
             int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
             for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
-                moduloIndexado.getAsignaturas().get(j).setCalificacion((Integer) jTable1.getValueAt(j, 2));
-
+                moduloIndexado.getAsignaturas().get(j).setCalificacion(Integer.parseInt((String)jTable1.getValueAt(contadorDeFilaDeAsignatura, 2)));
+                contadorDeFilaDeAsignatura++;
             }
         }
-
         alumno.getPlanDeEstudio().setModulos(modulos);
         ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarCalificacionAlumno(alumno);
         this.dispose();

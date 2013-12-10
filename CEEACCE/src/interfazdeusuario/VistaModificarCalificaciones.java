@@ -136,9 +136,11 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
 
             }
         }
+
         alumno.getPlanDeEstudio().setModulos(modulos);
-               
+        ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarCalificacionAlumno(alumno);
         this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

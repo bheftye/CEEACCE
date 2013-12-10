@@ -173,8 +173,20 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String nombreCurso = this.nombreCurso.getText();
-        PlanDeEstudio planDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio().get(planesDeEstudioCombo.getSelectedIndex()-1);
-        Curso cursoNuevo = new Curso(nombreCurso, planDeEstudio);
+        PlanDeEstudio planDeEstudioDeCurso = planDeEstudioSeleccionado;
+        ArrayList<Modulo> modulosAModificar = planDeEstudioDeCurso.getModulos();
+        int numeroDeModulos = modulosAModificar.size();
+        int contadorDeFilaDeAsignatura = 0;
+        for (int i = 0; i < numeroDeModulos; i++) {
+            Modulo moduloIndexado = modulosAModificar.get(i);
+            int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+            for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
+                moduloIndexado.getAsignaturas().get(j).setFechaImparticion((String)jTable1.getValueAt(contadorDeFilaDeAsignatura, 2));
+                contadorDeFilaDeAsignatura++;
+            }
+        }
+        planDeEstudioDeCurso.setModulos(modulosAModificar);
+        Curso cursoNuevo = new Curso(nombreCurso,planDeEstudioDeCurso);
         ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarCurso(cursoNuevo);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -204,7 +216,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
             int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
             for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
             Vector<String>  filaDatosDeAsignaturaIndexada = llenarFilaDatosDeAsignatura(moduloIndexado.getAsignaturas().get(j));
-            filaDatosDeAsignaturaIndexada.add(moduloIndexado.getNombre());
+            filaDatosDeAsignaturaIndexada.add(0,moduloIndexado.getNombre());
             datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
            }
        }
@@ -215,6 +227,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
    
    private Vector llenarTitulosDeTabla(){
        Vector titulos = new Vector();
+       titulos.add("Módulo");
        titulos.add("Asignatura");
        titulos.add("Fecha de Impartición");
        titulos.add("Duración");

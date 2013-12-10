@@ -83,6 +83,7 @@
                 <Column editable="true" title="Calificaci&#xf3;n" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="rowSelectionAllowed" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

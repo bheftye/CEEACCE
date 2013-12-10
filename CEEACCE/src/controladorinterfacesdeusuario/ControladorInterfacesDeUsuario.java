@@ -22,37 +22,44 @@ import modelo.Usuario;
  * @author brentheftye
  */
 public class ControladorInterfacesDeUsuario {
+
     private static ControladorInterfacesDeUsuario controladorInterfaces = new ControladorInterfacesDeUsuario();
     private ControladorDePeticiones controladorDePeticiones = ControladorDePeticiones.getControladorDePeticiones();
-    
-    private ControladorInterfacesDeUsuario(){}
-    
+
+    private ControladorInterfacesDeUsuario() {
+    }
+
     /**
      *
      * @return
      */
-    public static ControladorInterfacesDeUsuario getControladorInterfacesDeUsuario(){
+    public static ControladorInterfacesDeUsuario getControladorInterfacesDeUsuario() {
         return controladorInterfaces;
     }
-    
-    public boolean agregarAlumno(Alumno alumno){
+
+    public boolean agregarAlumno(Alumno alumno) {
         boolean agrego = controladorDePeticiones.agregarAlumno(alumno);
-        if(agrego){
+        if (agrego) {
             ControladorDePeticiones.getControladorDePeticiones().registrarBoletaVaciaDeAlumno(alumno);
             ControladorCache.getControladorCache().llenarListaDeAlumnos();
         }
         return agrego;
     }
-    
-    public boolean modificarAlumno(Alumno alumno){
+
+    public void modificarCalificacionAlumno(Alumno alumno) {
+        controladorDePeticiones.modificarCalificacionAlumno(alumno);
+      
+    }
+
+    public boolean modificarAlumno(Alumno alumno) {
         boolean modifico = controladorDePeticiones.modificarAlumno(alumno);
         boolean esEsteAlumno = false;
-        if(modifico){
+        if (modifico) {
             ArrayList<Alumno> listaDeAlumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
             for (int i = 0; i < listaDeAlumnos.size(); i++) {
                 esEsteAlumno = listaDeAlumnos.get(i).getMatricula().equalsIgnoreCase(alumno.getMatricula());
-                if(esEsteAlumno){
-                    listaDeAlumnos.add(i,alumno);
+                if (esEsteAlumno) {
+                    listaDeAlumnos.add(i, alumno);
                     break;
                 }
             }
@@ -60,12 +67,12 @@ public class ControladorInterfacesDeUsuario {
         }
         return modifico;
     }
-    
-    public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio){
+
+    public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
         boolean agrego = controladorDePeticiones.agregarPlanDeEstudio(planDeEstudio);
-        if(agrego){
+        if (agrego) {
             int clavePlanDeEstudio = ControladorDePeticiones.getControladorDePeticiones().obtenClaveDePlanDeEstudioPorNombre(planDeEstudio.getNombre());
-            if(clavePlanDeEstudio != -1){
+            if (clavePlanDeEstudio != -1) {
                 for (int i = 0; i < 6; i++) {
                     Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
                     int numAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
@@ -73,76 +80,74 @@ public class ControladorInterfacesDeUsuario {
                     for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
                         Asignatura asignaturaIndexada = asigunaturasDeModuloIndexado.get(j);
                         ControladorDePeticiones.getControladorDePeticiones().agregarAsignatura(asignaturaIndexada);
-                        int numModulo = i+1;
-                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio,numModulo, asignaturaIndexada.getClave());
+                        int numModulo = i + 1;
+                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio, numModulo, asignaturaIndexada.getClave());
                     }
                 }
-            }
-            else{
+            } else {
                 return false;
             }
-           ControladorCache.getControladorCache().llenarListaDePlanesDeEstudio();
+            ControladorCache.getControladorCache().llenarListaDePlanesDeEstudio();
         }
         return agrego;
     }
-    
-    public boolean agregarCurso(Curso curso){
+
+    public boolean agregarCurso(Curso curso) {
         boolean agrego = controladorDePeticiones.agregarCurso(curso);
-        if(agrego){
-            ArrayList<Curso> listaDeCursos = ListaDeCursos.getListaDeCursos().getCursos();  
+        if (agrego) {
+            ArrayList<Curso> listaDeCursos = ListaDeCursos.getListaDeCursos().getCursos();
             listaDeCursos.add(curso);
             ListaDeCursos.getListaDeCursos().setCursos(listaDeCursos);
         }
         return agrego;
     }
-    
-    public boolean darAltaUsuario(Usuario usuario){
+
+    public boolean darAltaUsuario(Usuario usuario) {
         boolean agrego = controladorDePeticiones.darAltaUsuario(usuario);
-        if(agrego){
+        if (agrego) {
             actualizarListaDeUsuarios();
         }
         return agrego;
     }
-    
-    public boolean verificarUsario(String usuario, String contrasenia){
+
+    public boolean verificarUsario(String usuario, String contrasenia) {
         int indiceUsuarioAVerificar = encuentraIndiceDeUsuario(usuario);
-        if(indiceUsuarioAVerificar != -1){
+        if (indiceUsuarioAVerificar != -1) {
             boolean contraseniaValida = ListaDeUsuarios.getListaDeUsuarios().getUsuarios().get(indiceUsuarioAVerificar).getContrasenia().equals(contrasenia);
-            if(contraseniaValida){
+            if (contraseniaValida) {
                 return true;
             }
         }
         return false;
     }
-    
-    private int encuentraIndiceDeUsuario(String usuario){
+
+    private int encuentraIndiceDeUsuario(String usuario) {
         ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
         for (int i = 0; i < ListaDeUsuarios.getListaDeUsuarios().getUsuarios().size(); i++) {
-            if(usuarios.get(i).getNombreDeUsuario().equalsIgnoreCase(usuario)){
+            if (usuarios.get(i).getNombreDeUsuario().equalsIgnoreCase(usuario)) {
                 return i;
             }
         }
         return -1;
     }
-    
-    public boolean existeUsuario(String nuevoUsuario){
+
+    public boolean existeUsuario(String nuevoUsuario) {
         ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
         int numUsuarios = usuarios.size();
         for (int i = 0; i < numUsuarios; i++) {
             Usuario usuarioIndexado = usuarios.get(i);
-            if(usuarioIndexado.getNombreDeUsuario().equalsIgnoreCase(nuevoUsuario)){
+            if (usuarioIndexado.getNombreDeUsuario().equalsIgnoreCase(nuevoUsuario)) {
                 return true;
             }
         }
         return false;
     }
-    
-    public PlanDeEstudio obtenerPlanDeEstudioPorClave(int clavePlanDeEstudio){
+
+    public PlanDeEstudio obtenerPlanDeEstudioPorClave(int clavePlanDeEstudio) {
         return ControladorDePeticiones.getControladorDePeticiones().obtenerNuevoPlanDeEstudioPorClave(clavePlanDeEstudio);
     }
-    
-    private void actualizarListaDeUsuarios(){
+
+    private void actualizarListaDeUsuarios() {
         ControladorCache.getControladorCache().llenarListaDeUsuarios();
     }
-    
-}    
+}

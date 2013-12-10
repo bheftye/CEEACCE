@@ -75,7 +75,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         anioNacimiento = new javax.swing.JTextField();
         planDeEstudio = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
@@ -137,8 +136,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
         jLabel15.setText("Plan de Estudio:");
 
-        jButton3.setText("Cambiar Plan de Estudio");
-
         cancelarButton.setText("Cancelar");
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,8 +154,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(0, 0, Short.MAX_VALUE)
-                                .add(jButton3)
-                                .add(18, 18, 18)
                                 .add(modificarButton)
                                 .add(18, 18, 18)
                                 .add(cancelarButton))
@@ -270,7 +265,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 61, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(modificarButton)
-                    .add(jButton3)
                     .add(cancelarButton))
                 .addContainerGap())
         );
@@ -375,7 +369,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField emailAlumno;
     private javax.swing.JTextField fechaDeInscripcion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

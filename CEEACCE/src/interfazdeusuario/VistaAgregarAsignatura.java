@@ -12,7 +12,6 @@ import modelo.Asignatura;
  * @author brentheftye
  */
 public class VistaAgregarAsignatura extends javax.swing.JFrame {
-    private VistaAltaPlanDeEstudio vistaAltaPlanDeEstudio;
     
     
     /**
@@ -177,9 +176,6 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this, "Verifica que todos los campos estén llenos.");
         }
-        
-        
-        
     }//GEN-LAST:event_botonAgregarAsignaturaActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -238,6 +234,7 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
             }
         });
     }
+    private VistaAltaPlanDeEstudio vistaAltaPlanDeEstudio;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarAsignatura;
     private javax.swing.JButton botonCancelar;

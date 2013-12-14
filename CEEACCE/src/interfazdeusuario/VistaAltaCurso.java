@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 
@@ -162,7 +163,9 @@ public class VistaAltaCurso extends javax.swing.JFrame {
 
     private void botonAsignarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAsignarFechaActionPerformed
         // TODO add your handling code here:
-        new VistaAsignacionFechaAsignatura().setVisible(true);
+        Asignatura asignaturaSeleccionada = getAsignaturaSeleccionada();
+        VistaAltaCurso vistaActual = this;
+        new VistaAsignacionFechaAsignatura(vistaActual, asignaturaSeleccionada).setVisible(true);
     }//GEN-LAST:event_botonAsignarFechaActionPerformed
 
     private void botonVaciarPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVaciarPlanActionPerformed
@@ -172,22 +175,38 @@ public class VistaAltaCurso extends javax.swing.JFrame {
 
     private void botonCrearCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearCursoActionPerformed
         // TODO add your handling code here:
-        String nombreCurso = this.nombreCurso.getText();
-        PlanDeEstudio planDeEstudioDeCurso = planDeEstudioSeleccionado;
-        ArrayList<Modulo> modulosAModificar = planDeEstudioDeCurso.getModulos();
-        int numeroDeModulos = modulosAModificar.size();
-        int contadorDeFilaDeAsignatura = 0;
-        for (int i = 0; i < numeroDeModulos; i++) {
-            Modulo moduloIndexado = modulosAModificar.get(i);
-            int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
-            for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
-                moduloIndexado.getAsignaturas().get(j).setFechaImparticion((String)jTable1.getValueAt(contadorDeFilaDeAsignatura, 2));
-                contadorDeFilaDeAsignatura++;
+        boolean camposFechaLlenos = validarCamposFechaLlenos();
+        if(camposFechaLlenos){
+            String nombreCurso = this.nombreCurso.getText();
+            PlanDeEstudio planDeEstudioDeCurso = planDeEstudioSeleccionado;
+            ArrayList<Modulo> modulosAModificar = planDeEstudioDeCurso.getModulos();
+            int numeroDeModulos = modulosAModificar.size();
+            int contadorDeFilaDeAsignatura = 0;
+            for (int i = 0; i < numeroDeModulos; i++) {
+                Modulo moduloIndexado = modulosAModificar.get(i);
+                int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+                for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
+                    String fechaImparticion = jTable1.getValueAt(contadorDeFilaDeAsignatura, 2).toString();
+                    Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                    asignaturaIndexada.setFechaImparticion(fechaImparticion);
+                    contadorDeFilaDeAsignatura++;
+                }
+            }
+            planDeEstudioDeCurso.setModulos(modulosAModificar);
+            Curso cursoNuevo = new Curso(nombreCurso,planDeEstudioDeCurso);
+            boolean agregoCursoNuevo = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarCurso(cursoNuevo);
+            if(agregoCursoNuevo){
+                JOptionPane.showMessageDialog(this, "Se agregó el curso exitosamente.");
+                new VistaPrincipal().setVisible(true);
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Hubo un problema, no se agregó el cursp.","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
-        planDeEstudioDeCurso.setModulos(modulosAModificar);
-        Curso cursoNuevo = new Curso(nombreCurso,planDeEstudioDeCurso);
-        ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().agregarCurso(cursoNuevo);
+        else{
+            JOptionPane.showMessageDialog(this,"Verifica que todas las celdas esten llenas");
+        }
     }//GEN-LAST:event_botonCrearCursoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -195,6 +214,17 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    protected void colocaFechaDeImparticion(String fechaImparticion){
+       int filaSeleccionada = jTable1.getSelectedRow();
+       jTable1.setValueAt(fechaImparticion, filaSeleccionada, 2);
+    }
+    
+    private Asignatura getAsignaturaSeleccionada(){
+        int filaSeleccionada = jTable1.getSelectedRow();
+        Asignatura asignaturaSeleccionada = listaAsignaturasEnCurso.get(filaSeleccionada);
+        return asignaturaSeleccionada;
+    }
+   
     private ArrayList llenaPlanesDeEstudio(){
         ArrayList<String> nombresPlanesEstudio = new ArrayList();
         nombresPlanesEstudio.add("Selecciona un plan de estudio");
@@ -215,9 +245,11 @@ public class VistaAltaCurso extends javax.swing.JFrame {
             Modulo moduloIndexado = modulos.get(i);
             int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
             for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
-            Vector<String>  filaDatosDeAsignaturaIndexada = llenarFilaDatosDeAsignatura(moduloIndexado.getAsignaturas().get(j));
-            filaDatosDeAsignaturaIndexada.add(0,moduloIndexado.getNombre());
-            datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                listaAsignaturasEnCurso.add(asignaturaIndexada);
+                Vector<String>  filaDatosDeAsignaturaIndexada = llenarFilaDatosDeAsignatura(asignaturaIndexada);
+                filaDatosDeAsignaturaIndexada.add(0,moduloIndexado.getNombre());
+                datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
            }
        }
    DefaultTableModel modelo = new DefaultTableModel(datosAsignaturas,titulosTabla){
@@ -241,6 +273,15 @@ public class VistaAltaCurso extends javax.swing.JFrame {
        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getFechaImparticion());
        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getDuracion() + "");
        return filaDatosDeAsignaturaIndexada;
+   }
+   
+   private boolean validarCamposFechaLlenos(){
+       int NUM_TOTAL_CAMPOS = 40;
+       for (int i = 0; i < NUM_TOTAL_CAMPOS; i++) {
+           if("".equals(jTable1.getValueAt(i, 3)))
+               return false;
+       }
+       return true;
    }
     /**
      * @param args the command line arguments
@@ -277,6 +318,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         });
     }
     
+    private ArrayList<Asignatura> listaAsignaturasEnCurso;
     private ArrayList<Modulo> modulos;
     private PlanDeEstudio planDeEstudioSeleccionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables

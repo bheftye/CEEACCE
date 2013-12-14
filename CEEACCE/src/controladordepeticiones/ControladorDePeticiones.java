@@ -76,7 +76,7 @@ public class ControladorDePeticiones {
         return DAOUsuario.getDAOUsuario().consultar("select * from usuario order by clvusuario asc");
     }
 
-    public ArrayList<Curso> obtenerCurso(String nombreCurso) {
+    public ArrayList<Curso> obtenerCursos(String nombreCurso) {
         return DAOCurso.getDAOCurso().consultar("select * from curso WHERE nomCurso = '" + nombreCurso + "'");
 
     }
@@ -187,7 +187,6 @@ public class ControladorDePeticiones {
                 DAOAsignatura.getDAOAsignatura().ejecutaQuery(query);
             }
         }
-
     }
 
     public void registrarBoletaVaciaDeAlumno(Alumno alumno) {

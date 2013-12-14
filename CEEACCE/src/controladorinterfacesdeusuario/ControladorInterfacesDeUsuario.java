@@ -48,7 +48,6 @@ public class ControladorInterfacesDeUsuario {
 
     public void modificarCalificacionAlumno(Alumno alumno) {
         controladorDePeticiones.modificarCalificacionAlumno(alumno);
-      
     }
 
     public boolean modificarAlumno(Alumno alumno) {

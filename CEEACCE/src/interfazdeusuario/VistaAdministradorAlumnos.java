@@ -25,7 +25,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.alumnosCoincidentes = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
-         this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
+        this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
         llenarJListConAlumnos();
         setListListener();
     }
@@ -156,6 +156,8 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         // TODO add your handling code here:
+        int indexEnJList = jList1.getSelectedIndex();
+        new VistaModificarAlumno(alumnosCoincidentes.get(indexEnJList)).setVisible(true);
     }//GEN-LAST:event_botonModificarActionPerformed
 
     private void botonDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDarDeBajaActionPerformed
@@ -209,7 +211,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     }
     
     private void llenarJListConAlumnos(){
-         DefaultListModel listModel = new DefaultListModel();
+        DefaultListModel listModel = new DefaultListModel();
         int NUM_DE_ALUMNOS = alumnosCoincidentes.size();
         for (int i = 0; i < NUM_DE_ALUMNOS; i++) {
             Alumno alumnoIndexado = alumnosCoincidentes.get(i);
@@ -235,11 +237,11 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         alumnosCoincidentes = new ArrayList();
         for (int i = 0; i < alumnosOriginales.size(); i++) {
             Alumno alumnoIndexado = alumnosOriginales.get(i);
-           boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
-           boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
-           if(coincideApellidos || coincideNombre){
-               alumnosCoincidentes.add(alumnoIndexado);
-           }
+            boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
+            boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
+            if(coincideApellidos || coincideNombre){
+                alumnosCoincidentes.add(alumnoIndexado);
+            }
         }
         llenarJListConAlumnos();
     }

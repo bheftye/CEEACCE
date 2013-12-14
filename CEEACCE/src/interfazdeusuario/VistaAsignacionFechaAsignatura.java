@@ -6,15 +6,18 @@ package interfazdeusuario;
 
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import modelo.Asignatura;
 
 /**
  *
  * @author brentheftye
  */
 public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
+    VistaAltaCurso vistaAltaCurso;
 
     /**
      * Creates new form VistaAsignacionFechaAsignatura
@@ -22,6 +25,13 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
     public VistaAsignacionFechaAsignatura() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+    }
+    
+    public VistaAsignacionFechaAsignatura(VistaAltaCurso vistaAltaCurso, Asignatura asignatura) {
+        initComponents();
+        CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        this.vistaAltaCurso = vistaAltaCurso;
+        llenarInformacionAsignatura(asignatura);
         setListenerToTextField();
     }
 
@@ -75,8 +85,18 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
         jLabel4.setText("Asignatura");
 
         botonGuardarCambioFecha.setText("Asignar");
+        botonGuardarCambioFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarCambioFechaActionPerformed(evt);
+            }
+        });
 
         botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +169,29 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaFieldInputMethodTextChanged
 
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonGuardarCambioFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambioFechaActionPerformed
+        // TODO add your handling code here:
+        boolean campoFechaVacio = "".equals(this.fechaField.getText());
+        if(!campoFechaVacio){
+            vistaAltaCurso.colocaFechaDeImparticion(fechaImparticion);
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No se ha asignado una fecha a la asignatura","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonGuardarCambioFechaActionPerformed
+
+    private void llenarInformacionAsignatura(Asignatura asignatura){
+        this.nombreLabel.setText("Nombre: " + asignatura.getNombreAsignatura());
+        //propongo que no coloquemos la etiqueta "Modulo"
+        this.duracionLabel.setText("Duración: " + asignatura.getDuracion());
+    }
+    
     private void setListenerToTextField(){
     
         observing.getDocument().addDocumentListener(new DocumentListener(){
@@ -170,12 +213,13 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
             String date = observing.getText();
             String[] dateSplit = date.split("/");
             if(dateSplit.length == 3){
-            String dateSpanish =  dateSplit[0]+" de "+ getMonth(dateSplit[1])+" del 20"+ dateSplit[2];
-            dateGlobal = dateSpanish;
-            SwingUtilities.invokeLater(new Runnable(){
-                public void run(){
-                   observing.setText(dateGlobal);
-                }});
+                String dateSpanish =  dateSplit[0]+" de "+ getMonth(dateSplit[1])+" del 20"+ dateSplit[2];
+                fechaImparticion = "20" + dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
+                dateGlobal = dateSpanish;
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        observing.setText(dateGlobal);
+                    }});
             }}
             
         });
@@ -240,5 +284,6 @@ public class VistaAsignacionFechaAsignatura extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private ObservingTextField observing;
     private String dateGlobal ="";
+    private String fechaImparticion = "";
 }
 

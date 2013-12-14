@@ -17,7 +17,7 @@ import modelo.ListaDeAlumnos;
  * @author Jorge
  */
 public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
-    private Alumno alumno;
+    
     
 
     /**
@@ -26,6 +26,8 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
     public VistaAdministradorDeCalificaciones() {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
+        this.alumnosCoincidentes = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
+        this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
         llenarJListConAlumnos();
         setListListener();
     }
@@ -40,7 +42,7 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        campoTextoBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         botonBuscarAlumno = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -55,6 +57,11 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         jLabel2.setText("Buscar Alumno");
 
         botonBuscarAlumno.setText("Buscar");
+        botonBuscarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarAlumnoActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(jList1);
 
@@ -84,7 +91,7 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoTextoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(botonBuscarAlumno)
                                 .addGap(0, 232, Short.MAX_VALUE))
@@ -114,7 +121,7 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTextoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(botonBuscarAlumno))
                         .addGap(18, 18, 18)
@@ -135,6 +142,12 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void botonBuscarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarAlumnoActionPerformed
+        // TODO add your handling code here:
+        String textoABuscar = this.campoTextoBuscar.getText();
+        encontrarAlumnoCoincidente(textoABuscar);
+    }//GEN-LAST:event_botonBuscarAlumnoActionPerformed
 
     protected Alumno getAlumnoSeleccionado(){
         return alumno;
@@ -161,6 +174,19 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    private void  encontrarAlumnoCoincidente(String textoABuscar){
+        alumnosCoincidentes = new ArrayList();
+        for (int i = 0; i < alumnosOriginales.size(); i++) {
+            Alumno alumnoIndexado = alumnosOriginales.get(i);
+            boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
+            boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
+            if(coincideApellidos || coincideNombre){
+                alumnosCoincidentes.add(alumnoIndexado);
+            }
+        }
+        llenarJListConAlumnos();
     }
     /**
      * @param args the command line arguments
@@ -203,14 +229,17 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
             }
         });
     }
+    private Alumno alumno;
+    private ArrayList<Alumno> alumnosCoincidentes;
+    private ArrayList<Alumno> alumnosOriginales;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscarAlumno;
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonVerCalificacionAlumno;
+    private javax.swing.JTextField campoTextoBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

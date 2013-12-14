@@ -6,8 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Curso;
 import java.util.ArrayList;
-import modelo.ListaDePlanesDeEstudio;
-import modelo.PlanDeEstudio;
+import modelo.*;
 
 public class DAOCurso extends DAO<Curso> {
     private static DAOCurso daoCurso = new DAOCurso();
@@ -22,19 +21,18 @@ public class DAOCurso extends DAO<Curso> {
     public int insertar(Curso curso) {
         String nombreCurso = curso.getNombre();
         int clvplan = curso.getPlanDeEstudio().getClave();
-        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan) VALUES ('"+nombreCurso+"',"+clvplan+")";
-        int numFilasAfectadas = 0; 
-        Connection conexion = getConexion();
-        try{
-        Statement sentencia = conexion.createStatement();
-        numFilasAfectadas = sentencia.executeUpdate(queryInsercion);
-        sentencia.close();
-        }catch(SQLException sqlException){
-            sqlException.printStackTrace();
-        }catch(Exception exception){
-            exception.printStackTrace();
-        }
-        cerrarConexion(conexion);
+        int numFilasAfectadas = 0;
+        for (int i = 0; i < 6; i++) {
+                    Modulo moduloIndexado = curso.getPlanDeEstudio().getModulos().get(i);
+                    int numAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+                    for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
+                        Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                        String clvasignatura = asignaturaIndexada.getClave();
+                        String fechaImparticion = asignaturaIndexada.getFechaImparticion();
+                        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan, clvasign, fechaimparticion) VALUES ('"+nombreCurso+"',"+clvplan+","+clvasignatura+",'"+fechaImparticion+"')";
+                        numFilasAfectadas = ejecutaQuery(queryInsercion);
+                    }
+                }
         return numFilasAfectadas;
     }
 
@@ -80,6 +78,21 @@ public class DAOCurso extends DAO<Curso> {
         return null;
     }
 
+    public int ejecutaQuery(String query){
+	int numFilasAfectadas = 0;
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        numFilasAfectadas = sentencia.executeUpdate(query);
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return numFilasAfectadas;
+    }
 	 
 }
  

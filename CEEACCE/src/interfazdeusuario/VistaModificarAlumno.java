@@ -4,10 +4,15 @@
  */
 package interfazdeusuario;
 
+import controladordepeticiones.ControladorDePeticiones;
+import controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.Alumno;
+import modelo.ListaDePlanesDeEstudio;
+import modelo.PlanDeEstudio;
 
 /**
  *
@@ -278,7 +283,28 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         // TODO add your handling code here:
-        
+            String matricula = this.matriculaAlumno.getText().trim();
+            String nombre = this.nombreAlumno.getText().trim();
+            String apellidos = this.apellidosAlumno.getText().trim();
+            String dia = this.diaNacimiento.getSelectedItem().toString();
+            String mes = Integer.toString(this.mesNacimiento.getSelectedIndex());
+            String anio = this.anioNacimiento.getText();
+            String fechaInscripcion = this.fechaDeInscripcion.getText();
+            String sexo = this.sexoAlumno.getSelectedItem().toString();
+            String email = this.emailAlumno.getText();
+            String curp = this.curpAlumno.getText();
+            String lugar = this.lugarDeNacimiento.getText();
+            String turno = this.turno.getSelectedItem().toString();
+            PlanDeEstudio planDeEstudioFijo = obtenerPlanDeEstudio();
+            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, anio+"-"+mes+"-"+dia, fechaInscripcion, turno, planDeEstudioFijo);
+            boolean modificoDatosAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarAlumno(alumno);
+            if (modificoDatosAlumno) {
+                JOptionPane.showMessageDialog(this, "Datos del alumno modificados exitosamente");
+                new VistaAdministradorAlumnos().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No fue posible modificar los datos de este alumno.","Error",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -286,6 +312,40 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VistaModificarAlumno().setVisible(true);
+            }
+        });
+    }
     
     private void llenaInformacionAlumno(Alumno alumno){
         this.nombreAlumno.setText(alumno.getNombre());
@@ -324,39 +384,13 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         this.planDeEstudio.setEnabled(false);
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaModificarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaModificarAlumno().setVisible(true);
-            }
-        });
+    private PlanDeEstudio obtenerPlanDeEstudio(){
+        String nombrePlanDeEstudio = this.planDeEstudio.getText();
+        int clavePlanDeEstudio = 0;
+        PlanDeEstudio planDeEstudioObtenido;
+        clavePlanDeEstudio = ControladorDePeticiones.getControladorDePeticiones().obtenClaveDePlanDeEstudioPorNombre(nombrePlanDeEstudio);
+        planDeEstudioObtenido = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().obtenerPlanDeEstudioPorClave(clavePlanDeEstudio);
+        return planDeEstudioObtenido;
     }
     
    

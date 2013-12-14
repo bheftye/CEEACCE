@@ -164,7 +164,7 @@ public class VistaAltaPlanDeEstudio extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(this, "Hubo un problema; no se agregó el plan de estudio.");
+                JOptionPane.showMessageDialog(this, "Hubo un problema; no se agregó el plan de estudio.","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         else{

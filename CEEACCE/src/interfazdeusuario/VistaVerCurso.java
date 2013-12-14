@@ -27,6 +27,8 @@ public class VistaVerCurso extends javax.swing.JFrame {
     public VistaVerCurso(Curso curso) {
         initComponents();
         this.nombreCurso.setText("Nombre: " + curso.getNombre());
+        this.modulos = curso.getPlanDeEstudio().getModulos();
+        llenarListaDeAsignaturas();
     }
 
     /**

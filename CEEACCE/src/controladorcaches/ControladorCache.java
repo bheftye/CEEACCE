@@ -42,7 +42,7 @@ public class ControladorCache {
     }
 
     public void llenarListaDeCursos(String nombreCurso) {
-        ArrayList<Curso> curso = ControladorDePeticiones.getControladorDePeticiones().obtenerCurso(nombreCurso);
+        ArrayList<Curso> curso = ControladorDePeticiones.getControladorDePeticiones().obtenerCursos(nombreCurso);
         ListaDeCursos.getListaDeCursos().setCursos(curso);
         
 

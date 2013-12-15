@@ -300,7 +300,6 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
             boolean modificoDatosAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarAlumno(alumno);
             if (modificoDatosAlumno) {
                 JOptionPane.showMessageDialog(this, "Datos del alumno modificados exitosamente");
-                new VistaAdministradorAlumnos().setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "No fue posible modificar los datos de este alumno.","Error",JOptionPane.ERROR_MESSAGE);

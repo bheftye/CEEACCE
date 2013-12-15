@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import modelo.Alumno;
 import modelo.ListaDeAlumnos;
 
@@ -162,7 +163,12 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
 
     private void botonDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDarDeBajaActionPerformed
         // TODO add your handling code here:
-        
+        int n = JOptionPane.showConfirmDialog(this,"¿Está seguro que desea eliminar este alumno?","Pregunta de Seguridad",JOptionPane.YES_NO_OPTION);
+        if(n == 0){
+            //Línea de eliminación de alumno
+            JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito");
+            this.dispose();
+        }
     }//GEN-LAST:event_botonDarDeBajaActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed

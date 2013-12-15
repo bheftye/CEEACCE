@@ -21,18 +21,20 @@ public class DAOCurso extends DAO<Curso> {
     public int insertar(Curso curso) {
         String nombreCurso = curso.getNombre();
         int clvplan = curso.getPlanDeEstudio().getClave();
+        int clvmodulo = 0;
         int numFilasAfectadas = 0;
         for (int i = 0; i < 6; i++) {
-                    Modulo moduloIndexado = curso.getPlanDeEstudio().getModulos().get(i);
-                    int numAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
-                    for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
-                        Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
-                        String clvasignatura = asignaturaIndexada.getClave();
-                        String fechaImparticion = asignaturaIndexada.getFechaImparticion();
-                        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan, clvasign, fechaimparticion) VALUES ('"+nombreCurso+"',"+clvplan+",'"+clvasignatura+"','"+fechaImparticion+"')";
-                        numFilasAfectadas = ejecutaQuery(queryInsercion);
-                    }
-                }
+            clvmodulo = i+1;
+            Modulo moduloIndexado = curso.getPlanDeEstudio().getModulos().get(i);
+            int numAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
+            for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                String clvasignatura = asignaturaIndexada.getClave();
+                String fechaImparticion = asignaturaIndexada.getFechaImparticion();
+                String queryInsercion = "INSERT INTO curso (nomcurso, clvplan, clvmodulo, clvasign, fechaimparticion) VALUES ('"+nombreCurso+"',"+clvplan+","+clvmodulo+",'"+clvasignatura+"','"+fechaImparticion+"')";
+                numFilasAfectadas = ejecutaQuery(queryInsercion);
+            }
+        }
         return numFilasAfectadas;
     }
 

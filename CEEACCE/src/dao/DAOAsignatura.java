@@ -125,5 +125,24 @@ public class DAOAsignatura extends DAO<Asignatura> {
         cerrarConexion(conexion);
         return calificacion;
     }
+    
+    public String obtenerFechaImparticion(String query){
+        String fechaImparticion = "";
+        Connection conexion = getConexion();
+        try{
+        Statement sentencia = conexion.createStatement();
+        ResultSet resultadoDatos = sentencia.executeQuery(query);
+        while(resultadoDatos.next()){
+            fechaImparticion = resultadoDatos.getString("fechaimparticion");
+        }
+        sentencia.close();
+        }catch(SQLException sqlException){
+            sqlException.printStackTrace();
+        }catch(Exception exception){
+            exception.printStackTrace();
+        }
+        cerrarConexion(conexion);
+        return fechaImparticion;
+    }
 }
  

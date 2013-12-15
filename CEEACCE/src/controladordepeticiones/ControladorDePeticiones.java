@@ -77,7 +77,29 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<Curso> obtenerCursos(String nombreCurso) {
-        return DAOCurso.getDAOCurso().consultar("select * from curso order by clvcurso asc");
+        ArrayList<Curso> cursos = DAOCurso.getDAOCurso().consultar("select * from curso");
+        int NUM_ALUMNOS = cursos.size();
+        for (int i = 0; i < NUM_ALUMNOS; i++) {
+            Curso cursoIndexado = cursos.get(i);
+            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(cursoIndexado.getPlanDeEstudio().getClave());
+            cursoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
+            int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
+            int NUM_DE_MODULOS = 6;
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+                int claveModulo = j + 1;
+                Modulo moduloIndexado = copiaPlanDeEstudio.getModulos().get(j);
+                int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
+                for (int k = 0; k < NUM_ASIGNATURAS_DEL_MODULO; k++) {
+                    Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(k);
+                    String claveAsignatura = asignaturaIndexada.getClave();
+                    String queryFechaImparticion = "select fechaimparticion from curso where nomcurso = '" + cursoIndexado.getNombre() + "' and clvplan = " + clavePlanDeEstudio + " and clvmodulo = " + claveModulo + " and clvasign = '" + claveAsignatura + "'";
+                    String fechaImparticion = DAOAsignatura.getDAOAsignatura().obtenerFechaImparticion(queryFechaImparticion);
+                    asignaturaIndexada.setFechaImparticion(fechaImparticion);
+                }
+            }
+
+        }
+        return cursos;
 
     }
 

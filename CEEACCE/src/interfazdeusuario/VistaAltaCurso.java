@@ -200,7 +200,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(this, "Hubo un problema, no se agregó el cursp.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Hubo un problema, no se agregó el curso.","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         else{

@@ -121,7 +121,7 @@ public class VistaVerCurso extends javax.swing.JFrame {
         Vector titulos = new Vector();
         titulos.add("Clave");
         titulos.add("Nombre");
-        titulos.add("Créditos");
+        titulos.add("Fecha de Impartición");
         titulos.add("Duración(Semanas)");
         titulos.add("Módulo");
         return titulos;
@@ -138,7 +138,7 @@ public class VistaVerCurso extends javax.swing.JFrame {
         Vector<String> filaDatosDeAsignaturaIndexada = new Vector<String>();
         filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getClave());
         filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getNombreAsignatura());
-        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getCreditos() + "");
+        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getFechaImparticion());
         filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getDuracion() + "");
         return filaDatosDeAsignaturaIndexada;
     }

@@ -5,7 +5,7 @@
 package main;
 
 import controladorcaches.ControladorCache;
-import interfazdeusuario.VistaInicioSesion;
+import gui.interfazdeusuario.VistaInicioSesion;
 
 /**
  *

@@ -4,7 +4,7 @@
  */
 package controladorcaches;
 
-import controladordepeticiones.ControladorDePeticiones;
+import accesodatos.controladordepeticiones.ControladorDePeticiones;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Curso;

@@ -31,25 +31,29 @@ public class ControladorCache {
     }
 
     public void llenarListaDeAlumnos() {
-        ArrayList<Alumno> alumnos = ControladorDePeticiones.getControladorDePeticiones().obtenerAlumnos();
+        ControladorDePeticiones controladorDePeticiones = ControladorDePeticiones.getControladorDePeticiones();
+        ArrayList<Alumno> alumnos = controladorDePeticiones.obtenerAlumnos();
         ListaDeAlumnos.getListaDeAlumnos().setAlumnos(alumnos);
 
     }
 
     public void llenarListaDePlanesDeEstudio() {
-        ArrayList<PlanDeEstudio> planesDeEstudio = ControladorDePeticiones.getControladorDePeticiones().obtenerPlanesDeEstudio();
+        ControladorDePeticiones controladorDePeticiones = ControladorDePeticiones.getControladorDePeticiones();
+        ArrayList<PlanDeEstudio> planesDeEstudio = controladorDePeticiones.obtenerPlanesDeEstudio();
         ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().setPlanesDeEstudio(planesDeEstudio);
     }
 
-    public void llenarListaDeCursos(String nombreCurso) {
-        ArrayList<Curso> curso = ControladorDePeticiones.getControladorDePeticiones().obtenerCursos(nombreCurso);
-        ListaDeCursos.getListaDeCursos().setCursos(curso);
+    public void llenarListaDeCursos() {
+        ControladorDePeticiones controladorDePeticiones = ControladorDePeticiones.getControladorDePeticiones();
+        ArrayList<Curso> cursos = controladorDePeticiones.obtenerCursos();
+        ListaDeCursos.getListaDeCursos().setCursos(cursos);
         
 
     }
 
     public void llenarListaDeUsuarios() {
-        ArrayList<Usuario> usuarios = ControladorDePeticiones.getControladorDePeticiones().obtenerUsuarios();
+        ControladorDePeticiones controladorDePeticiones = ControladorDePeticiones.getControladorDePeticiones();
+        ArrayList<Usuario> usuarios = controladorDePeticiones.obtenerUsuarios();
         ListaDeUsuarios.getListaDeUsuarios().setUsuarios(usuarios);
     }
 }

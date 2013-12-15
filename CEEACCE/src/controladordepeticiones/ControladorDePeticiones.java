@@ -76,7 +76,7 @@ public class ControladorDePeticiones {
         return DAOUsuario.getDAOUsuario().consultar("select * from usuario order by clvusuario asc");
     }
 
-    public ArrayList<Curso> obtenerCursos(String nombreCurso) {
+    public ArrayList<Curso> obtenerCursos() {
         ArrayList<Curso> cursos = DAOCurso.getDAOCurso().consultar("select * from curso");
         int NUM_ALUMNOS = cursos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {

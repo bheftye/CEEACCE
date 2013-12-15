@@ -29,7 +29,7 @@ public class DAOCurso extends DAO<Curso> {
                         Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
                         String clvasignatura = asignaturaIndexada.getClave();
                         String fechaImparticion = asignaturaIndexada.getFechaImparticion();
-                        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan, clvasign, fechaimparticion) VALUES ('"+nombreCurso+"',"+clvplan+","+clvasignatura+",'"+fechaImparticion+"')";
+                        String queryInsercion = "INSERT INTO curso (nomcurso, clvplan, clvasign, fechaimparticion) VALUES ('"+nombreCurso+"',"+clvplan+",'"+clvasignatura+"','"+fechaImparticion+"')";
                         numFilasAfectadas = ejecutaQuery(queryInsercion);
                     }
                 }

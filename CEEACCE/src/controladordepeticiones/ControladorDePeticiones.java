@@ -77,7 +77,7 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<Curso> obtenerCursos(String nombreCurso) {
-        return DAOCurso.getDAOCurso().consultar("select * from curso WHERE nomCurso = '" + nombreCurso + "'");
+        return DAOCurso.getDAOCurso().consultar("select * from curso order by clvcurso asc");
 
     }
 

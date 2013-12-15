@@ -70,7 +70,6 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         jLabel2.setText("Plan de Estudio:");
 
         planesDeEstudioCombo = new javax.swing.JComboBox(llenaPlanesDeEstudio().toArray());
-        planesDeEstudioCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         botonAsignarFecha.setText("Asignar Fecha");
         botonAsignarFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -318,7 +317,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
         });
     }
     
-    private ArrayList<Asignatura> listaAsignaturasEnCurso;
+    private ArrayList<Asignatura> listaAsignaturasEnCurso = new ArrayList<>();
     private ArrayList<Modulo> modulos;
     private PlanDeEstudio planDeEstudioSeleccionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables

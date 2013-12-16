@@ -23,30 +23,20 @@ import modelo.Usuario;
  */
 public class ControladorDePeticiones {
 
-    private static ControladorDePeticiones controladorDePeticiones = new ControladorDePeticiones();
-
-    private ControladorDePeticiones() {
-    }
-
     public static ControladorDePeticiones getControladorDePeticiones() {
         return controladorDePeticiones;
     }
 
     public boolean agregarAlumno(Alumno alumno) {
-        DAOAlumno daoAlumno = DAOAlumno.getDAOAlumno();
-        int numeroFilasAfectadas = daoAlumno.insertar(alumno);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOAlumno controladorDAOAlumno = ControladorDAOAlumno.getControladorDAOAlumno();
+        boolean agrego = controladorDAOAlumno.agregar(alumno);
+        return agrego;
     }
 
-    public boolean modificarAlumno(Alumno alumno) {
-        int numeroFilasAfectadas = DAOAlumno.getDAOAlumno().actualizar(alumno);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+    public boolean modificarAlumno(Alumno alumno){
+        ControladorDAOAlumno controladorDAOAlumno = ControladorDAOAlumno.getControladorDAOAlumno();
+        boolean modifico = controladorDAOAlumno.modificar(alumno);
+        return modifico;
     }
 
     public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
@@ -230,4 +220,10 @@ public class ControladorDePeticiones {
             }
         }
     }
+    
+    private ControladorDePeticiones() {
+    }
+    
+    private static ControladorDePeticiones controladorDePeticiones = new ControladorDePeticiones();
+
 }

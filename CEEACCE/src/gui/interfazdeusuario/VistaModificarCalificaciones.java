@@ -20,9 +20,6 @@ import modelo.Modulo;
  */
 public class VistaModificarCalificaciones extends javax.swing.JFrame {
 
-    private ArrayList<Modulo> modulos;
-    private Alumno alumno;
-
     /**
      * Creates new form VistaModificarCalificaciones
      */
@@ -32,7 +29,6 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
     }
 
     public VistaModificarCalificaciones(Alumno alumno) {
-
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.nombreAlumno.setText("Calificaciones de " + alumno.getNombre());
@@ -166,42 +162,8 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
      * Método que llena la Tabla con las filas de las asignaturas.
      */
     private void llenarListaAsignaturas() {
-        Vector titulosTabla = llenarTitulosDeTabla();
-        Vector datosAsignaturas = new Vector<Vector<String>>();
-        int numeroDeModulos = this.modulos.size();
-        for (int i = 0; i < numeroDeModulos; i++) {
-            Modulo moduloIndexado = modulos.get(i);
-            int numeroDeAsignaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
-            for (int j = 0; j < numeroDeAsignaturasDeModuloIndexado; j++) {
-                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
-                Vector<String> filaDatosDeAsignaturaIndexada = new Vector<String>();
-                filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getNombreAsignatura());
-                filaDatosDeAsignaturaIndexada.add(moduloIndexado.getNombre());
-                filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getCalificacion() + "");
-                datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
-            }
-        }
-
-        DefaultTableModel modelo = new DefaultTableModel(datosAsignaturas, titulosTabla) {
-            public boolean isCellEditable(int row, int column) {
-
-                return true;
-            }
-        };
+        DefaultTableModel modelo = helper.llenarListaAsignaturas(modulos);
         this.jTable1.setModel(modelo);
-    }
-
-    /**
-     * Método que crea los titulos de la tabla a mostrar.
-     *
-     * @return Vector Títulos de la JTable.
-     */
-    private Vector llenarTitulosDeTabla() {
-        Vector titulos = new Vector();
-        titulos.add("Asignatura");
-        titulos.add("Módulo");
-        titulos.add("Calificación");
-        return titulos;
     }
 
     /**
@@ -244,6 +206,9 @@ public class VistaModificarCalificaciones extends javax.swing.JFrame {
             }
         });
     }
+    private ArrayList<Modulo> modulos;
+    private Alumno alumno;
+    private HelperVistaModificarCalificaciones helper = new HelperVistaModificarCalificaciones();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonGenerarCertificado;

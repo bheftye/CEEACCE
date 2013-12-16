@@ -16,7 +16,6 @@ import modelo.PlanDeEstudio;
  * @author brentheftye
  */
 public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
-    ArrayList<Modulo> modulos;
     
     /**
      * Creates new form VistaVerPlanDeEstudio.
@@ -118,59 +117,11 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botonVerPlanDeEstudioActionPerformed
-
-    /**
-     * Método que crea los titulos de la tabla a mostrar.
-     *
-     * @return Vector Títulos de la JTable.
-     */
-    private Vector llenarTitulosDeTabla() {
-        Vector titulos = new Vector();
-        titulos.add("Clave");
-        titulos.add("Nombre");
-        titulos.add("Créditos");
-        titulos.add("Duración(Semanas)");
-        titulos.add("Módulo");
-        return titulos;
-    }
-
-    /**
-     * Método que crea y llena una fila de la tabla con datos de una asignatura.
-     *
-     * @param asignatura Instancia.
-     * @return Vector<String> Vector fila con los datos de la asignatura.
-     */
-    private Vector<String> llenarFilaDatosDeAsignatura(Asignatura asignatura) {
-        Asignatura asignaturaIndexada = asignatura;
-        Vector<String> filaDatosDeAsignaturaIndexada = new Vector<String>();
-        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getClave());
-        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getNombreAsignatura());
-        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getCreditos() + "");
-        filaDatosDeAsignaturaIndexada.add(asignaturaIndexada.getDuracion() + "");
-        return filaDatosDeAsignaturaIndexada;
-    }
-
     /**
      * Método que llena la Tabla con las filas de las asignaturas.
      */
     private void llenarListaDeAsignaturas() {
-        Vector titulosTabla = llenarTitulosDeTabla();
-        Vector datosAsignaturas = new Vector<Vector<String>>();
-        int numeroDeModulos = this.modulos.size();
-        for (int i = 0; i < numeroDeModulos; i++) {
-            Modulo moduloIndexado = modulos.get(i);
-            int numeroDeAsigaturasDeModuloIndexado = moduloIndexado.getAsignaturas().size();
-            for (int j = 0; j < numeroDeAsigaturasDeModuloIndexado; j++) {
-                Vector<String> filaDatosDeAsignaturaIndexada = llenarFilaDatosDeAsignatura(moduloIndexado.getAsignaturas().get(j));
-                filaDatosDeAsignaturaIndexada.add(moduloIndexado.getNombre());
-                datosAsignaturas.add(filaDatosDeAsignaturaIndexada);
-            }
-        }
-        DefaultTableModel modelo = new DefaultTableModel(datosAsignaturas, titulosTabla) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        DefaultTableModel modelo = helper.llenarListaDeAsignaturasCreadas(modulos);
         this.jTable1.setModel(modelo);
     }
 
@@ -209,6 +160,8 @@ public class VistaVerPlanDeEstudio extends javax.swing.JFrame {
             }
         });
     }
+    private ArrayList<Modulo> modulos;
+    private HelperVistasPlanDeEstudio helper = new HelperVistasPlanDeEstudio();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonVerPlanDeEstudio;
     private javax.swing.JLabel jLabel2;

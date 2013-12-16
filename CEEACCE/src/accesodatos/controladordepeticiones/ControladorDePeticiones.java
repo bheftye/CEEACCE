@@ -60,7 +60,8 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<Usuario> obtenerUsuarios() {
-        return DAOUsuario.getDAOUsuario().consultar("select * from usuario order by clvusuario asc");
+        ControladorDAOUsuario controladorDAOUsuario = ControladorDAOUsuario.getControladorDAOUsuario();
+        return controladorDAOUsuario.obtenTodosLosUsuarios();
     }
 
     public ArrayList<Curso> obtenerCursos() {
@@ -91,11 +92,9 @@ public class ControladorDePeticiones {
     }
 
     public boolean agregarAsignatura(Asignatura nuevaAsignatura) {
-        int numeroFilasAfectadas = DAOAsignatura.getDAOAsignatura().insertar(nuevaAsignatura);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        boolean agrego = controladorDAOAsignatura.agregar(nuevaAsignatura);
+        return agrego;
     }
 
     public boolean registraAsignaturaEnPlanDeEstudio(int clavePlanDeEstudio, int modulo, String claveAsignatura) {

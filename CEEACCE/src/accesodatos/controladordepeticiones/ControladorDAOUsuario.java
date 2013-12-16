@@ -5,6 +5,7 @@
 package accesodatos.controladordepeticiones;
 
 import accesodatos.dao.DAOUsuario;
+import java.util.ArrayList;
 import modelo.Usuario;
 
 /**
@@ -32,6 +33,12 @@ public class ControladorDAOUsuario extends ControladorDAO<Usuario> {
     @Override
     protected boolean eliminar(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    protected ArrayList<Usuario> obtenTodosLosUsuarios(){
+        DAOUsuario dao = DAOUsuario.getDAOUsuario();
+        ArrayList<Usuario> usuarios = dao.consultar("select * from usuario order by clvusuario asc");
+        return usuarios;
     }
     
     private ControladorDAOUsuario(){}

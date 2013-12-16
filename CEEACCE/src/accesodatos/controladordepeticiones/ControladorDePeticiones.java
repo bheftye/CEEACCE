@@ -40,11 +40,9 @@ public class ControladorDePeticiones {
     }
 
     public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
-        int numeroFilasAfectadas = DAOPlanDeEstudio.getDAOPlanDeEstudio().insertar(planDeEstudio);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        boolean agrego = controladorDAOPlanDeEstudio.agregar(planDeEstudio);
+        return agrego;
     }
 
     public boolean agregarCurso(Curso curso) {

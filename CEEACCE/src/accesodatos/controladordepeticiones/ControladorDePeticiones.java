@@ -54,11 +54,9 @@ public class ControladorDePeticiones {
     }
 
     public boolean darAltaUsuario(Usuario usuario) {
-        int numeroFilasAfectadas = DAOUsuario.getDAOUsuario().insertar(usuario);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOUsuario controladorDAOUsuario = ControladorDAOUsuario.getControladorDAOUsuario();
+        boolean dioAlta = controladorDAOUsuario.agregar(usuario);
+        return dioAlta;
     }
 
     public ArrayList<Usuario> obtenerUsuarios() {

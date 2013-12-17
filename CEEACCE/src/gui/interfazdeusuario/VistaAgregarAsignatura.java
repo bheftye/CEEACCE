@@ -4,6 +4,8 @@
  */
 package gui.interfazdeusuario;
 
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import modelo.Asignatura;
 
@@ -11,7 +13,7 @@ import modelo.Asignatura;
  *
  * @author brentheftye
  */
-public class VistaAgregarAsignatura extends javax.swing.JFrame {
+public class VistaAgregarAsignatura extends javax.swing.JFrame implements Observer{
     
     
     /**
@@ -30,6 +32,9 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.vistaAltaPlanDeEstudio = vistaAltaPlanDeEstudio;
+        helper = new HelperVistaAgregarAsignatura();
+        helper.addObserver(this);
+        update(helper, null);
     }
 
     /**
@@ -155,7 +160,8 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
 
     private void botonAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAsignaturaActionPerformed
         // TODO add your handling code here:
-        boolean camposLlenos = validaLlenadoDeCampos();
+        update(helper,null);
+        boolean camposLlenos = helper.validaLlenadoDeCampos();
         if(camposLlenos){
             String clave = this.claveAsignatura.getText();
             String nombre = this.nombreAsignatura.getText();
@@ -182,24 +188,6 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    
-    private boolean validaLlenadoDeCampos(){
-        String clave = this.claveAsignatura.getText();
-        String nombre = this.nombreAsignatura.getText();
-        String creditos = this.creditosAsignatura.getText();
-        String duracion = this.duracionAsignatura.getText();
-        
-        boolean campoClaveVacio = "".equals(clave);
-        boolean campoNombreVacio = "".equals(nombre);
-        boolean campoCreditosVacio = "".equals(creditos);
-        boolean campoDuracionVacio = "".equals(duracion);
-        
-        if(!campoClaveVacio && !campoNombreVacio && !campoCreditosVacio && !campoDuracionVacio){
-            return true;
-        }
-        return false;
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -234,7 +222,17 @@ public class VistaAgregarAsignatura extends javax.swing.JFrame {
             }
         });
     }
+    
+    @Override
+    public void update(Observable o, Object o1) {
+        helper.setClave(claveAsignatura.getText());
+        helper.setNombre(nombreAsignatura.getText());
+        helper.setCreditos(creditosAsignatura.getText());
+        helper.setDuracion(duracionAsignatura.getText());
+    }
+    
     private VistaAltaPlanDeEstudio vistaAltaPlanDeEstudio;
+    private HelperVistaAgregarAsignatura helper;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarAsignatura;
     private javax.swing.JButton botonCancelar;

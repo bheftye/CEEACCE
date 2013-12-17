@@ -272,7 +272,7 @@ public class VistaAltaCurso extends javax.swing.JFrame {
     
     private ArrayList<Asignatura> listaAsignaturasEnCurso;
     private ArrayList<Modulo> modulos;
-    private HelperVistaAltaCurso helper = new HelperVistaAltaCurso();
+    private HelperVistasCurso helper = new HelperVistasCurso();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAsignarFecha;
     private javax.swing.JButton botonCrearCurso;

@@ -15,7 +15,7 @@ import modelo.Modulo;
  *
  * @author Jorge
  */
-public class HelperVistaAltaCurso {
+public class HelperVistasCurso {
     ArrayList<Asignatura> listaAsignaturasEnCurso = new ArrayList();
     
     public DefaultTableModel llenarListaAsignaturas(ArrayList<Modulo> modulos){

@@ -121,18 +121,6 @@ public class HelperVistaAgregarAlumno extends Observable{
     }
     
     protected boolean validarLlenadoDeCampos(){
-        String matricula = getMatricula();
-        String nombre = getNombre();
-        String apellidos = getApellidos();
-        int indiceDia = getIndiceDia();
-        int indiceMes = getIndiceMes();
-        int indiceAnio = getIndiceAnio();
-        int indiceSexo = getIndiceSexo();
-        String email = getEmail();
-        String curp = getCurp();
-        String lugar = getLugar();
-        int indiceTurno = getIndiceTurno();
-        int indicePlan = getIndicePlan();
         int INDICE_COMBO_VACIO = 0;
         
         boolean campoMatriculaVacio = "".equals(matricula);

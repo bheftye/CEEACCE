@@ -272,6 +272,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame implements Observer{
 
     private void botonAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaAlumnoActionPerformed
         // TODO add your handling code here:
+        update(helper,null);
         boolean camposLlenos = helper.validarLlenadoDeCampos();
         if(camposLlenos){
             String matricula = this.matriculaAlumno.getText().trim();

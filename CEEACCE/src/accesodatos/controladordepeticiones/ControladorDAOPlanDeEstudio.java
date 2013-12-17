@@ -4,6 +4,7 @@
  */
 package accesodatos.controladordepeticiones;
 
+import accesodatos.dao.DAOAsignatura;
 import accesodatos.dao.DAOPlanDeEstudio;
 import java.util.ArrayList;
 import modelo.Asignatura;
@@ -59,6 +60,27 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
             }
         }
         return planesDeEstudio;
+    }
+    
+    protected PlanDeEstudio obtenerCopiaPlanDeEstudioPorClave(int clavePlanDeEstudio) {
+        int NUM_DE_MODULOS = 6;
+        PlanDeEstudio planDeEstudio = obtenerPlanDeEstudioSinAsignaturas(clavePlanDeEstudio);
+        if (planDeEstudio != null) {
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+                Modulo moduloIndexado = planDeEstudio.getModulos().get(j);
+                String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + planDeEstudio.getClave() + " and clvmodulo = " + (j + 1) + " and clvasign = clvasig";
+                moduloIndexado.setAsignaturas(DAOAsignatura.getDAOAsignatura().consultar(queryDeAsignaturasDeModulo));
+            }
+            return planDeEstudio;
+        }
+        return null;
+    }
+    
+    protected PlanDeEstudio obtenerPlanDeEstudioSinAsignaturas(int clvPlanDeEstudio){
+        String queryDeConsulta = "select * from plandeestudio where clvplan =" + clvPlanDeEstudio;
+        DAOPlanDeEstudio dao = DAOPlanDeEstudio.getDAOPlanDeEstudio();
+        PlanDeEstudio planDeEstudio = dao.obtenerPlanDeEstudio(queryDeConsulta);
+        return planDeEstudio;
     }
     
     private ArrayList<PlanDeEstudio> obtenerPlanesDeEstudioSinAsignaturas(){

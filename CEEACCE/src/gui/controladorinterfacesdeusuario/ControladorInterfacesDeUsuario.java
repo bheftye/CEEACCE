@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Curso;
-import modelo.ListaDeAlumnos;
-import modelo.ListaDeCursos;
 import modelo.ListaDeUsuarios;
 import modelo.Modulo;
 import modelo.PlanDeEstudio;
@@ -40,29 +38,24 @@ public class ControladorInterfacesDeUsuario {
     public boolean agregarAlumno(Alumno alumno) {
         boolean agrego = controladorDePeticiones.agregarAlumno(alumno);
         if (agrego) {
-            ControladorDePeticiones.getControladorDePeticiones().registrarBoletaVaciaDeAlumno(alumno);
+            controladorDePeticiones.registrarBoletaVaciaDeAlumno(alumno);
             ControladorCache.getControladorCache().llenarListaDeAlumnos();
         }
         return agrego;
     }
 
-    public void modificarCalificacionAlumno(Alumno alumno) {
-        controladorDePeticiones.modificarCalificacionesAlumno(alumno);
+    public boolean modificarCalificacionAlumno(Alumno alumno) {
+        boolean modifico = controladorDePeticiones.modificarCalificacionesAlumno(alumno);
+        if(modifico){
+        actulizarListaDeAlumnos();
+        }
+        return modifico;
     }
 
     public boolean modificarAlumno(Alumno alumno) {
         boolean modifico = controladorDePeticiones.modificarAlumno(alumno);
-        boolean esEsteAlumno = false;
-        if (modifico) {
-            ArrayList<Alumno> listaDeAlumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
-            for (int i = 0; i < listaDeAlumnos.size(); i++) {
-                esEsteAlumno = listaDeAlumnos.get(i).getMatricula().equalsIgnoreCase(alumno.getMatricula());
-                if (esEsteAlumno) {
-                    listaDeAlumnos.add(i, alumno);
-                    break;
-                }
-            }
-            ListaDeAlumnos.getListaDeAlumnos().setAlumnos(listaDeAlumnos);
+        if(modifico){
+        actulizarListaDeAlumnos();
         }
         return modifico;
     }
@@ -70,7 +63,7 @@ public class ControladorInterfacesDeUsuario {
     public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
         boolean agrego = controladorDePeticiones.agregarPlanDeEstudio(planDeEstudio);
         if (agrego) {
-            int clavePlanDeEstudio = ControladorDePeticiones.getControladorDePeticiones().obtenClaveDePlanDeEstudioPorNombre(planDeEstudio.getNombre());
+            int clavePlanDeEstudio = controladorDePeticiones.obtenClaveDePlanDeEstudioPorNombre(planDeEstudio.getNombre());
             if (clavePlanDeEstudio != -1) {
                 for (int i = 0; i < 6; i++) {
                     Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
@@ -78,9 +71,9 @@ public class ControladorInterfacesDeUsuario {
                     ArrayList<Asignatura> asigunaturasDeModuloIndexado = moduloIndexado.getAsignaturas();
                     for (int j = 0; j < numAsignaturasDeModuloIndexado; j++) {
                         Asignatura asignaturaIndexada = asigunaturasDeModuloIndexado.get(j);
-                        ControladorDePeticiones.getControladorDePeticiones().agregarAsignatura(asignaturaIndexada);
+                        controladorDePeticiones.agregarAsignatura(asignaturaIndexada);
                         int numModulo = i + 1;
-                        ControladorDePeticiones.getControladorDePeticiones().registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio, numModulo, asignaturaIndexada.getClave());
+                        controladorDePeticiones.registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio, numModulo, asignaturaIndexada.getClave());
                     }
                 }
             } else {
@@ -93,10 +86,8 @@ public class ControladorInterfacesDeUsuario {
 
     public boolean agregarCurso(Curso curso) {
         boolean agrego = controladorDePeticiones.agregarCurso(curso);
-        if (agrego) {
-            ArrayList<Curso> listaDeCursos = ListaDeCursos.getListaDeCursos().getCursos();
-            listaDeCursos.add(curso);
-            ListaDeCursos.getListaDeCursos().setCursos(listaDeCursos);
+        if(agrego){
+        actualizarListaDeCursos();
         }
         return agrego;
     }
@@ -112,7 +103,11 @@ public class ControladorInterfacesDeUsuario {
     public boolean verificarUsario(String usuario, String contrasenia) {
         int indiceUsuarioAVerificar = encuentraIndiceDeUsuario(usuario);
         if (indiceUsuarioAVerificar != -1) {
-            boolean contraseniaValida = ListaDeUsuarios.getListaDeUsuarios().getUsuarios().get(indiceUsuarioAVerificar).getContrasenia().equals(contrasenia);
+            ListaDeUsuarios listaDeUsuarios = ListaDeUsuarios.getListaDeUsuarios();
+            ArrayList<Usuario> usuarios = listaDeUsuarios.getUsuarios();
+            Usuario usuarioAVerificar = usuarios.get(indiceUsuarioAVerificar);
+            String contraseniaAVerificar = usuarioAVerificar.getContrasenia();
+            boolean contraseniaValida = contraseniaAVerificar.equals(contrasenia);
             if (contraseniaValida) {
                 return true;
             }
@@ -121,8 +116,10 @@ public class ControladorInterfacesDeUsuario {
     }
 
     private int encuentraIndiceDeUsuario(String usuario) {
-        ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
-        for (int i = 0; i < ListaDeUsuarios.getListaDeUsuarios().getUsuarios().size(); i++) {
+        ListaDeUsuarios listaDeUsuarios = ListaDeUsuarios.getListaDeUsuarios();
+        ArrayList<Usuario> usuarios = listaDeUsuarios.getUsuarios();
+        int numUsuarios = usuarios.size();
+        for (int i = 0; i < numUsuarios; i++) {
             if (usuarios.get(i).getNombreDeUsuario().equalsIgnoreCase(usuario)) {
                 return i;
             }
@@ -143,10 +140,19 @@ public class ControladorInterfacesDeUsuario {
     }
 
     public PlanDeEstudio obtenerPlanDeEstudioPorClave(int clavePlanDeEstudio) {
-        return ControladorDePeticiones.getControladorDePeticiones().obtenerCopiaPlanDeEstudioPorClave(clavePlanDeEstudio);
+        
+        return controladorDePeticiones.obtenerCopiaPlanDeEstudioPorClave(clavePlanDeEstudio);
     }
 
     private void actualizarListaDeUsuarios() {
         ControladorCache.getControladorCache().llenarListaDeUsuarios();
+    }
+    
+    private void actulizarListaDeAlumnos(){
+        ControladorCache.getControladorCache().llenarListaDeAlumnos();
+    }
+    
+    private void actualizarListaDeCursos(){
+        ControladorCache.getControladorCache().llenarListaDeCursos();
     }
 }

@@ -68,6 +68,13 @@ public class ControladorDAOAsignatura extends ControladorDAO<Asignatura> {
         return calificacion;
     }
 
+    protected String obtenerFechaDeImparticionDeAsignatura(String nomCurso, int clavePlanDeEstudio, int claveModulo, String claveAsignatura) {
+        String queryFechaImparticion = "select fechaimparticion from curso where nomcurso = '" + nomCurso + "' and clvplan = " + clavePlanDeEstudio + " and clvmodulo = " + claveModulo + " and clvasign = '" + claveAsignatura + "'";
+        DAOAsignatura dao = DAOAsignatura.getDAOAsignatura();
+        String fechaImparticion = dao.obtenerFechaImparticion(queryFechaImparticion);
+        return fechaImparticion;
+    }
+
     private ControladorDAOAsignatura() {
     }
     private static ControladorDAOAsignatura controladorDAOAsignatura = new ControladorDAOAsignatura();

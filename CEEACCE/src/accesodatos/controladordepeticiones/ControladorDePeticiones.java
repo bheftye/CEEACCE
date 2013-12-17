@@ -98,17 +98,15 @@ public class ControladorDePeticiones {
     }
 
     public boolean registraAsignaturaEnPlanDeEstudio(int clavePlanDeEstudio, int modulo, String claveAsignatura) {
-        String queryDeRegistro = "INSERT INTO planmoduloasignatura (clvplan, clvmodulo,clvasign) VALUES (" + clavePlanDeEstudio + "," + modulo + ",'" + claveAsignatura + "')";
-        int numeroFilasAfectadas = DAOAsignatura.getDAOAsignatura().ejecutaQuery(queryDeRegistro);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        boolean registro = controladorDAOAsignatura.registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio, modulo, claveAsignatura);
+        return registro;
     }
 
     public int obtenClaveDePlanDeEstudioPorNombre(String nombrePlanDeEstudio) {
-        String queryDeConsulta = "SELECT * FROM plandeestudio WHERE nomplan = '" + nombrePlanDeEstudio + "'";
-        return DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerClaveDePlanDeEstudioPorNombre(queryDeConsulta);
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        int clavePlanDeEstudio = controladorDAOPlanDeEstudio.obtenClaveDePlanDeEstudioPorNombre(nombrePlanDeEstudio);
+        return clavePlanDeEstudio;
     }
 
     public boolean eliminarPlanDeEstudio(PlanDeEstudio planDeEstudio) {

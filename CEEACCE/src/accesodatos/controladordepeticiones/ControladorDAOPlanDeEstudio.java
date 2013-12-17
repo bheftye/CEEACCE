@@ -33,6 +33,13 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    protected int obtenClaveDePlanDeEstudioPorNombre(String nombrePlanDeEstudio) {
+        String queryDeConsulta = "SELECT * FROM plandeestudio WHERE nomplan = '" + nombrePlanDeEstudio + "'";
+        DAOPlanDeEstudio dao = DAOPlanDeEstudio.getDAOPlanDeEstudio();
+        int clavePlanDeEstudio = dao.obtenerClaveDePlanDeEstudioPorNombre(queryDeConsulta);
+        return clavePlanDeEstudio;
+    }
+    
     private ControladorDAOPlanDeEstudio(){}
     
     private static ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = new ControladorDAOPlanDeEstudio();

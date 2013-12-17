@@ -34,6 +34,13 @@ public class ControladorDAOAsignatura extends ControladorDAO<Asignatura> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    protected boolean registraAsignaturaEnPlanDeEstudio(int clavePlanDeEstudio, int modulo, String claveAsignatura) {
+        String queryDeRegistro = "INSERT INTO planmoduloasignatura (clvplan, clvmodulo,clvasign) VALUES (" + clavePlanDeEstudio + "," + modulo + ",'" + claveAsignatura + "')";
+        DAOAsignatura dao =  DAOAsignatura.getDAOAsignatura();
+        int numeroFilasAfectadas = dao.ejecutaQuery(queryDeRegistro);
+        return determinarExitoDeTransaccion(numeroFilasAfectadas);
+    }
+    
     private ControladorDAOAsignatura(){}
     
     private static ControladorDAOAsignatura controladorDAOAsignatura = new ControladorDAOAsignatura();

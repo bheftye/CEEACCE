@@ -60,7 +60,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         ArrayList<PlanDeEstudio> resultadoPlanEstudio = new ArrayList();
         ArrayList<Modulo> modulos = new ArrayList();
         for (int i = 0; i < 6; i++) {
-           modulos.add(new Modulo("Modulo "+(i+1))); 
+           modulos.add(new Modulo("Modulo "+(i+1),i+1)); 
         }
         try{
         Connection conexion = getConexion(); 
@@ -123,7 +123,7 @@ public class DAOPlanDeEstudio extends DAO<PlanDeEstudio> {
         ArrayList<Modulo> modulos = new ArrayList();
          PlanDeEstudio planDeEstudio = null;
         for (int i = 0; i < 6; i++) {
-           modulos.add(new Modulo("Modulo "+(i+1))); 
+           modulos.add(new Modulo("Modulo "+(i+1),i+1)); 
         }
         try{
         Connection conexion = getConexion(); 

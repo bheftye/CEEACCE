@@ -64,7 +64,8 @@ public class DAOModulo extends DAO<Modulo> {
         ResultSet resultadoDeDatos = sentencia.executeQuery(querySeleccion); 
             while(resultadoDeDatos.next()){
                 String nombreModulo = resultadoDeDatos.getString("nommod");
-                Modulo modulo = new Modulo(nombreModulo);
+                int clvModulo = resultadoDeDatos.getInt("clvmodulo");
+                Modulo modulo = new Modulo(nombreModulo,clvModulo);
                 resultadoModulos.add(modulo);
             }
         sentencia.close();

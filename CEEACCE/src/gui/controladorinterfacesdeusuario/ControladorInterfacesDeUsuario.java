@@ -47,7 +47,7 @@ public class ControladorInterfacesDeUsuario {
     }
 
     public void modificarCalificacionAlumno(Alumno alumno) {
-        controladorDePeticiones.modificarCalificacionAlumno(alumno);
+        controladorDePeticiones.modificarCalificacionesAlumno(alumno);
     }
 
     public boolean modificarAlumno(Alumno alumno) {
@@ -143,7 +143,7 @@ public class ControladorInterfacesDeUsuario {
     }
 
     public PlanDeEstudio obtenerPlanDeEstudioPorClave(int clavePlanDeEstudio) {
-        return ControladorDePeticiones.getControladorDePeticiones().obtenerNuevoPlanDeEstudioPorClave(clavePlanDeEstudio);
+        return ControladorDePeticiones.getControladorDePeticiones().obtenerCopiaPlanDeEstudioPorClave(clavePlanDeEstudio);
     }
 
     private void actualizarListaDeUsuarios() {

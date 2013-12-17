@@ -8,7 +8,6 @@ import accesodatos.dao.DAOAlumno;
 import accesodatos.dao.DAOAsignatura;
 import accesodatos.dao.DAOCurso;
 import accesodatos.dao.DAOPlanDeEstudio;
-import accesodatos.dao.DAOUsuario;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
@@ -40,11 +39,9 @@ public class ControladorDePeticiones {
     }
 
     public boolean agregarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
-        int numeroFilasAfectadas = DAOPlanDeEstudio.getDAOPlanDeEstudio().insertar(planDeEstudio);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        boolean agrego = controladorDAOPlanDeEstudio.agregar(planDeEstudio);
+        return agrego;
     }
 
     public boolean agregarCurso(Curso curso) {
@@ -56,15 +53,14 @@ public class ControladorDePeticiones {
     }
 
     public boolean darAltaUsuario(Usuario usuario) {
-        int numeroFilasAfectadas = DAOUsuario.getDAOUsuario().insertar(usuario);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOUsuario controladorDAOUsuario = ControladorDAOUsuario.getControladorDAOUsuario();
+        boolean dioAlta = controladorDAOUsuario.agregar(usuario);
+        return dioAlta;
     }
 
     public ArrayList<Usuario> obtenerUsuarios() {
-        return DAOUsuario.getDAOUsuario().consultar("select * from usuario order by clvusuario asc");
+        ControladorDAOUsuario controladorDAOUsuario = ControladorDAOUsuario.getControladorDAOUsuario();
+        return controladorDAOUsuario.obtenTodosLosUsuarios();
     }
 
     public ArrayList<Curso> obtenerCursos() {
@@ -72,7 +68,7 @@ public class ControladorDePeticiones {
         int NUM_ALUMNOS = cursos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             Curso cursoIndexado = cursos.get(i);
-            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(cursoIndexado.getPlanDeEstudio().getClave());
+            PlanDeEstudio copiaPlanDeEstudio = obtenerCopiaPlanDeEstudioPorClave(cursoIndexado.getPlanDeEstudio().getClave());
             cursoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
             int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
             int NUM_DE_MODULOS = 6;
@@ -95,47 +91,26 @@ public class ControladorDePeticiones {
     }
 
     public boolean agregarAsignatura(Asignatura nuevaAsignatura) {
-        int numeroFilasAfectadas = DAOAsignatura.getDAOAsignatura().insertar(nuevaAsignatura);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        boolean agrego = controladorDAOAsignatura.agregar(nuevaAsignatura);
+        return agrego;
     }
 
     public boolean registraAsignaturaEnPlanDeEstudio(int clavePlanDeEstudio, int modulo, String claveAsignatura) {
-        String queryDeRegistro = "INSERT INTO planmoduloasignatura (clvplan, clvmodulo,clvasign) VALUES (" + clavePlanDeEstudio + "," + modulo + ",'" + claveAsignatura + "')";
-        int numeroFilasAfectadas = DAOAsignatura.getDAOAsignatura().ejecutaQuery(queryDeRegistro);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        boolean registro = controladorDAOAsignatura.registraAsignaturaEnPlanDeEstudio(clavePlanDeEstudio, modulo, claveAsignatura);
+        return registro;
     }
 
     public int obtenClaveDePlanDeEstudioPorNombre(String nombrePlanDeEstudio) {
-        String queryDeConsulta = "SELECT * FROM plandeestudio WHERE nomplan = '" + nombrePlanDeEstudio + "'";
-        return DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerClaveDePlanDeEstudioPorNombre(queryDeConsulta);
-    }
-
-    public boolean eliminarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
-        int numeroFilasAfectadas = DAOPlanDeEstudio.getDAOPlanDeEstudio().eliminar(planDeEstudio);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        int clavePlanDeEstudio = controladorDAOPlanDeEstudio.obtenClaveDePlanDeEstudioPorNombre(nombrePlanDeEstudio);
+        return clavePlanDeEstudio;
     }
 
     public ArrayList<PlanDeEstudio> obtenerPlanesDeEstudio() {
-        int NUM_DE_MODULOS = 6;
-        String queryDeConsulta = "select * from plandeestudio order by clvplan asc ";
-        ArrayList<PlanDeEstudio> planesDeEstudio = DAOPlanDeEstudio.getDAOPlanDeEstudio().consultar(queryDeConsulta);
-        for (int i = 0; i < planesDeEstudio.size(); i++) {
-            PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
-            for (int j = 0; j < NUM_DE_MODULOS; j++) {
-                Modulo moduloIndexado = planDeEstudioIndexado.getModulos().get(j);
-                String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + planDeEstudioIndexado.getClave() + " and clvmodulo = " + (j + 1) + " and clvasign = clvasig";
-                moduloIndexado.setAsignaturas(DAOAsignatura.getDAOAsignatura().consultar(queryDeAsignaturasDeModulo));
-            }
-        }
+        ControladorDAOPlanDeEstudio  controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        ArrayList<PlanDeEstudio> planesDeEstudio = controladorDAOPlanDeEstudio.obtenerPlanesDeEstudioConAsignaturas();
         return planesDeEstudio;
     }
 
@@ -144,7 +119,7 @@ public class ControladorDePeticiones {
         int NUM_ALUMNOS = alumnos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             Alumno alumnoIndexado = alumnos.get(i);
-            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
+            PlanDeEstudio copiaPlanDeEstudio = obtenerCopiaPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
             alumnoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
             int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
             int NUM_DE_MODULOS = 6;
@@ -165,41 +140,16 @@ public class ControladorDePeticiones {
         return alumnos;
     }
 
-    public PlanDeEstudio obtenerNuevoPlanDeEstudioPorClave(int clavePlanDeEstudio) {
-        int NUM_DE_MODULOS = 6;
-        String queryDeConsulta = "select * from plandeestudio where clvplan =" + clavePlanDeEstudio;
-        PlanDeEstudio planDeEstudio = DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerPlanDeEstudio(queryDeConsulta);
-        if (planDeEstudio != null) {
-            for (int j = 0; j < NUM_DE_MODULOS; j++) {
-                Modulo moduloIndexado = planDeEstudio.getModulos().get(j);
-                String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + planDeEstudio.getClave() + " and clvmodulo = " + (j + 1) + " and clvasign = clvasig";
-                moduloIndexado.setAsignaturas(DAOAsignatura.getDAOAsignatura().consultar(queryDeAsignaturasDeModulo));
-            }
-            return planDeEstudio;
-        }
-        return null;
+    public PlanDeEstudio obtenerCopiaPlanDeEstudioPorClave(int clavePlanDeEstudio) {
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        PlanDeEstudio planDeEstudio = controladorDAOPlanDeEstudio.obtenerCopiaPlanDeEstudioPorClave(clavePlanDeEstudio);
+        return planDeEstudio;
     }
 
-    public void modificarCalificacionAlumno(Alumno alumno) {
-        PlanDeEstudio planDeEstudio = alumno.getPlanDeEstudio();
-        int clavePlanDeEstudio = planDeEstudio.getClave();
-        int claveModulo = 0;
-        String claveAsignatura = "";
-        String calificacion = ""; 
-        String claveAlumno = alumno.getMatricula();
-        int NUM_DE_MODULOS = 6;
-        for (int i = 0; i < NUM_DE_MODULOS; i++) {
-            claveModulo = i + 1;
-            Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
-            int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
-            for (int j = 0; j < NUM_ASIGNATURAS_DEL_MODULO; j++) {
-                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
-                claveAsignatura = asignaturaIndexada.getClave();
-                calificacion = asignaturaIndexada.getCalificacion()+"";
-                String query = "UPDATE calificaciones SET calificacion = " + calificacion + " WHERE clvalumno = '" + claveAlumno + "' AND clvplan = " + clavePlanDeEstudio + " AND clvmodulo = " + claveModulo + " AND clvasign = '" + claveAsignatura + "'";
-                DAOAsignatura.getDAOAsignatura().ejecutaQuery(query);
-            }
-        }
+    public boolean modificarCalificacionesAlumno(Alumno alumno) {
+        ControladorDAOAlumno controladorDAOAlumno = ControladorDAOAlumno.getControladorDAOAlumno();
+        boolean modifico = controladorDAOAlumno.modificarCalificacionesAlumno(alumno);
+        return modifico;
     }
 
     public void registrarBoletaVaciaDeAlumno(Alumno alumno) {

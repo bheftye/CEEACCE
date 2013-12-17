@@ -110,17 +110,8 @@ public class ControladorDePeticiones {
     }
 
     public ArrayList<PlanDeEstudio> obtenerPlanesDeEstudio() {
-        int NUM_DE_MODULOS = 6;
-        String queryDeConsulta = "select * from plandeestudio order by clvplan asc ";
-        ArrayList<PlanDeEstudio> planesDeEstudio = DAOPlanDeEstudio.getDAOPlanDeEstudio().consultar(queryDeConsulta);
-        for (int i = 0; i < planesDeEstudio.size(); i++) {
-            PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
-            for (int j = 0; j < NUM_DE_MODULOS; j++) {
-                Modulo moduloIndexado = planDeEstudioIndexado.getModulos().get(j);
-                String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + planDeEstudioIndexado.getClave() + " and clvmodulo = " + (j + 1) + " and clvasign = clvasig";
-                moduloIndexado.setAsignaturas(DAOAsignatura.getDAOAsignatura().consultar(queryDeAsignaturasDeModulo));
-            }
-        }
+        ControladorDAOPlanDeEstudio  controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        ArrayList<PlanDeEstudio> planesDeEstudio = controladorDAOPlanDeEstudio.obtenerTodosLosPlanesDeEstudio();
         return planesDeEstudio;
     }
 

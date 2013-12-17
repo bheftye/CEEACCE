@@ -5,6 +5,7 @@
 package accesodatos.controladordepeticiones;
 
 import accesodatos.dao.DAOAsignatura;
+import java.util.ArrayList;
 import modelo.Asignatura;
 
 /**
@@ -39,6 +40,13 @@ public class ControladorDAOAsignatura extends ControladorDAO<Asignatura> {
         DAOAsignatura dao =  DAOAsignatura.getDAOAsignatura();
         int numeroFilasAfectadas = dao.ejecutaQuery(queryDeRegistro);
         return determinarExitoDeTransaccion(numeroFilasAfectadas);
+    }
+    
+    protected ArrayList<Asignatura> obtenAsignaturasPorModulo(int clvPlanDeEstudio, int clvModulo){
+        DAOAsignatura dao = DAOAsignatura.getDAOAsignatura();
+        String queryDeAsignaturasDeModulo = "select clvasig,nomasig,serializacion,creditos,duracion from planmoduloasignatura,asignatura where clvplan = " + clvPlanDeEstudio + " and clvmodulo = " + clvModulo + " and clvasign = clvasig";
+        ArrayList<Asignatura> asignaturasDelModulo = dao.consultar(queryDeAsignaturasDeModulo);
+        return asignaturasDelModulo;
     }
     
     private ControladorDAOAsignatura(){}

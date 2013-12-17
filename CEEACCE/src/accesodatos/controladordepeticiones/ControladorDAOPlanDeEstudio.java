@@ -4,7 +4,11 @@
  */
 package accesodatos.controladordepeticiones;
 
+import accesodatos.dao.DAOAsignatura;
 import accesodatos.dao.DAOPlanDeEstudio;
+import java.util.ArrayList;
+import modelo.Asignatura;
+import modelo.Modulo;
 import modelo.PlanDeEstudio;
 
 /**
@@ -38,6 +42,31 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
         DAOPlanDeEstudio dao = DAOPlanDeEstudio.getDAOPlanDeEstudio();
         int clavePlanDeEstudio = dao.obtenerClaveDePlanDeEstudioPorNombre(queryDeConsulta);
         return clavePlanDeEstudio;
+    }
+    
+    protected ArrayList<PlanDeEstudio> obtenerTodosLosPlanesDeEstudio() {
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        int NUM_DE_MODULOS = 6;
+        ArrayList<PlanDeEstudio> planesDeEstudio = obtenerPlanesDeEstudioSinModulosNiAsignaturas();
+        for (int i = 0; i < planesDeEstudio.size(); i++) {
+            PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
+            int clvPlanDeEstudioIndexado = planDeEstudioIndexado.getClave();
+            ArrayList<Modulo> modulosDePlanDeEstudioIndexado = planDeEstudioIndexado.getModulos();
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+                Modulo moduloIndexado = modulosDePlanDeEstudioIndexado.get(j);
+                int clvModuloIndexado = j + 1;
+                ArrayList<Asignatura> asignaturasDelModulo = controladorDAOAsignatura.obtenAsignaturasPorModulo(clvPlanDeEstudioIndexado, clvModuloIndexado);
+                moduloIndexado.setAsignaturas(asignaturasDelModulo);
+            }
+        }
+        return planesDeEstudio;
+    }
+    
+    private ArrayList<PlanDeEstudio> obtenerPlanesDeEstudioSinModulosNiAsignaturas(){
+        String queryDePlanesDeEstudio = "select * from plandeestudio order by clvplan asc ";
+        DAOPlanDeEstudio dao = DAOPlanDeEstudio.getDAOPlanDeEstudio();
+        ArrayList<PlanDeEstudio> planesDeEstudio =  dao.consultar(queryDePlanesDeEstudio);
+        return planesDeEstudio;
     }
     
     private ControladorDAOPlanDeEstudio(){}

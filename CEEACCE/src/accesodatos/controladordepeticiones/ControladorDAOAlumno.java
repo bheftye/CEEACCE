@@ -5,7 +5,6 @@
 package accesodatos.controladordepeticiones;
 
 import accesodatos.dao.DAOAlumno;
-import accesodatos.dao.DAOAsignatura;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
@@ -88,8 +87,9 @@ public class ControladorDAOAlumno extends ControladorDAO<Alumno>{
     }
     
      public ArrayList<Alumno> obtenerAlumnos() {
-        ArrayList<Alumno> alumnos = DAOAlumno.getDAOAlumno().consultar("select * from alumno");
+        ArrayList<Alumno> alumnos = obtenerAlumnosSinPlanDeEstudio();
         ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
         int NUM_ALUMNOS = alumnos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             Alumno alumnoIndexado = alumnos.get(i);
@@ -104,14 +104,19 @@ public class ControladorDAOAlumno extends ControladorDAO<Alumno>{
                 for (int k = 0; k < NUM_ASIGNATURAS_DEL_MODULO; k++) {
                     Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(k);
                     String claveAsignatura = asignaturaIndexada.getClave();
-                    String queryCalificacion = "select calificacion from calificaciones where clvalumno = '" + alumnoIndexado.getMatricula() + "' and clvplan = " + clavePlanDeEstudio + " and clvmodulo = " + claveModulo + " and clvasign = '" + claveAsignatura + "'";
-                    int calificacion = DAOAsignatura.getDAOAsignatura().obtenerCalificacion(queryCalificacion);
+                    int calificacion = controladorDAOAsignatura.obtenerCalificacionAsignaturaDeAlumno(alumnoIndexado.getMatricula(), clavePlanDeEstudio, claveModulo, claveAsignatura);
                     asignaturaIndexada.setCalificacion(calificacion);
                 }
             }
 
         }
         return alumnos;
+    }
+     
+    protected ArrayList<Alumno> obtenerAlumnosSinPlanDeEstudio(){
+        DAOAlumno dao = DAOAlumno.getDAOAlumno();
+         ArrayList<Alumno> alumnos = dao.consultar("select * from alumno");
+         return alumnos;
     }
         
     private ControladorDAOAlumno() {

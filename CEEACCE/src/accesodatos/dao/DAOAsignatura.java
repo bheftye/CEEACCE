@@ -161,6 +161,10 @@ public class DAOAsignatura extends DAO<Asignatura> {
             }
             conexion.commit();
             transaccionExitosa = true;
+            for (int i = 0; i < queriesPreparados.size(); i++) {
+                queriesPreparados.get(i).close();
+            }
+            setAutoCommitTrue(conexion);
         }catch(SQLException exception){
             exception.printStackTrace();
             try {
@@ -179,6 +183,14 @@ public class DAOAsignatura extends DAO<Asignatura> {
     private void setAutoCommitFalse(Connection connection){
         try {
             connection.setAutoCommit(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void setAutoCommitTrue(Connection connection){
+        try {
+            connection.setAutoCommit(true);
         } catch (SQLException ex) {
             Logger.getLogger(DAOAsignatura.class.getName()).log(Level.SEVERE, null, ex);
         }

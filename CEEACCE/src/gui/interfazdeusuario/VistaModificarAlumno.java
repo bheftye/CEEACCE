@@ -26,18 +26,18 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
     }
-    
-    public VistaModificarAlumno(Alumno alumno){
+
+    public VistaModificarAlumno(Alumno alumno) {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         llenaInformacionAlumno(alumno);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-            new VistaAdministradorAlumnos().setVisible(true);
-            ((VistaModificarAlumno)we.getSource()).dispose();
+                new VistaAdministradorAlumnos().setVisible(true);
+                ((VistaModificarAlumno) we.getSource()).dispose();
             }
-         });
+        });
     }
 
     /**
@@ -282,27 +282,27 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         // TODO add your handling code here:
-            String matricula = this.matriculaAlumno.getText().trim();
-            String nombre = this.nombreAlumno.getText().trim();
-            String apellidos = this.apellidosAlumno.getText().trim();
-            String dia = this.diaNacimiento.getSelectedItem().toString();
-            String mes = Integer.toString(this.mesNacimiento.getSelectedIndex());
-            String anio = this.anioNacimiento.getText();
-            String fechaInscripcion = this.fechaDeInscripcion.getText();
-            String sexo = this.sexoAlumno.getSelectedItem().toString();
-            String email = this.emailAlumno.getText();
-            String curp = this.curpAlumno.getText();
-            String lugar = this.lugarDeNacimiento.getText();
-            String turno = this.turno.getSelectedItem().toString();
-            PlanDeEstudio planDeEstudioFijo = obtenerPlanDeEstudio();
-            Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, anio+"-"+mes+"-"+dia, fechaInscripcion, turno, planDeEstudioFijo);
-            boolean modificoDatosAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarAlumno(alumno);
-            if (modificoDatosAlumno) {
-                JOptionPane.showMessageDialog(this, "Datos del alumno modificados exitosamente");
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "No fue posible modificar los datos de este alumno.","Error",JOptionPane.ERROR_MESSAGE);
-            }
+        String matricula = this.matriculaAlumno.getText().trim();
+        String nombre = this.nombreAlumno.getText().trim();
+        String apellidos = this.apellidosAlumno.getText().trim();
+        String dia = this.diaNacimiento.getSelectedItem().toString();
+        String mes = Integer.toString(this.mesNacimiento.getSelectedIndex());
+        String anio = this.anioNacimiento.getText();
+        String fechaInscripcion = this.fechaDeInscripcion.getText();
+        String sexo = this.sexoAlumno.getSelectedItem().toString();
+        String email = this.emailAlumno.getText();
+        String curp = this.curpAlumno.getText();
+        String lugar = this.lugarDeNacimiento.getText();
+        String turno = this.turno.getSelectedItem().toString();
+        PlanDeEstudio planDeEstudioFijo = obtenerPlanDeEstudio();
+        Alumno alumno = new Alumno(nombre, apellidos, sexo, email, matricula, curp, lugar, anio + "-" + mes + "-" + dia, fechaInscripcion, turno, planDeEstudioFijo);
+        boolean modificoDatosAlumno = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().modificarAlumno(alumno);
+        if (modificoDatosAlumno) {
+            JOptionPane.showMessageDialog(this, "Datos del alumno modificados exitosamente");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No fue posible modificar los datos de este alumno.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -344,45 +344,23 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void llenaInformacionAlumno(Alumno alumno){
-        this.nombreAlumno.setText(alumno.getNombre());
-        this.apellidosAlumno.setText(alumno.getApellidos());
-        if(alumno.getSexo().equalsIgnoreCase("Hombre")){
-            this.sexoAlumno.setSelectedIndex(1);
-        }
-        else{
-            this.sexoAlumno.setSelectedIndex(2);
-        }
-        this.diaNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("-"))[2]));
-        this.mesNacimiento.setSelectedIndex(Integer.valueOf((alumno.getFechaDeNacimiento().split("-"))[1]));
-        this.anioNacimiento.setText((alumno.getFechaDeNacimiento().split("-"))[0]);
-        this.lugarDeNacimiento.setText(alumno.getLugarDeNacimiento());
-        this.curpAlumno.setText(alumno.getCURP());
-        this.emailAlumno.setText(alumno.getEmail());
-        this.matriculaAlumno.setText(alumno.getMatricula());
-        this.fechaDeInscripcion.setText(alumno.getFechaDeInscripcion());
-        switch(alumno.getTurno()){
-            case "Matutino":
-                            this.turno.setSelectedIndex(1);
-                            break;
-            case "Vespertino:":
-                            this.turno.setSelectedIndex(2);
-                            break;
-            case "Diurno":
-                            this.turno.setSelectedIndex(3);
-                            break;
-            case "Nocturno":
-                            this.turno.setSelectedIndex(4);
-                            break;
-            default:
-                            break;
-        }
-        this.planDeEstudio.setText(alumno.getPlanDeEstudio().getNombre());
-        this.planDeEstudio.setEnabled(false);
+
+    private void llenaInformacionAlumno(Alumno alumno) {
+        setApellidos();
+        setNombre();
+        setCurp();
+        setEmail();
+        setIndiceAnio();
+        setIndiceDia();
+        setIndiceMes();
+        setIndicePlan();
+        setIndiceSexo();
+        setIndiceTurno();
+        setLugarNacimiento();
+        setMatricula();
     }
-    
-    private PlanDeEstudio obtenerPlanDeEstudio(){
+
+    private PlanDeEstudio obtenerPlanDeEstudio() {
         String nombrePlanDeEstudio = this.planDeEstudio.getText();
         int clavePlanDeEstudio = 0;
         PlanDeEstudio planDeEstudioObtenido;
@@ -390,8 +368,57 @@ public class VistaModificarAlumno extends javax.swing.JFrame {
         planDeEstudioObtenido = ControladorInterfacesDeUsuario.getControladorInterfacesDeUsuario().obtenerPlanDeEstudioPorClave(clavePlanDeEstudio);
         return planDeEstudioObtenido;
     }
+
+    protected void setApellidos() {
+        apellidosAlumno.setText(helper.getApellidos());
+    }
+
+    protected void setCurp() {
+        curpAlumno.setText(helper.getCurp());
+    }
+
+    protected void setEmail() {
+        emailAlumno.setText(helper.getEmail());
+
+    }
+
+    protected void setIndiceAnio() {
+        anioNacimiento.setText(helper.getIndiceAnio());
+    }
+
+    protected void setIndiceDia() {
+        diaNacimiento.setSelectedIndex(helper.getIndiceDia());
+    }
+
+    protected void setIndiceMes() {
+        mesNacimiento.setSelectedIndex(helper.getIndiceMes());
+    }
+
+    protected void setIndicePlan() {
+        planDeEstudio.setText(helper.getPlanDeEstudio());
+    }
+
+    protected void setIndiceSexo() {
+        sexoAlumno.setSelectedIndex(helper.getIndiceSexo());
+    }
+
+    protected void setIndiceTurno() {
+        turno.setSelectedIndex(helper.getIndiceTurno());
+    }
+
+    protected void setLugarNacimiento() {
+        lugarDeNacimiento.setText(helper.getLugar());
+    }
+
+    protected void setMatricula() {
+        matriculaAlumno.setText(helper.getMatricula());
+    }
+
+    protected void setNombre() {
+        nombreAlumno.setText(helper.getNombre());
+    }
     
-   
+    private HelperVistaModificarAlumno helper = new HelperVistaModificarAlumno();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioNacimiento;
     private javax.swing.JTextField apellidosAlumno;

@@ -82,6 +82,8 @@ public class ControladorDAOAlumno extends ControladorDAO<Alumno>{
                 registrosDeTransaccion.add(queryRegistro);
             }
         }
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        controladorDAOAsignatura.registraAsignaturasComoTransaccion(registrosDeTransaccion);
         
     }
     

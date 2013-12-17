@@ -41,11 +41,9 @@ public class ControladorDePeticiones {
     }
 
     public boolean agregarCurso(Curso curso) {
-        int numeroFilasAfectadas = DAOCurso.getDAOCurso().insertar(curso);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
+        ControladorDAOCurso controladorDAOCurso = ControladorDAOCurso.getControladorDAOCurso();
+        boolean agrego = controladorDAOCurso.agregar(curso);
+        return agrego;
     }
 
     public boolean darAltaUsuario(Usuario usuario) {

@@ -23,7 +23,9 @@ public class ControladorDAOCurso extends ControladorDAO<Curso> {
 
     @Override
     protected boolean agregar(Curso curso) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DAOCurso dao = DAOCurso.getDAOCurso();
+        int numFilasAfectadas = dao.insertar(curso);
+        return determinarExitoDeTransaccion(numFilasAfectadas);
     }
 
     @Override

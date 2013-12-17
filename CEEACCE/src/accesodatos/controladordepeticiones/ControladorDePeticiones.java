@@ -109,14 +109,6 @@ public class ControladorDePeticiones {
         return clavePlanDeEstudio;
     }
 
-    public boolean eliminarPlanDeEstudio(PlanDeEstudio planDeEstudio) {
-        int numeroFilasAfectadas = DAOPlanDeEstudio.getDAOPlanDeEstudio().eliminar(planDeEstudio);
-        if (numeroFilasAfectadas > 0) {
-            return true;
-        }
-        return false;
-    }
-
     public ArrayList<PlanDeEstudio> obtenerPlanesDeEstudio() {
         int NUM_DE_MODULOS = 6;
         String queryDeConsulta = "select * from plandeestudio order by clvplan asc ";

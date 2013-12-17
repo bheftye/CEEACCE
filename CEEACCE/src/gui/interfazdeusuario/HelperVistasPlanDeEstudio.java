@@ -22,7 +22,7 @@ public class HelperVistasPlanDeEstudio {
         int numeroDeModulosPorCrear = 6;
         ArrayList<Modulo> listaDeModulos = new ArrayList();
         for (int i = 0; i < numeroDeModulosPorCrear; i++) {
-            Modulo modulo = new Modulo("Módulo "+(i+1));
+            Modulo modulo = new Modulo("Módulo "+(i+1), (i+1));
             modulo.setAsignaturas(new ArrayList<Asignatura>());
             listaDeModulos.add(modulo);
         }

@@ -15,12 +15,12 @@ import modelo.PlanDeEstudio;
  */
 public class InsercionPlanDeEstudio {
     public static void main(String[] args) {
-        Modulo m1 = new Modulo("Modulo 1");
-        Modulo m2 = new Modulo("Modulo 2");
-        Modulo m3 = new Modulo("Modulo 3");
-        Modulo m4 = new Modulo("Modulo 4");
-        Modulo m5 = new Modulo("Modulo 5");
-        Modulo m6 = new Modulo("Modulo 6");
+        Modulo m1 = new Modulo("Modulo 1",1);
+        Modulo m2 = new Modulo("Modulo 2",2);
+        Modulo m3 = new Modulo("Modulo 3",3);
+        Modulo m4 = new Modulo("Modulo 4",4);
+        Modulo m5 = new Modulo("Modulo 5",5);
+        Modulo m6 = new Modulo("Modulo 6",6);
         ArrayList<Asignatura> asignaturas1 = new ArrayList();
         ArrayList<Asignatura> asignaturas2 = new ArrayList();
         ArrayList<Asignatura> asignaturas3 = new ArrayList();

@@ -44,10 +44,10 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
         return clavePlanDeEstudio;
     }
     
-    protected ArrayList<PlanDeEstudio> obtenerTodosLosPlanesDeEstudio() {
+    protected ArrayList<PlanDeEstudio> obtenerPlanesDeEstudioConAsignaturas() {
         ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
         int NUM_DE_MODULOS = 6;
-        ArrayList<PlanDeEstudio> planesDeEstudio = obtenerPlanesDeEstudioSinModulosNiAsignaturas();
+        ArrayList<PlanDeEstudio> planesDeEstudio = obtenerPlanesDeEstudioSinAsignaturas();
         for (int i = 0; i < planesDeEstudio.size(); i++) {
             PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
             int clvPlanDeEstudioIndexado = planDeEstudioIndexado.getClave();
@@ -62,7 +62,7 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
         return planesDeEstudio;
     }
     
-    private ArrayList<PlanDeEstudio> obtenerPlanesDeEstudioSinModulosNiAsignaturas(){
+    private ArrayList<PlanDeEstudio> obtenerPlanesDeEstudioSinAsignaturas(){
         String queryDePlanesDeEstudio = "select * from plandeestudio order by clvplan asc ";
         DAOPlanDeEstudio dao = DAOPlanDeEstudio.getDAOPlanDeEstudio();
         ArrayList<PlanDeEstudio> planesDeEstudio =  dao.consultar(queryDePlanesDeEstudio);

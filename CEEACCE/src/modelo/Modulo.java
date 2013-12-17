@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Modulo {
 
     
-    public Modulo(String nombre){
+    public Modulo(String nombre, int clvModulo){
         this.nombre = nombre;
     }
     
@@ -31,6 +31,7 @@ public class Modulo {
         this.nombre = nombre;
     }
     
+    private int clvModulo;
     private String nombre;
     private ArrayList<Asignatura> asignaturas;
 	 

@@ -111,7 +111,7 @@ public class ControladorDePeticiones {
 
     public ArrayList<PlanDeEstudio> obtenerPlanesDeEstudio() {
         ControladorDAOPlanDeEstudio  controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
-        ArrayList<PlanDeEstudio> planesDeEstudio = controladorDAOPlanDeEstudio.obtenerTodosLosPlanesDeEstudio();
+        ArrayList<PlanDeEstudio> planesDeEstudio = controladorDAOPlanDeEstudio.obtenerPlanesDeEstudioConAsignaturas();
         return planesDeEstudio;
     }
 

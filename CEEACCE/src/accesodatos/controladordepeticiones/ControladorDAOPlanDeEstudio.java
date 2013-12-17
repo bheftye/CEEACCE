@@ -58,6 +58,7 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
                 ArrayList<Asignatura> asignaturasDelModulo = controladorDAOAsignatura.obtenAsignaturasPorModulo(clvPlanDeEstudioIndexado, clvModuloIndexado);
                 moduloIndexado.setAsignaturas(asignaturasDelModulo);
             }
+            planDeEstudioIndexado.setModulos(modulosDePlanDeEstudioIndexado);
         }
         return planesDeEstudio;
     }

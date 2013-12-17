@@ -7,6 +7,7 @@ public class Modulo {
     
     public Modulo(String nombre, int clvModulo){
         this.nombre = nombre;
+        this.clvModulo = clvModulo;
     }
 
     public int getClvModulo() {

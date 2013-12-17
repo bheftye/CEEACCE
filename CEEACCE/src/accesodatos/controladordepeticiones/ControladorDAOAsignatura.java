@@ -49,6 +49,17 @@ public class ControladorDAOAsignatura extends ControladorDAO<Asignatura> {
         return asignaturasDelModulo;
     }
     
+    protected boolean actualizarCalificacionDeAlumno(int calificacion, String claveAlumno, int clavePlanDeEstudio, int claveModulo, String claveAsignatura){
+        String queryActualizacionAsignatura = "UPDATE calificaciones SET calificacion = " + calificacion + " WHERE clvalumno = '" + claveAlumno + "' AND clvplan = " + clavePlanDeEstudio + " AND clvmodulo = " + claveModulo + " AND clvasign = '" + claveAsignatura + "'";
+        DAOAsignatura dao = DAOAsignatura.getDAOAsignatura();
+        int numeroFilasAfectadas = dao.ejecutaQuery(claveAlumno);
+        return determinarExitoDeTransaccion(numeroFilasAfectadas);
+    }
+    
+    protected boolean registraAsignaturasComoTransaccion(ArrayList<String> registrosDeAsignaturas){
+       DAOAsignatura dao = DAOAsignatura.getDAOAsignatura();
+       return dao.ejecutaTransaccion(registrosDeAsignaturas);
+    }
     private ControladorDAOAsignatura(){}
     
     private static ControladorDAOAsignatura controladorDAOAsignatura = new ControladorDAOAsignatura();

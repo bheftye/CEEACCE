@@ -1,12 +1,14 @@
 package accesodatos.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Asignatura;
-import modelo.Alumno;
 
 public class DAOAsignatura extends DAO<Asignatura> {
     private static DAOAsignatura daoAsignatura = new DAOAsignatura();
@@ -143,6 +145,43 @@ public class DAOAsignatura extends DAO<Asignatura> {
         }
         cerrarConexion(conexion);
         return fechaImparticion;
+    }
+    
+    public boolean ejecutaTransaccion(ArrayList<String> queries){
+        Connection conexion = getConexion();
+        setAutoCommitFalse(conexion);
+        ArrayList<PreparedStatement> queriesPreparados = new ArrayList();
+        boolean transaccionExitosa = false;
+        try{
+            for (int i = 0; i < queries.size(); i++) {
+                queriesPreparados.add(conexion.prepareStatement(queries.get(i)));
+            }
+            for (int i = 0; i < queriesPreparados.size(); i++) {
+                queriesPreparados.get(i).executeUpdate();
+            }
+            conexion.commit();
+            transaccionExitosa = true;
+        }catch(SQLException exception){
+            exception.printStackTrace();
+            try {
+                conexion.rollback();
+                cerrarConexion(conexion);
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        finally{
+            return transaccionExitosa;
+        }
+    }
+    
+    private void setAutoCommitFalse(Connection connection){
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
  

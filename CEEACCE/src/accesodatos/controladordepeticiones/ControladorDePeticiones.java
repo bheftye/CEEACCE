@@ -8,7 +8,6 @@ import accesodatos.dao.DAOAlumno;
 import accesodatos.dao.DAOAsignatura;
 import accesodatos.dao.DAOCurso;
 import accesodatos.dao.DAOPlanDeEstudio;
-import accesodatos.dao.DAOUsuario;
 import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
@@ -69,7 +68,7 @@ public class ControladorDePeticiones {
         int NUM_ALUMNOS = cursos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             Curso cursoIndexado = cursos.get(i);
-            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(cursoIndexado.getPlanDeEstudio().getClave());
+            PlanDeEstudio copiaPlanDeEstudio = obtenerCopiaPlanDeEstudioPorClave(cursoIndexado.getPlanDeEstudio().getClave());
             cursoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
             int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
             int NUM_DE_MODULOS = 6;
@@ -120,7 +119,7 @@ public class ControladorDePeticiones {
         int NUM_ALUMNOS = alumnos.size();
         for (int i = 0; i < NUM_ALUMNOS; i++) {
             Alumno alumnoIndexado = alumnos.get(i);
-            PlanDeEstudio copiaPlanDeEstudio = obtenerNuevoPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
+            PlanDeEstudio copiaPlanDeEstudio = obtenerCopiaPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
             alumnoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
             int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
             int NUM_DE_MODULOS = 6;
@@ -141,7 +140,7 @@ public class ControladorDePeticiones {
         return alumnos;
     }
 
-    public PlanDeEstudio obtenerNuevoPlanDeEstudioPorClave(int clavePlanDeEstudio) {
+    public PlanDeEstudio obtenerCopiaPlanDeEstudioPorClave(int clavePlanDeEstudio) {
         int NUM_DE_MODULOS = 6;
         String queryDeConsulta = "select * from plandeestudio where clvplan =" + clavePlanDeEstudio;
         PlanDeEstudio planDeEstudio = DAOPlanDeEstudio.getDAOPlanDeEstudio().obtenerPlanDeEstudio(queryDeConsulta);

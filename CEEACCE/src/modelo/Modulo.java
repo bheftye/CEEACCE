@@ -8,6 +8,16 @@ public class Modulo {
     public Modulo(String nombre, int clvModulo){
         this.nombre = nombre;
     }
+
+    public int getClvModulo() {
+        return clvModulo;
+    }
+
+    public void setClvModulo(int clvModulo) {
+        this.clvModulo = clvModulo;
+    }
+    
+    
     
     /**
      * @return the asignaturas

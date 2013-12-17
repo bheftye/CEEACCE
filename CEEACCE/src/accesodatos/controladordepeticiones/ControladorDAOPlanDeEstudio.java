@@ -4,7 +4,6 @@
  */
 package accesodatos.controladordepeticiones;
 
-import accesodatos.dao.DAOAsignatura;
 import accesodatos.dao.DAOPlanDeEstudio;
 import java.util.ArrayList;
 import modelo.Asignatura;
@@ -54,7 +53,7 @@ public class ControladorDAOPlanDeEstudio extends ControladorDAO<PlanDeEstudio> {
             ArrayList<Modulo> modulosDePlanDeEstudioIndexado = planDeEstudioIndexado.getModulos();
             for (int j = 0; j < NUM_DE_MODULOS; j++) {
                 Modulo moduloIndexado = modulosDePlanDeEstudioIndexado.get(j);
-                int clvModuloIndexado = j + 1;
+                int clvModuloIndexado = moduloIndexado.getClvModulo();
                 ArrayList<Asignatura> asignaturasDelModulo = controladorDAOAsignatura.obtenAsignaturasPorModulo(clvPlanDeEstudioIndexado, clvModuloIndexado);
                 moduloIndexado.setAsignaturas(asignaturasDelModulo);
             }

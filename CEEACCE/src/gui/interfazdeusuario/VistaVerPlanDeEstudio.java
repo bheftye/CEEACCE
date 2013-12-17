@@ -5,9 +5,7 @@
 package gui.interfazdeusuario;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import modelo.Asignatura;
 import modelo.Modulo;
 import modelo.PlanDeEstudio;
 

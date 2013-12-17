@@ -6,11 +6,9 @@ package gui.interfazdeusuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import modelo.ListaDePlanesDeEstudio;
-import modelo.PlanDeEstudio;
 
 /**
  *
@@ -128,14 +126,8 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void llenarJListConPlanesDeEstudio(){
-        ArrayList<PlanDeEstudio> planesDeEstudio = ListaDePlanesDeEstudio.getListaDePlanesDeEstudio().getPlanesDeEstudio();
-        DefaultListModel listModel = new DefaultListModel();
-        int numPlanes = planesDeEstudio.size();
-        for (int i = 0; i < numPlanes; i++) {
-            PlanDeEstudio planDeEstudioIndexado = planesDeEstudio.get(i);
-            listModel.addElement(planDeEstudioIndexado.getNombre());
-        }
-        jList1.setModel(listModel);
+        DefaultListModel listModel = helper.llenarJListConPlanesDeEstudio();
+        this.jList1.setModel(listModel);
     }
     
     private void setListListener() {
@@ -184,6 +176,7 @@ public class VistaAdministradorPlanesDeEstudios extends javax.swing.JFrame {
             }
         });
     }
+    private HelperVistaAdministradorPlanesDeEstudio helper = new HelperVistaAdministradorPlanesDeEstudio();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearPlanDeEstudio;
     private javax.swing.JButton botonSalir;

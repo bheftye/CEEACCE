@@ -7,6 +7,8 @@ package gui.interfazdeusuario;
 import gui.controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import modelo.Alumno;
 import modelo.ListaDePlanesDeEstudio;
@@ -16,7 +18,7 @@ import modelo.PlanDeEstudio;
  *
  * @author brentheftye
  */
-public class VistaAgregarAlumno extends javax.swing.JFrame {
+public class VistaAgregarAlumno extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form VistaAgregarAlumno
@@ -25,6 +27,9 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         generaFechaInscripcion();
+        helper = new HelperVistaAgregarAlumno();
+        helper.addObserver(this);
+        update(helper, null);
     }
 
     /**
@@ -267,7 +272,7 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
 
     private void botonAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaAlumnoActionPerformed
         // TODO add your handling code here:
-        boolean camposLlenos = validarLlenadoDeCampos();
+        boolean camposLlenos = helper.validarLlenadoDeCampos();
         if(camposLlenos){
             String matricula = this.matriculaAlumno.getText().trim();
             String nombre = this.nombreAlumno.getText().trim();
@@ -336,43 +341,6 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         }
         return nombresPlanesEstudio;
     }
-    
-    private boolean validarLlenadoDeCampos(){
-        String matricula = this.matriculaAlumno.getText();
-        String nombre = this.nombreAlumno.getText();
-        String apellidos = this.apellidosAlumno.getText();
-        int indiceDia = this.diaNacimiento.getSelectedIndex();
-        int indiceMes = this.mesNacimiento.getSelectedIndex();
-        int indiceAnio = this.anioNacimiento.getSelectedIndex();
-        int indiceSexo = this.sexoAlumno.getSelectedIndex();
-        String email = this.emailAlumno.getText();
-        String curp = this.curpAlumno.getText();
-        String lugar = this.lugarDeNacimiento.getText();
-        int indiceTurno = this.turnoCombo.getSelectedIndex();
-        int indicePlan = this.planesDeEstudioCombo.getSelectedIndex();
-        
-        boolean campoMatriculaVacio = "".equals(matricula);
-        boolean campoNombreVacio = "".equals(nombre);
-        boolean campoApellidosVacio = "".equals(apellidos);
-        boolean campoDiaVacio = indiceDia == 0? true : false;
-        boolean campoMesVacio = indiceMes == 0? true : false;
-        boolean campoAnioVacio = indiceAnio == 0? true : false;
-        boolean campoSexoVacio = indiceSexo == 0? true : false;
-        boolean campoEmailVacio = "".equals(email);
-        boolean campoCurpVacio = "".equals(curp);
-        boolean campoLugarVacio = "".equals(lugar);
-        boolean campoTurnoVacio = indiceTurno == 0? true : false;
-        boolean campoPlanVacio = indicePlan == 0? true : false;
-        
-        
-        if(!campoMatriculaVacio && !campoNombreVacio && !campoApellidosVacio && !campoDiaVacio && !campoMesVacio
-                && !campoAnioVacio && !campoSexoVacio && !campoEmailVacio && !campoCurpVacio && !campoLugarVacio
-                && !campoTurnoVacio && !campoPlanVacio){
-            return true;
-        }
-        return false;
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -408,7 +376,25 @@ public class VistaAgregarAlumno extends javax.swing.JFrame {
         });
     }
     
+    @Override
+    public void update(Observable o, Object o1) {
+        helper.setMatricula(matriculaAlumno.getText());
+        helper.setNombre(nombreAlumno.getText());
+        helper.setApellidos(apellidosAlumno.getText());
+        helper.setIndiceDia(diaNacimiento.getSelectedIndex());
+        helper.setIndiceMes(mesNacimiento.getSelectedIndex());
+        helper.setIndiceAnio(anioNacimiento.getSelectedIndex());
+        helper.setIndiceSexo(sexoAlumno.getSelectedIndex());
+        helper.setIndiceSexo(sexoAlumno.getSelectedIndex());
+        helper.setEmail(emailAlumno.getText());
+        helper.setCurp(curpAlumno.getText());
+        helper.setLugar(lugarDeNacimiento.getText());
+        helper.setIndiceTurno(turnoCombo.getSelectedIndex());
+        helper.setIndicePlan(planesDeEstudioCombo.getSelectedIndex());
+    }
+    
    private String fechaDeInscripcionAlumno ="";
+   private HelperVistaAgregarAlumno helper;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox anioNacimiento;
     private javax.swing.JTextField apellidosAlumno;

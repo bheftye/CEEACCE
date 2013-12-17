@@ -27,7 +27,6 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.alumnosCoincidentes = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
-        this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
         llenarJListConAlumnos();
         setListListener();
     }
@@ -135,11 +134,12 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
     private void botonVerCalificacionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerCalificacionAlumnoActionPerformed
         // TODO add your handling code here:
         int indexEnJList = this.jList1.getSelectedIndex();
-        new VistaModificarCalificaciones(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().get(indexEnJList)).setVisible(true);
+        new VistaModificarCalificaciones(alumnosCoincidentes.get(indexEnJList)).setVisible(true);
     }//GEN-LAST:event_botonVerCalificacionAlumnoActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
+        new VistaPrincipal().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
@@ -149,45 +149,6 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
         encontrarAlumnoCoincidente(textoABuscar);
     }//GEN-LAST:event_botonBuscarAlumnoActionPerformed
 
-    protected Alumno getAlumnoSeleccionado(){
-        return alumno;
-    }
-    
-    private void llenarJListConAlumnos(){
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Alumno> listaAlumnos = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
-        for (int i = 0; i < listaAlumnos.size(); i++) {
-            Alumno alumnoIndexado = listaAlumnos.get(i);
-            listModel.addElement(alumnoIndexado.getNombre());
-        }
-        jList1.setModel(listModel);
-    }
-    
-    private void setListListener() {
-        jList1.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                JList list = (JList) evt.getSource();
-                if (evt.getClickCount() == 2) {
-                    int indexEnJList = list.locationToIndex(evt.getPoint());
-                    new VistaModificarCalificaciones(ListaDeAlumnos.getListaDeAlumnos().getAlumnos().get(indexEnJList)).setVisible(true);
-
-                }
-            }
-        });
-    }
-    
-    private void  encontrarAlumnoCoincidente(String textoABuscar){
-        alumnosCoincidentes = new ArrayList();
-        for (int i = 0; i < alumnosOriginales.size(); i++) {
-            Alumno alumnoIndexado = alumnosOriginales.get(i);
-            boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
-            boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
-            if(coincideApellidos || coincideNombre){
-                alumnosCoincidentes.add(alumnoIndexado);
-            }
-        }
-        llenarJListConAlumnos();
-    }
     /**
      * @param args the command line arguments
      */
@@ -229,9 +190,36 @@ public class VistaAdministradorDeCalificaciones extends javax.swing.JFrame {
             }
         });
     }
+    
+    protected Alumno getAlumnoSeleccionado(){
+        return alumno;
+    }
+    
+    private void llenarJListConAlumnos(){
+        DefaultListModel listModel = helper.llenarJListConAlumnos(alumnosCoincidentes);
+        jList1.setModel(listModel);
+    }
+    
+    private void setListListener() {
+        jList1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    int indexEnJList = list.locationToIndex(evt.getPoint());
+                    new VistaModificarAlumno(alumnosCoincidentes.get(indexEnJList)).setVisible(true);
+                }
+            }
+        });
+    }
+    
+    private void  encontrarAlumnoCoincidente(String textoABuscar){
+        alumnosCoincidentes = helper.encontrarAlumnoCoincidente(textoABuscar);
+        llenarJListConAlumnos();
+    }
+    
     private Alumno alumno;
     private ArrayList<Alumno> alumnosCoincidentes;
-    private ArrayList<Alumno> alumnosOriginales;
+    private HelperVistaAdministradorDeCalificaciones helper = new HelperVistaAdministradorDeCalificaciones();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscarAlumno;
     private javax.swing.JButton botonSalir;

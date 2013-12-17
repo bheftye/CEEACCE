@@ -4,14 +4,11 @@
  */
 package gui.interfazdeusuario;
 
-import gui.controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import generadordedocumentos.InsertText;
+import gui.controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Alumno;
-import modelo.Asignatura;
 import modelo.Modulo;
 
 /**

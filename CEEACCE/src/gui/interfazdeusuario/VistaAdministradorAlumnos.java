@@ -26,7 +26,6 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
         initComponents();
         CentradorDeVistas.getCentradorDeVistas().centrarJFrame(this);
         this.alumnosCoincidentes = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
-        this.alumnosOriginales = ListaDeAlumnos.getListaDeAlumnos().getAlumnos();
         llenarJListConAlumnos();
         setListListener();
     }
@@ -163,22 +162,19 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
 
     private void botonDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDarDeBajaActionPerformed
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(this,"¿Está seguro que desea eliminar este alumno?","Pregunta de Seguridad",JOptionPane.YES_NO_OPTION);
-        if(n == 0){
+        int numeroDeOpcionElegida = JOptionPane.showConfirmDialog(this,"¿Está seguro que desea dar de baja a este alumno?","Pregunta de Seguridad",JOptionPane.YES_NO_OPTION);
+        boolean eligioOpcionSi = numeroDeOpcionElegida == 0;
+        if(eligioOpcionSi){
             //Línea de eliminación de alumno
-            JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito");
+            JOptionPane.showMessageDialog(this, "Se ha dado de baja al alumno con éxito");
             this.dispose();
         }
     }//GEN-LAST:event_botonDarDeBajaActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(this,"¿Está seguro que desea eliminar este alumno?","Pregunta de Seguridad",JOptionPane.YES_NO_OPTION);
-        if(n == 0){
-            //Línea de eliminación de alumno
-            JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito");
-            this.dispose();
-        }
+        new VistaPrincipal().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
@@ -222,12 +218,7 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     }
     
     private void llenarJListConAlumnos(){
-        DefaultListModel listModel = new DefaultListModel();
-        int NUM_DE_ALUMNOS = alumnosCoincidentes.size();
-        for (int i = 0; i < NUM_DE_ALUMNOS; i++) {
-            Alumno alumnoIndexado = alumnosCoincidentes.get(i);
-            listModel.addElement(alumnoIndexado.getNombre()+" "+alumnoIndexado.getApellidos());
-        }
+        DefaultListModel listModel = helper.llenarJListConAlumnos(alumnosCoincidentes);
         jList1.setModel(listModel);
     }
     
@@ -245,20 +236,12 @@ public class VistaAdministradorAlumnos extends javax.swing.JFrame {
     }
     
     private void  encontrarAlumnoCoincidente(String textoABuscar){
-        alumnosCoincidentes = new ArrayList();
-        for (int i = 0; i < alumnosOriginales.size(); i++) {
-            Alumno alumnoIndexado = alumnosOriginales.get(i);
-            boolean coincideNombre =  alumnoIndexado.getNombre().contains(textoABuscar);
-            boolean coincideApellidos = alumnoIndexado.getApellidos().contains(textoABuscar);
-            if(coincideApellidos || coincideNombre){
-                alumnosCoincidentes.add(alumnoIndexado);
-            }
-        }
+        alumnosCoincidentes = helper.encontrarAlumnoCoincidente(textoABuscar);
         llenarJListConAlumnos();
     }
     
     private ArrayList<Alumno> alumnosCoincidentes;
-    private ArrayList<Alumno> alumnosOriginales;
+    private HelperVistaAdministradorAlumnos helper = new HelperVistaAdministradorAlumnos();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;
     private javax.swing.JButton botonDarDeBaja;

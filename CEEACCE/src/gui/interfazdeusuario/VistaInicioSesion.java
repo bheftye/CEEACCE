@@ -9,7 +9,6 @@ import gui.controladorinterfacesdeusuario.ControladorInterfacesDeUsuario;
 import gui.encriptador.EncriptadorDeContrasenia;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import modelo.ListaDeAlumnos;
 
 /**
  *

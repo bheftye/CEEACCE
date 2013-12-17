@@ -11,7 +11,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Alumno;
-import modelo.ListaDePlanesDeEstudio;
 import modelo.PlanDeEstudio;
 
 /**

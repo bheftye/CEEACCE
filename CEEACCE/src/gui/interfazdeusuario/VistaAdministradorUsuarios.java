@@ -4,10 +4,7 @@
  */
 package gui.interfazdeusuario;
 
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import modelo.ListaDeUsuarios;
-import modelo.Usuario;
 
 /**
  *
@@ -120,13 +117,7 @@ public class VistaAdministradorUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void llenarJListConUsuarios(){
-        ArrayList<Usuario> usuarios = ListaDeUsuarios.getListaDeUsuarios().getUsuarios();
-        DefaultListModel listModel = new DefaultListModel();
-        int numUsuarios = usuarios.size();
-        for (int i = 0; i < numUsuarios; i++) {
-            Usuario usuarioIndexado = usuarios.get(i);
-            listModel.addElement(usuarioIndexado.getNombreDeUsuario());
-        }
+        DefaultListModel listModel = helper.llenarJListConUsuarios();;
         jList1.setModel(listModel);
     }
     /**
@@ -163,6 +154,7 @@ public class VistaAdministradorUsuarios extends javax.swing.JFrame {
             }
         });
     }
+    private HelperVistaAdministradorUsuarios helper = new HelperVistaAdministradorUsuarios();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscarUsuario;
     private javax.swing.JButton botonNuevoUsuario;

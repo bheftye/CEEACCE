@@ -5,7 +5,7 @@
 package accesodatos.controladordepeticiones;
 
 import accesodatos.dao.DAOAlumno;
-import accesodatos.dao.DAOAsignatura;
+import java.util.ArrayList;
 import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Modulo;
@@ -42,11 +42,12 @@ public class ControladorDAOAlumno extends ControladorDAO<Alumno>{
     
     protected boolean modificarCalificacionesAlumno(Alumno alumno) {
         PlanDeEstudio planDeEstudio = alumno.getPlanDeEstudio();
+        ControladorDAOAsignatura  controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
         int clavePlanDeEstudio = planDeEstudio.getClave();
-        int claveModulo = 0;
-        String claveAsignatura = "";
-        String calificacion = ""; 
         String claveAlumno = alumno.getMatricula();
+        int claveModulo;
+        String claveAsignatura;
+        int calificacion;
         int NUM_DE_MODULOS = 6;
         for (int i = 0; i < NUM_DE_MODULOS; i++) {
             claveModulo = i + 1;
@@ -55,12 +56,67 @@ public class ControladorDAOAlumno extends ControladorDAO<Alumno>{
             for (int j = 0; j < NUM_ASIGNATURAS_DEL_MODULO; j++) {
                 Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
                 claveAsignatura = asignaturaIndexada.getClave();
-                calificacion = asignaturaIndexada.getCalificacion()+"";
-                String query = "UPDATE calificaciones SET calificacion = " + calificacion + " WHERE clvalumno = '" + claveAlumno + "' AND clvplan = " + clavePlanDeEstudio + " AND clvmodulo = " + claveModulo + " AND clvasign = '" + claveAsignatura + "'";
-                determinarExitoDeTransaccion(DAOAsignatura.getDAOAsignatura().ejecutaQuery(query));
+                calificacion = asignaturaIndexada.getCalificacion();
+                controladorDAOAsignatura.actualizarCalificacionDeAlumno(calificacion, claveAlumno, clavePlanDeEstudio, claveModulo, claveAsignatura);
             }
         }
         return false;
+    }
+    
+    protected void registrarBoletaVaciaDeAlumno(Alumno alumno) {
+        PlanDeEstudio planDeEstudio = alumno.getPlanDeEstudio();
+        int clavePlanDeEstudio = planDeEstudio.getClave();
+        int claveModulo = 0;
+        String claveAsignatura = "";
+        int NUM_DE_MODULOS = 6;
+        ArrayList<String> registrosDeTransaccion = new ArrayList();
+        for (int i = 0; i < NUM_DE_MODULOS; i++) {
+            Modulo moduloIndexado = planDeEstudio.getModulos().get(i);
+            claveModulo = moduloIndexado.getClvModulo();
+            int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
+            for (int j = 0; j < NUM_ASIGNATURAS_DEL_MODULO; j++) {
+                Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(j);
+                claveAsignatura = asignaturaIndexada.getClave();
+                String queryRegistro = "insert into calificaciones (clvalumno,clvplan,clvmodulo,clvasign) values ('" + alumno.getMatricula() + "','" + clavePlanDeEstudio + "','" + claveModulo + "','" + claveAsignatura + "')";
+                registrosDeTransaccion.add(queryRegistro);
+            }
+        }
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        controladorDAOAsignatura.registraAsignaturasComoTransaccion(registrosDeTransaccion);
+        
+    }
+    
+     public ArrayList<Alumno> obtenerAlumnos() {
+        ArrayList<Alumno> alumnos = obtenerAlumnosSinPlanDeEstudio();
+        ControladorDAOPlanDeEstudio controladorDAOPlanDeEstudio = ControladorDAOPlanDeEstudio.getControladorDAOPlanDeEstudio();
+        ControladorDAOAsignatura controladorDAOAsignatura = ControladorDAOAsignatura.getControladorDAOAsignatura();
+        int NUM_ALUMNOS = alumnos.size();
+        for (int i = 0; i < NUM_ALUMNOS; i++) {
+            Alumno alumnoIndexado = alumnos.get(i);
+            PlanDeEstudio copiaPlanDeEstudio = controladorDAOPlanDeEstudio.obtenerCopiaPlanDeEstudioPorClave(alumnoIndexado.getPlanDeEstudio().getClave());
+            alumnoIndexado.setPlanDeEstudio(copiaPlanDeEstudio);
+            int clavePlanDeEstudio = copiaPlanDeEstudio.getClave();
+            int NUM_DE_MODULOS = 6;
+            for (int j = 0; j < NUM_DE_MODULOS; j++) {
+                int claveModulo = j + 1;
+                Modulo moduloIndexado = copiaPlanDeEstudio.getModulos().get(j);
+                int NUM_ASIGNATURAS_DEL_MODULO = moduloIndexado.getAsignaturas().size();
+                for (int k = 0; k < NUM_ASIGNATURAS_DEL_MODULO; k++) {
+                    Asignatura asignaturaIndexada = moduloIndexado.getAsignaturas().get(k);
+                    String claveAsignatura = asignaturaIndexada.getClave();
+                    int calificacion = controladorDAOAsignatura.obtenerCalificacionAsignaturaDeAlumno(alumnoIndexado.getMatricula(), clavePlanDeEstudio, claveModulo, claveAsignatura);
+                    asignaturaIndexada.setCalificacion(calificacion);
+                }
+            }
+
+        }
+        return alumnos;
+    }
+     
+    protected ArrayList<Alumno> obtenerAlumnosSinPlanDeEstudio(){
+        DAOAlumno dao = DAOAlumno.getDAOAlumno();
+         ArrayList<Alumno> alumnos = dao.consultar("select * from alumno");
+         return alumnos;
     }
         
     private ControladorDAOAlumno() {
